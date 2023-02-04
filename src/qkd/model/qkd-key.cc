@@ -21,6 +21,9 @@
 #include "ns3/assert.h"
 #include "ns3/log.h" 
 #include "qkd-key.h" 
+#include "ns3/log.h"
+#include "ns3/random-variable-stream.h"
+#include "ns3/double.h"
 #include <string>
 #include <cstdarg>
 
@@ -57,6 +60,14 @@ namespace ns3 {
       NS_LOG_FUNCTION  (this << m_key << size ); 
 
       m_globalUid++;
+      Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
+      randomgenerator->SetAttribute("Min", DoubleValue (0.0));
+      randomgenerator->SetAttribute("Min", DoubleValue (9.0));
+      std::stringstream keystream;
+      for(uint32_t i = 0; i < size; i++){
+        keystream << randomgenerator->GetInteger();
+      }
+      //m_key = std::string( keystream.str());
       m_key = std::string( size, '0');
       m_timestamp = Simulator::Now ();
       NS_LOG_FUNCTION  (this << m_id << m_key  << m_timestamp.GetMilliSeconds() );     

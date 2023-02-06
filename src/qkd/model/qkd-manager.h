@@ -548,6 +548,15 @@ namespace ns3 {
     	std::map<Address, Connection> m_destinations; //<! map of QKD destinations including buffers
 
         std::vector<Ptr<QKDBuffer> > m_buffers; //<!  Buffers associated to this QKD manager
+
+        Ptr<UniformRandomVariable> randomgenerator; //<! Usado para crear material de claves de forma aleatoria
+
+        /**
+         *   Genera un string de numeros aleatorios
+         *   \param len longitud de la cadena que se va a generar
+         *   \return string generado aleatoriamente
+        */
+        std::string GenerateRandomKey(uint32_t len);
  
     }; 
 }  

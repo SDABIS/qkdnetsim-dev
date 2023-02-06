@@ -272,6 +272,14 @@ public:
     uint32_t            m_bufferID;     //!< unique buffer ID
 
     static uint32_t     nBuffers;       //!< number of created buffers - static value
+
+    /**
+     *   Añade al material de clave actual el string que se le pasa
+     * 
+     *   \param newMaterial String de numeros que representa el material que se añade al buffer
+     *   \return Un entero que es 0 si todo fue bien o un numero para representar el error que tuvo
+    */
+   uint32_t AddKeyMaterial(std::string newMaterial);
  
 private:
 
@@ -422,7 +430,13 @@ private:
     TracedCallback<uint32_t > m_McurrentDecreaseTrace;
     TracedCallback<uint32_t > m_StatusChangeTrace;   
     TracedCallback<double   > m_CMetricChangeTrace;   
-    TracedCallback<double  > m_AverageKeyChargingTimePeriodTrace;    
+    TracedCallback<double  > m_AverageKeyChargingTimePeriodTrace; 
+
+    /**
+     *  Es el material de clave que tienen los buffers compartidos entre ellos
+    */
+
+    std::string    key_material; 
 };
 }
 

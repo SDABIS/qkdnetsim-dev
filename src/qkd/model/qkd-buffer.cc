@@ -147,6 +147,8 @@ QKDBuffer::Init(){
     m_bitsUsedInTimePeriod = 0;
     m_c = 0;
     m_lastKeyChargingTimeStamp = 0;
+
+    key_material = "";
  
     this->CalculateAverageAmountOfTheKeyInTheBuffer();
 }
@@ -561,5 +563,20 @@ QKDBuffer::GetMmin (void) const
     NS_LOG_FUNCTION  (this << m_Mmin); 
     return m_Mmin;
 } 
+
+uint32_t
+QKDBuffer::AddKeyMaterial (std::string newMaterial)
+{
+    NS_LOG_FUNCTION(this << newMaterial);
+
+    std::string aux = key_material + newMaterial;
+    //si se añade mas material del que puede almacenar el buffer entonces devuelve el error -1
+    if(aux.size() > GetMmax()){
+        return -1;
+    }
+    key_material = aux;
+
+    return 0;
+}
 
 } // namespace ns3

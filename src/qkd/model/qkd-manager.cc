@@ -56,6 +56,9 @@ QKDManager::QKDManager ()
 { 
     NS_LOG_FUNCTION (this);   
     m_linksThresholdHelpValue = 0; 
+    randomgenerator = CreateObject<UniformRandomVariable>();
+    randomgenerator->SetAttribute("Min", DoubleValue (0.0));
+    randomgenerator->SetAttribute("Min", DoubleValue (9.0));
 }
  
 QKDManager::~QKDManager ()
@@ -93,6 +96,8 @@ QKDManager::DoDispose ()
         j->second.socket = 0;
         j->second.socketSink = 0;   
     }
+
+    randomgenerator->Dispose();
     
     Object::DoDispose ();
 }
@@ -203,7 +208,21 @@ QKDManager::AddNewLink (
         NS_LOG_FUNCTION(this << "IPNetDeviceDst address:" << newConnection.IPNetDeviceDst->GetAddress() );
     }
     
-    m_destinations.insert (std::make_pair (IPNetDeviceSrc->GetAddress (), newConnection));  
+    m_destinations.insert (std::make_pair (IPNetDeviceSrc->GetAddress (), newConnection)); 
+    std::map<ns3::Address, ns3::QKDManager::Connection>::iterator it = m_destinations.find(IPNetDeviceDst->GetAddress ());
+    if(it != m_destinations.end()){
+        //Si existe entonces hay que crear sus key materials de forma que tengan el mismo
+
+        uint32_t maxDst = it->second.buffer->GetMmax();
+        uint32_t maxSrc = newConnection.buffer->GetMmax();
+        if(maxSrc < maxDst){
+            maxSrc = maxDst;
+        }
+        std::string newKeyMaterial = GenerateRandomKey(maxSrc);
+
+        it->second.buffer->AddKeyMaterial(newKeyMaterial);
+        newConnection.buffer->AddKeyMaterial(newKeyMaterial);
+    }
 }
  
 
@@ -1232,6 +1251,14 @@ QKDManager::TosToBand(const uint32_t& tos){
     return priority;
 }
 
-
+std::string
+QKDManager::GenerateRandomKey(uint32_t len)
+{
+    std::stringstream aux;
+    for(uint32_t i = 0; i < len; i++){
+        aux << randomgenerator->GetInteger();
+    }
+    return aux.str();
+}
  
 } // namespace ns3

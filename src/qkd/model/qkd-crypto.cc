@@ -430,7 +430,11 @@ QKDCrypto::ProcessOutgoingPacket (
             case QKDCRYPTO_OTP:
 
                 if(QKDbuffer != 0) 
-                    key = QKDbuffer->ProcessOutgoingRequest ( plainText.size() * 8 ); //In bits
+                    //key = QKDbuffer->ProcessOutgoingRequest ( plainText.size() * 8 ); //In bits
+                    //TODO cambiar para que se actualice en el otro buffer
+                    NS_LOG_FUNCTION ("Usando nueva generacion de claves");
+                    key = QKDbuffer->FetchKeyByID(QKDbuffer->ReserveKeyMaterial(plainText.size() * 8));
+
 
                 if(key == 0){
                     NS_LOG_FUNCTION ("NO KEY PROVIDED!");

@@ -65,7 +65,12 @@ class QKDKey : public Object
         * \brief Create an empty QKD key with a new uid (as returned
         * by getUid).
         */
-        QKDKey (uint32_t keyID, uint32_t keySize); 
+        QKDKey (uint32_t keyID, uint32_t keySize);
+
+        /**
+        * \brief Crea una clave con el material de clave que se le pasa
+        */
+        QKDKey (uint32_t keyID, std::string keyMaterial); 
 
         uint32_t        GetKeyId (void) const;
         void            SetKeyId (uint32_t);

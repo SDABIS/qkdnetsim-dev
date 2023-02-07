@@ -73,6 +73,18 @@ namespace ns3 {
       NS_LOG_FUNCTION  (this << m_id << m_key  << m_timestamp.GetMilliSeconds() );     
     }
 
+    QKDKey::QKDKey (uint32_t keyID, std::string keyMaterial)
+      : m_id (keyID),
+        m_size (keyMaterial.size())
+    {
+      NS_LOG_FUNCTION  (this << m_key << keyMaterial ); 
+
+      m_globalUid++;
+      m_key = keyMaterial;
+      m_timestamp = Simulator::Now ();
+      NS_LOG_FUNCTION  (this << m_id << m_key  << m_timestamp.GetMilliSeconds() );  
+    }
+    
     uint32_t        
     QKDKey::GetKeyId (void) const
     {

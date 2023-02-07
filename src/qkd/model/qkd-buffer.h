@@ -287,16 +287,16 @@ public:
      *   \return Identificador de la clave, se usara para recuperarla e identificarla en los dos buffers.
     */
    uint32_t ReserveKeyMaterial(const uint32_t& keySize);
- 
-private:
 
-    /**
+   /**
     *   Check whether key exists in the buffer
     *  
     *   \param uint32_t keyID
     *   \return Ptr to the key
     */
     Ptr<QKDKey>     FetchKeyByID (const uint32_t& keyID);
+ 
+private:
 
     /**
     *   Find the key of required size to be used for encryption

@@ -569,12 +569,30 @@ QKDBuffer::AddKeyMaterial (std::string newMaterial)
 {
     NS_LOG_FUNCTION(this << newMaterial);
 
-    std::string aux = key_material + newMaterial;
+    
     //si se añade mas material del que puede almacenar el buffer entonces devuelve el error -1
-    if(aux.size() > GetMmax()){
+    
+
+    if(m_Mcurrent + newMaterial.size() >= m_Mmax){
+
+        NS_LOG_FUNCTION(this << "Buffer is full! Not able to add new " 
+            << newMaterial.size() << "since the current is " 
+            << m_Mcurrent << " and max is " << m_Mmax
+        );
+        
+        m_McurrentChangeTrace (m_Mcurrent);
+        m_McurrentIncreaseTrace (0);
+
         return -1;
+
     }
+
+    std::string aux = key_material + newMaterial;
+
     key_material = aux;
+
+    //TODO asegurarse que se actualizan todas las caracteristicas de m_Mcurrent
+    //TODO funcion de referencia AddNewContent
 
     return 0;
 }

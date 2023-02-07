@@ -209,10 +209,12 @@ QKDManager::AddNewLink (
     }
     
     m_destinations.insert (std::make_pair (IPNetDeviceSrc->GetAddress (), newConnection)); 
+    
+    //TODO revisar para quitar esto
     std::map<ns3::Address, ns3::QKDManager::Connection>::iterator it = m_destinations.find(IPNetDeviceDst->GetAddress ());
     if(it != m_destinations.end()){
         //Si existe entonces hay que crear sus key materials de forma que tengan el mismo
-
+        NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << it->second.buffer << newConnection.buffer );
         uint32_t maxDst = it->second.buffer->GetMmax();
         uint32_t maxSrc = newConnection.buffer->GetMmax();
         if(maxSrc < maxDst){

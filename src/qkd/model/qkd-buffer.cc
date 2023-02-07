@@ -57,7 +57,7 @@ QKDBuffer::GetTypeId (void)
                    UintegerValue (2000000), //2Mb
                    MakeUintegerAccessor (&QKDBuffer::m_Mthr),
                    MakeUintegerChecker<uint32_t> ()) 
-    .AddAttribute ("Current", 
+    .AddAttribute ("Current", //TODO quitar esta funcion, debe empezar vacio y llenarse con claves compartidas
                    "The current amount of key material in QKD storage",
                    UintegerValue (5000000), //5Mb
                    MakeUintegerAccessor (&QKDBuffer::m_Mcurrent),
@@ -595,6 +595,31 @@ QKDBuffer::AddKeyMaterial (std::string newMaterial)
     //TODO funcion de referencia AddNewContent
 
     return 0;
+}
+
+uint32_t
+QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
+{
+    NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
+
+    if(m_Mcurrent <= keySize)
+        return 0;
+
+    std::string key = key_material.substr(0,keySize);
+    key_material = key_material.substr(keySize,key_material.size());
+    
+    m_nextKeyID++;
+    Ptr<QKDKey> newKey = CreateObject<QKDKey> (m_nextKeyID, key_material);
+
+    m_keys.insert(std::pair<uint32_t,Ptr<QKDKey>>(m_nextKeyID,newKey));
+    m_Mcurrent = m_Mcurrent - keySize;
+    m_McurrentChangeTrace(m_Mcurrent);
+    m_McurrentDecreaseTrace (keySize);
+
+    m_bitsUsedInTimePeriod -= keySize;
+
+    KeyCalculation(); 
+    return m_nextKeyID;
 }
 
 } // namespace ns3

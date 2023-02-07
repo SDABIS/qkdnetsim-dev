@@ -280,6 +280,13 @@ public:
      *   \return Un entero que es 0 si todo fue bien o un numero para representar el error que tuvo
     */
    uint32_t AddKeyMaterial(std::string newMaterial);
+
+    /**
+     *   Selecciona el material de clave correspondiente al tamaño que se le pasa. Lo separa y le asigna un keyId
+     *   \param keySize entero que representa el tamaño de la clave
+     *   \return Identificador de la clave, se usara para recuperarla e identificarla en los dos buffers.
+    */
+   uint32_t ReserveKeyMaterial(const uint32_t& keySize);
  
 private:
 
@@ -436,7 +443,7 @@ private:
      *  Es el material de clave que tienen los buffers compartidos entre ellos
     */
 
-    std::string    key_material; 
+    std::string    key_material;        //!< representacion del buffer con el mismo material compartido entre los dos nodos
 };
 }
 

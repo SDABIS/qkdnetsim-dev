@@ -1111,7 +1111,7 @@ QKDHelper::InstallQKD(
     }
 
     std::stringstream aux;
-    for(uint32_t i = 0; i < maxSrc; i++){
+    for(uint32_t i = 0; i < maxSrc - 1; i++){
         aux << randomgenerator->GetInteger();
     }
     std::string newKeyMaterial = aux.str();

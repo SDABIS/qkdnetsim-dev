@@ -953,7 +953,6 @@ QKDManager::ProcessOutgoingRequest (Ptr<NetDevice> dev, Ptr<Packet> p)
 
             if(i->second.crypto == 0)
                 continue;
-
             processedPackets = i->second.crypto->ProcessOutgoingPacket(
                 packet, 
                 i->second.buffer,

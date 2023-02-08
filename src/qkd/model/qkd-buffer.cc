@@ -591,6 +591,7 @@ QKDBuffer::AddKeyMaterial (std::string newMaterial)
 
     key_material = aux;
 
+    m_Mcurrent = key_material.size();
     //TODO asegurarse que se actualizan todas las caracteristicas de m_Mcurrent
     //TODO funcion de referencia AddNewContent
 
@@ -609,7 +610,7 @@ QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
     key_material = key_material.substr(keySize,key_material.size());
     
     m_nextKeyID++;
-    Ptr<QKDKey> newKey = CreateObject<QKDKey> (m_nextKeyID, key_material);
+    Ptr<QKDKey> newKey = CreateObject<QKDKey> (m_nextKeyID, key);
 
     m_keys.insert(std::pair<uint32_t,Ptr<QKDKey>>(m_nextKeyID,newKey));
     m_Mcurrent = m_Mcurrent - keySize;

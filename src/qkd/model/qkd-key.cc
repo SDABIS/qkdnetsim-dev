@@ -77,7 +77,7 @@ namespace ns3 {
       : m_id (keyID),
         m_size (keyMaterial.size())
     {
-      NS_LOG_FUNCTION  (this << m_key << keyMaterial ); 
+      NS_LOG_FUNCTION  (this << m_key << keyMaterial.size() << keyMaterial ); 
 
       m_globalUid++;
       m_key = keyMaterial;

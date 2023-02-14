@@ -174,7 +174,8 @@ public:
     */
     std::vector<Ptr<Packet> > ProcessOutgoingPacket (
         Ptr<Packet>     p, 
-        Ptr<QKDBuffer>  QKDBuffer,
+        Ptr<QKDBuffer>  SrcBuffer,
+        Ptr<QKDBuffer>  DstBuffer,
         uint32_t        channelID
     ); 
 

@@ -51,7 +51,7 @@ QKDHelper::QKDHelper ()
     m_deviceFactory.SetTypeId ("ns3::QKDNetDevice"); 
     m_tcpFactory.SetTypeId ("ns3::VirtualTcpL4Protocol");
 
-    m_useRealStorages = false;
+    m_useRealStorages = true;
     m_portOverlayNumber = 667; 
     m_channelID = 0; 
     m_routing = 0; 
@@ -707,6 +707,25 @@ QKDHelper::InstallOverlayQKD(
     // which are in charge to create QKD buffers  
     /////////////////////////////////
  
+    NS_LOG_FUNCTION (this << "CREATE NEW BUFFER 'A'!");
+    Ptr<QKDBuffer> bufferA = CreateObject<QKDBuffer> (a->GetId(), b->GetId(), m_useRealStorages );
+    bufferA->SetAttribute ("Minimal",     UintegerValue (Mmin));
+    bufferA->SetAttribute ("Maximal",     UintegerValue (Mmax));
+    bufferA->SetAttribute ("Threshold",   UintegerValue (Mthr));
+    bufferA->SetAttribute ("Current",     UintegerValue (Mcurrent));   
+
+    NS_LOG_FUNCTION(this << "BUFFERID A:" << bufferA->m_bufferID);
+
+    NS_LOG_FUNCTION (this << "CREATE NEW BUFFER 'B'!");
+     Ptr<QKDBuffer> bufferB = CreateObject<QKDBuffer> (a->GetId(), b->GetId(), m_useRealStorages );
+    bufferB->SetAttribute ("Minimal",     UintegerValue (Mmin));
+    bufferB->SetAttribute ("Maximal",     UintegerValue (Mmax));
+    bufferB->SetAttribute ("Threshold",   UintegerValue (Mthr));
+    bufferB->SetAttribute ("Current",     UintegerValue (Mcurrent));   
+
+    NS_LOG_FUNCTION(this << "BUFFERID B:" << bufferB->m_bufferID);
+
+
     //MASTER on node A
     if(a->GetObject<QKDManager> () != 0){
         a->GetObject<QKDManager> ()->AddNewLink( 
@@ -724,16 +743,14 @@ QKDHelper::InstallOverlayQKD(
             netA,  //IP Src Address - underlay device
             netB,  //IP Dst Address - underlay device 
             true,  
-            Mmin, 
-            Mthr, 
-            Mmax, 
-            Mcurrent,
+            bufferA,
+            bufferB,
             m_channelID
         ); 
     }
     
     //SLAVE on node B
-    if(b->GetObject<QKDManager> () != 0){
+    if(b->GetObject<QKDManager> () != 0){  
         b->GetObject<QKDManager> ()->AddNewLink( 
             devB, //QKDNetDevice on node B
             devA, //QKDNetDevice on node A
@@ -749,10 +766,8 @@ QKDHelper::InstallOverlayQKD(
             netB,  //IP Dst Address - underlay device 
             netA,  //IP Src Address - underlay device
             false,              
-            Mmin, 
-            Mthr, 
-            Mmax, 
-            Mcurrent,
+            bufferB,
+            bufferA,
             m_channelID++
         ); 
     } 
@@ -765,7 +780,7 @@ QKDHelper::InstallOverlayQKD(
 
    //TODO arreglar esto
     if(m_useRealStorages){ 
-        Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ()); 
+        /*Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ()); 
         Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ());
 
         NS_LOG_FUNCTION(this << "!!!!!!!!!!!!!!" << bufferA->GetBufferId() << bufferB->GetBufferId() );
@@ -775,11 +790,11 @@ QKDHelper::InstallOverlayQKD(
         {
             bufferA->AddNewContent(packetSize);
             bufferB->AddNewContent(packetSize);
-        }
+        }*/
     }
 
-    Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ()); 
-    Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ());
+    //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ()); 
+    //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ());
     Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
     randomgenerator->SetAttribute("Min", DoubleValue (0.0));
     randomgenerator->SetAttribute("Min", DoubleValue (9.0));
@@ -1024,6 +1039,26 @@ QKDHelper::InstallQKD(
     // which are in charge to create QKD buffers  
     /////////////////////////////////
  
+
+    NS_LOG_FUNCTION (this << "CREATE NEW BUFFER 'A'!");
+    Ptr<QKDBuffer> bufferA = CreateObject<QKDBuffer> (a->GetId(), b->GetId(), m_useRealStorages );
+    bufferA->SetAttribute ("Minimal",     UintegerValue (Mmin));
+    bufferA->SetAttribute ("Maximal",     UintegerValue (Mmax));
+    bufferA->SetAttribute ("Threshold",   UintegerValue (Mthr));
+    bufferA->SetAttribute ("Current",     UintegerValue (Mcurrent));   
+
+    NS_LOG_FUNCTION(this << "BUFFERID A:" << bufferA->m_bufferID);
+
+    NS_LOG_FUNCTION (this << "CREATE NEW BUFFER 'B'!");
+     Ptr<QKDBuffer> bufferB = CreateObject<QKDBuffer> (a->GetId(), b->GetId(), m_useRealStorages );
+    bufferB->SetAttribute ("Minimal",     UintegerValue (Mmin));
+    bufferB->SetAttribute ("Maximal",     UintegerValue (Mmax));
+    bufferB->SetAttribute ("Threshold",   UintegerValue (Mthr));
+    bufferB->SetAttribute ("Current",     UintegerValue (Mcurrent));   
+
+    NS_LOG_FUNCTION(this << "BUFFERID B:" << bufferB->m_bufferID);
+
+
     //MASTER on node A
     if(a->GetObject<QKDManager> () != 0){
         a->GetObject<QKDManager> ()->AddNewLink( 
@@ -1041,10 +1076,8 @@ QKDHelper::InstallQKD(
             netA,  //IP Src Address - underlay device
             netB,  //IP Dst Address - underlay device 
             true,  
-            Mmin, 
-            Mthr, 
-            Mmax, 
-            Mcurrent,
+            bufferA,
+            bufferB,
             m_channelID
         ); 
     }
@@ -1066,10 +1099,8 @@ QKDHelper::InstallQKD(
             netB,  //IP Dst Address - underlay device 
             netA,  //IP Src Address - underlay device
             false,              
-            Mmin, 
-            Mthr, 
-            Mmax, 
-            Mcurrent,
+            bufferB,
+            bufferA,
             m_channelID++
         ); 
     }  
@@ -1082,7 +1113,7 @@ QKDHelper::InstallQKD(
     if(m_useRealStorages){
 
         //Get buffer on node A which is pointed from netA 
-        Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(netA.GetLocal ());
+        /*Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(netA.GetLocal ());
 
         //Get buffer on node B which is pointed from netB 
         Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(netB.GetLocal ()); 
@@ -1094,11 +1125,11 @@ QKDHelper::InstallQKD(
         {
             bufferA->AddNewContent(packetSize);
             bufferB->AddNewContent(packetSize);
-        }
+        }*/
     }
     //TODO arreglar esto
-    Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
-    Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
+    //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
+    //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
     Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
     randomgenerator->SetAttribute("Min", DoubleValue (0.0));
     randomgenerator->SetAttribute("Min", DoubleValue (9.0));

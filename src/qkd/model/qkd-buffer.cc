@@ -403,9 +403,9 @@ QKDBuffer::FetchKeyByID (const uint32_t& keyID)
     std::map<uint32_t, Ptr<QKDKey> >::iterator a = m_keys.find (keyID);
     if (a != m_keys.end () && a->first == keyID)
     {
-       NS_LOG_FUNCTION (this << "KeyID is valid!" << m_keys.size() ); 
+       NS_LOG_FUNCTION (this << "KeyID is valid!" << keyID ); 
     }else{
-      NS_LOG_FUNCTION (this << "KeyID is NOT valid!" << m_keys.size() ); 
+      NS_LOG_FUNCTION (this << "KeyID is NOT valid!" << keyID ); 
       return 0;
     }
     return a->second;
@@ -612,6 +612,7 @@ QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
     m_nextKeyID++;
     Ptr<QKDKey> newKey = CreateObject<QKDKey> (m_nextKeyID, key);
 
+    NS_LOG_FUNCTION  (this << "Add keyID:" << m_nextKeyID);
     m_keys.insert(std::pair<uint32_t,Ptr<QKDKey>>(m_nextKeyID,newKey));
     m_Mcurrent = m_Mcurrent - keySize;
     m_McurrentChangeTrace(m_Mcurrent);
@@ -621,6 +622,24 @@ QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
 
     KeyCalculation(); 
     return m_nextKeyID;
+}
+
+bool
+QKDBuffer::DeleteKeyID (const uint32_t& keyID)
+{
+    std::map<uint32_t, Ptr<QKDKey> >::iterator a = m_keys.find (keyID);
+    if (a != m_keys.end () && a->first == keyID)
+    {
+       NS_LOG_FUNCTION (this << "KeyID is deleted from 'm_keys'" << keyID ); 
+        m_keys.erase(keyID);
+        //TODO es necesario
+        //a->second->Dispose();
+        return true;
+    }else{
+      NS_LOG_FUNCTION (this << "KeyID is NOT in the map 'm_keys'" << keyID ); 
+      return false;
+    }
+    return false;
 }
 
 } // namespace ns3

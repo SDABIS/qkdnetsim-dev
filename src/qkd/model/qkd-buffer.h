@@ -295,6 +295,15 @@ public:
     *   \return Ptr to the key
     */
     Ptr<QKDKey>     FetchKeyByID (const uint32_t& keyID);
+
+    /**
+     *  Borra del mapa de claves la clave que se le indica
+     * 
+     *   \param uint32_t keyID
+     *   \return booleano que si es verdadero es que se elimino y falso si no estaba en el mapa
+    */
+
+    bool    DeleteKeyID (const uint32_t& keyID);
  
 private:
 

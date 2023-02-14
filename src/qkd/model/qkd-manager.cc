@@ -91,7 +91,7 @@ QKDManager::DoDispose ()
         j->second.QKDNetDeviceDst = 0;
         j->second.IPNetDeviceSrc = 0;
         j->second.IPNetDeviceDst = 0;
-        j->second.buffer = 0;
+        j->second.SrcBuffer = 0;
         j->second.crypto = 0;
         j->second.socket = 0;
         j->second.socketSink = 0;   
@@ -123,10 +123,8 @@ QKDManager::AddNewLink (
     Ipv4InterfaceAddress    IPSrc,      //IP Src Address - underlay device
     Ipv4InterfaceAddress    IPDst,      //IP Dst Address - underlay device 
     bool                    isMaster,  
-    uint32_t                Mmin, 
-    uint32_t                Mthr, 
-    uint32_t                Mmax, 
-    uint32_t                Mcurrent,
+    Ptr<QKDBuffer>          SrcBuffer,
+    Ptr<QKDBuffer>          DstBuffer,
     uint32_t                channelID
 )
 {  
@@ -177,16 +175,13 @@ QKDManager::AddNewLink (
     }
     */
 
-    NS_LOG_FUNCTION (this << "CREATE NEW BUFFER!");
-    newConnection.buffer = CreateObject<QKDBuffer> (a->GetId(), b->GetId(), m_useRealStorages );
-    newConnection.buffer->SetAttribute ("Minimal",     UintegerValue (Mmin));
-    newConnection.buffer->SetAttribute ("Maximal",     UintegerValue (Mmax));
-    newConnection.buffer->SetAttribute ("Threshold",   UintegerValue (Mthr));
-    newConnection.buffer->SetAttribute ("Current",     UintegerValue (Mcurrent));   
-    m_buffers.push_back(newConnection.buffer); 
-    newConnection.bufferId = newConnection.buffer->m_bufferID;
+    newConnection.SrcBuffer = SrcBuffer;
+    m_buffers.push_back(newConnection.SrcBuffer); 
+    newConnection.SrcBufferId = newConnection.SrcBuffer->m_bufferID;
 
-    NS_LOG_FUNCTION(this << "BUFFERID:" << newConnection.buffer->m_bufferID);  
+    newConnection.DstBuffer = DstBuffer;
+    newConnection.DstBufferId = newConnection.DstBuffer->m_bufferID;
+
 
     NS_LOG_FUNCTION(this << "QKDNetDeviceSrc:" << newConnection.QKDNetDeviceSrc);
     if(newConnection.QKDNetDeviceSrc != 0){
@@ -214,16 +209,16 @@ QKDManager::AddNewLink (
     std::map<ns3::Address, ns3::QKDManager::Connection>::iterator it = m_destinations.find(IPNetDeviceDst->GetAddress ());
     if(it != m_destinations.end()){
         //Si existe entonces hay que crear sus key materials de forma que tengan el mismo
-        NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << it->second.buffer << newConnection.buffer );
-        uint32_t maxDst = it->second.buffer->GetMmax();
-        uint32_t maxSrc = newConnection.buffer->GetMmax();
+        NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << newConnection.DstBuffer << newConnection.SrcBuffer );
+        uint32_t maxDst = newConnection.DstBuffer->GetMmax();
+        uint32_t maxSrc = newConnection.SrcBuffer->GetMmax();
         if(maxSrc < maxDst){
             maxSrc = maxDst;
         }
         std::string newKeyMaterial = GenerateRandomKey(maxSrc);
 
-        it->second.buffer->AddKeyMaterial(newKeyMaterial);
-        newConnection.buffer->AddKeyMaterial(newKeyMaterial);
+        newConnection.DstBuffer->AddKeyMaterial(newKeyMaterial);
+        newConnection.SrcBuffer->AddKeyMaterial(newKeyMaterial);
     }
 }
  
@@ -767,7 +762,7 @@ QKDManager::GetConnectionDetails (const uint32_t& bufferId)
     NS_LOG_FUNCTION (this << bufferId);
     std::map<Address, Connection >::const_iterator i; 
     for (i = m_destinations.begin (); !(i == m_destinations.end ()); i++){
-        if( i->second.bufferId == bufferId )
+        if( i->second.SrcBufferId == bufferId )
             return i->second;
     }
 
@@ -785,7 +780,7 @@ QKDManager::GetBufferPosition (const Address& sourceAddress)
     
     std::map<Address, QKDManager::Connection >::iterator i = FetchConnection (sourceAddress);
     if (i != m_destinations.end ()){ 
-        tempBuffer = i->second.buffer;
+        tempBuffer = i->second.SrcBuffer;
         uint32_t a = 0;
         for (std::vector<Ptr<QKDBuffer> >::iterator i = m_buffers.begin (); !(i == m_buffers.end ()); i++){
             if( **i == *tempBuffer ){
@@ -806,7 +801,7 @@ QKDManager::GetBufferBySourceAddress (const Address& sourceAddress)
   
     std::map<Address, QKDManager::Connection >::iterator i = FetchConnection (sourceAddress);
     if (i != m_destinations.end ())
-        return i->second.buffer;
+        return i->second.SrcBuffer;
 
     return 0;
 }
@@ -848,7 +843,7 @@ QKDManager::FetchStatusForDestinationBuffer(Ptr<NetDevice> dev)
         if( (i->second.QKDNetDeviceSrc == 0 && i->second.IPNetDeviceSrc == dev) ||
             i->second.QKDNetDeviceSrc == dev
         ){  
-            uint32_t output = i->second.buffer->FetchState();
+            uint32_t output = i->second.SrcBuffer->FetchState();
             NS_LOG_FUNCTION (this  << "status is " << (uint32_t) output );
             return output;
         }
@@ -888,7 +883,7 @@ QKDManager::ProcessIncomingRequest (Ptr<NetDevice> dev, Ptr<Packet> p)
 
             packetOutput = i->second.crypto->ProcessIncomingPacket(
                 packet, 
-                i->second.buffer,
+                i->second.SrcBuffer,
                 i->second.channelID
             );  
             UpdatePublicChannelMetric (i->first);
@@ -948,14 +943,15 @@ QKDManager::ProcessOutgoingRequest (Ptr<NetDevice> dev, Ptr<Packet> p)
                 << " to " 
                 << i->second.IPQKDDst 
                 << " using buffer: " 
-                << i->second.buffer->m_bufferID
+                << i->second.SrcBuffer->m_bufferID
             );
 
             if(i->second.crypto == 0)
                 continue;
             processedPackets = i->second.crypto->ProcessOutgoingPacket(
                 packet, 
-                i->second.buffer,
+                i->second.SrcBuffer,
+                i->second.DstBuffer,
                 i->second.channelID
             );                
             NS_LOG_FUNCTION(this << "Encryption/Authentication completed!" 
@@ -1015,7 +1011,7 @@ QKDManager::AddNewKeyMaterial (const Address sourceAddress, uint32_t& newKey)
         NS_LOG_DEBUG ( this << "\t" << "sourceAddress: \t" << i->first );
         NS_LOG_DEBUG (this << "Adding new key to the buffer! \t" << "keySize:\t" << newKey << "\n" );
 
-        bool response = i->second.buffer->AddNewContent(newKey); 
+        bool response = i->second.SrcBuffer->AddNewContent(newKey); 
         UpdatePublicChannelMetric (i->first);
         UpdateQuantumChannelMetric(i->first);
         CalculateLinkThresholdHelpValue();
@@ -1119,18 +1115,18 @@ QKDManager::CheckForResourcesToProcessThePacket(
         NS_LOG_WARN (this << "\t first:\t" << i->first);
         NS_LOG_WARN (this << "\t IPNetDeviceSrc:\t" << i->second.IPNetDeviceSrc);
         NS_LOG_WARN (this << "\t IPNetDeviceDst:\t" << i->second.IPNetDeviceDst);
-        NS_LOG_WARN (this << "\t BufferID:\t" << i->second.bufferId);
+        NS_LOG_WARN (this << "\t BufferID:\t" << i->second.SrcBufferId);
 
-        NS_ASSERT (i->second.buffer != 0);
+        NS_ASSERT (i->second.SrcBuffer != 0);
         NS_ASSERT (i->second.crypto != 0);
 
-        NS_LOG_WARN (this << "\t BufferID:\t" << i->second.buffer);
-        NS_LOG_WARN (this << "\t BufferID:\t" << i->second.buffer->m_bufferID);
+        NS_LOG_WARN (this << "\t BufferID:\t" << i->second.SrcBuffer);
+        NS_LOG_WARN (this << "\t BufferID:\t" << i->second.SrcBuffer->m_bufferID);
 
         return i->second.crypto->CheckForResourcesToProcessThePacket(
             p,
             TOSband,
-            i->second.buffer
+            i->second.SrcBuffer
         );
     }
     return false;

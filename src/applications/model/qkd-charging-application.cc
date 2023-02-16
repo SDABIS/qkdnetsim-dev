@@ -1077,6 +1077,9 @@ void QKDChargingApplication::SendData (void)
   NS_LOG_DEBUG(this << "\tSendData!\t" << m_sendDevice->GetAddress() << "\t" << m_sinkDevice->GetAddress() );
   NS_LOG_DEBUG (this << "\t Sending packet " << m_packetNumber << " of maximal " << m_maxPackets);
 
+  //TODO ver como cuadrar bien esta variable
+  //Esto permite que se cifren los paquetes.
+  m_sendKeyRateMessage = true;
   if(m_packetNumber >= m_maxPackets)
   {
     m_sendKeyRateMessage = true;
@@ -1084,6 +1087,7 @@ void QKDChargingApplication::SendData (void)
     m_qkdPacketNumber = 0;
   }
 
+  NS_LOG_FUNCTION(this << "m_master" << m_master << "m_sendKeyRateMessage" << m_sendKeyRateMessage);
   if(m_master == true && m_sendKeyRateMessage == true)
     PrepareOutput("ADDKEY", m_keyRate); 
   else
@@ -1101,14 +1105,19 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value)
     msg << std::string( m_random->GetValue (m_pktSize, m_pktSize*1.5), '0');
     msg << '\0';
 
-    //NS_LOG_FUNCTION (this << msg.str() );
+    NS_LOG_FUNCTION (this << "msg:" << msg.str() );
 
     Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.str().c_str(), msg.str().length());
 
-    if(key== "ADDKEY:"){
+    NS_LOG_FUNCTION (this << "key" << key );
+    if(key== "ADDKEY"){
+      NS_LOG_FUNCTION (this << "inside of the if to encrypt, key:" << key  );
       if( GetNode()->GetObject<QKDManager> () != 0 )
         packet = GetNode()->GetObject<QKDManager> ()->MarkEncrypt (packet);
+        
     }
+    bool encriptado = GetNode()->GetObject<QKDManager> ()->IsMarkedAsEncrypt(packet);
+    NS_LOG_FUNCTION (this << "Esta marcado para encriptar?:" << encriptado );
 
     NS_LOG_DEBUG(this << "\t PACKET SIZE:" << packet->GetSize());
     

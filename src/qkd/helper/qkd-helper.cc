@@ -778,44 +778,31 @@ QKDHelper::InstallOverlayQKD(
     *           Instead, they only keep the number of current amount of key material, but not the real key material in memory
     */
 
-   //TODO arreglar esto
     if(m_useRealStorages){ 
-        /*Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ()); 
-        Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ());
+        //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ()); 
+        //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ());
+        Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
+        randomgenerator->SetAttribute("Min", DoubleValue (0.0));
+        randomgenerator->SetAttribute("Min", DoubleValue (9.0));
+        NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
+        uint32_t maxDst = bufferA->GetMmax();
+        uint32_t maxSrc = bufferB->GetMmax();
+        if(maxSrc < maxDst){
+            maxSrc = maxDst;
+        }
 
-        NS_LOG_FUNCTION(this << "!!!!!!!!!!!!!!" << bufferA->GetBufferId() << bufferB->GetBufferId() );
+        std::stringstream aux;
+        for(uint32_t i = 0; i < maxSrc; i++){
+            aux << randomgenerator->GetInteger();
+        }
+        std::string newKeyMaterial = aux.str();
 
-        uint32_t packetSize = 32;
-        for(uint32_t i = 0; i < Mcurrent; i++ )
-        {
-            bufferA->AddNewContent(packetSize);
-            bufferB->AddNewContent(packetSize);
-        }*/
+        NS_LOG_FUNCTION(this << newKeyMaterial);
+
+        bufferA->AddKeyMaterial(newKeyMaterial);
+        bufferB->AddKeyMaterial(newKeyMaterial);
+        randomgenerator->Dispose();
     }
-
-    //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ()); 
-    //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ());
-    Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
-    randomgenerator->SetAttribute("Min", DoubleValue (0.0));
-    randomgenerator->SetAttribute("Min", DoubleValue (9.0));
-    NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
-    uint32_t maxDst = bufferA->GetMmax();
-    uint32_t maxSrc = bufferB->GetMmax();
-    if(maxSrc < maxDst){
-        maxSrc = maxDst;
-    }
-
-    std::stringstream aux;
-    for(uint32_t i = 0; i < maxSrc; i++){
-        aux << randomgenerator->GetInteger();
-    }
-    std::string newKeyMaterial = aux.str();
-
-    NS_LOG_FUNCTION(this << newKeyMaterial);
-
-    bufferA->AddKeyMaterial(newKeyMaterial);
-    bufferB->AddKeyMaterial(newKeyMaterial);
-    randomgenerator->Dispose();
     
     if(typeId == "ns3::TcpSocketFactory")
         m_portOverlayNumber++;
@@ -1111,47 +1098,32 @@ QKDHelper::InstallQKD(
     *           Instead, they only keep the number of current amount of key material, but not the real key material in memory
     */
     if(m_useRealStorages){
+        //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
+        //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
+        Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
+        randomgenerator->SetAttribute("Min", DoubleValue (0.0));
+        randomgenerator->SetAttribute("Min", DoubleValue (9.0));
+        NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
 
-        //Get buffer on node A which is pointed from netA 
-        /*Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(netA.GetLocal ());
+        uint32_t maxDst = bufferA->GetMmax();
+        uint32_t maxSrc = bufferB->GetMmax();
+        if(maxSrc < maxDst){
+            maxSrc = maxDst;
+        }
 
-        //Get buffer on node B which is pointed from netB 
-        Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(netB.GetLocal ()); 
+        std::stringstream aux;
+        for(uint32_t i = 0; i < maxSrc - 1; i++){
+            aux << randomgenerator->GetInteger();
+        }
+        std::string newKeyMaterial = aux.str();
 
-        NS_LOG_FUNCTION(this << "!!!!!!!!!!!!!!" << bufferA->GetBufferId() << bufferB->GetBufferId() );
+        NS_LOG_FUNCTION(this << newKeyMaterial);
 
-        uint32_t packetSize = 32;
-        for(uint32_t i = 0; i < Mcurrent; i++ )
-        {
-            bufferA->AddNewContent(packetSize);
-            bufferB->AddNewContent(packetSize);
-        }*/
+        bufferA->AddKeyMaterial(newKeyMaterial);
+        bufferB->AddKeyMaterial(newKeyMaterial);
+        randomgenerator->Dispose();
+        
     }
-    //TODO arreglar esto
-    //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
-    //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
-    Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
-    randomgenerator->SetAttribute("Min", DoubleValue (0.0));
-    randomgenerator->SetAttribute("Min", DoubleValue (9.0));
-    NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
-
-    uint32_t maxDst = bufferA->GetMmax();
-    uint32_t maxSrc = bufferB->GetMmax();
-    if(maxSrc < maxDst){
-        maxSrc = maxDst;
-    }
-
-    std::stringstream aux;
-    for(uint32_t i = 0; i < maxSrc - 1; i++){
-        aux << randomgenerator->GetInteger();
-    }
-    std::string newKeyMaterial = aux.str();
-
-    NS_LOG_FUNCTION(this << newKeyMaterial);
-
-    bufferA->AddKeyMaterial(newKeyMaterial);
-    bufferB->AddKeyMaterial(newKeyMaterial);
-    randomgenerator->Dispose();
 
     return qkdNetDevices;
 

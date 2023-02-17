@@ -193,6 +193,11 @@ public:
         Ptr<QKDBuffer>          QKDbuffer
     );
 
+    //TODO restaurar este cambio
+    std::string OTP (const std::string& data, Ptr<QKDKey> key);
+    std::string AESEncrypt (const std::string& data, Ptr<QKDKey> key);
+    std::string AESDecrypt (const std::string& data, Ptr<QKDKey> key);
+
 private:
 
     byte m_iv   [ CryptoPP::AES::BLOCKSIZE ];
@@ -261,7 +266,7 @@ private:
     *   @param  Ptr<QKDKey> key
     *   @return std::string
     */
-    std::string OTP (const std::string& data, Ptr<QKDKey> key);
+    //std::string OTP (const std::string& data, Ptr<QKDKey> key);
         
     /**
     *   AES encryption
@@ -269,7 +274,7 @@ private:
     *   @param  Ptr<QKDKey> key
     *   @return std::string
     */
-    std::string AESEncrypt (const std::string& data, Ptr<QKDKey> key);
+    //std::string AESEncrypt (const std::string& data, Ptr<QKDKey> key);
 
     /**
     *   AES decryption
@@ -277,7 +282,7 @@ private:
     *   @param  Ptr<QKDKey> key
     *   @return std::string
     */
-    std::string AESDecrypt (const std::string& data, Ptr<QKDKey> key);
+    //std::string AESDecrypt (const std::string& data, Ptr<QKDKey> key);
 
     /**
     *   Help parent function used for calling child authentication functions

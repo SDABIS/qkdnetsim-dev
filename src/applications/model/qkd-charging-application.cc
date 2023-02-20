@@ -1117,7 +1117,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value)
         
     }
     bool encriptado = GetNode()->GetObject<QKDManager> ()->IsMarkedAsEncrypt(packet);
-    NS_LOG_FUNCTION (this << "Esta marcado para encriptar?:" << encriptado );
+    NS_LOG_FUNCTION (this << "Esta marcado para encriptar?:" << encriptado << "packet->GetUid():" << packet->GetUid());
 
     NS_LOG_DEBUG(this << "\t PACKET SIZE:" << packet->GetSize());
     

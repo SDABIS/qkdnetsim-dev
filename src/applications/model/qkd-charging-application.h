@@ -61,7 +61,7 @@ public:
   Ptr<Socket> GetSendSocket (void) const;
   Ptr<Socket> GetSinkSocket (void) const;
 
- void PrepareOutput (std::string key, uint32_t value);
+ void PrepareOutput (std::string key, uint32_t value, const Address& src, const Address& dst);
  
 
   /**

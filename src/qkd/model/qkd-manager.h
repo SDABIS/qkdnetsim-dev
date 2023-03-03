@@ -214,10 +214,10 @@ namespace ns3 {
         *   \brief Add new key material to the corresponding QKD Buffer. 
         *   Returns true if success, false otherwise.
         *   @param Ptr<NetDevice>
-        *   @param uint32_t&
+        *   @param std::string
         *   @return bool        
         */
-        bool AddNewKeyMaterial (const Address sourceAddress, uint32_t& newKey);
+        bool AddNewKeyMaterial (const Address sourceAddress, std::string newKeyMaterial);
      
         /**
         * \brief Called from traffic-control/module/qkd-pfifo-fast-queue-disc
@@ -515,6 +515,10 @@ namespace ns3 {
         *   \brief Fetch performances of the public channel. 
         */
         double  FetchPublicChannelPerformance (Ipv4Address nextHop);
+
+        uint32_t GetSourceBufferStatus(const Address sourceAddress);
+
+        uint32_t GetDestinationBufferStatus(const Address sourceAddress);
  
     protected: 
       /**

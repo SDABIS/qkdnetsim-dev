@@ -583,7 +583,7 @@ QKDBuffer::AddKeyMaterial (std::string newMaterial)
         m_McurrentChangeTrace (m_Mcurrent);
         m_McurrentIncreaseTrace (0);
 
-        return -1;
+        return (m_Mcurrent + newMaterial.size() - m_Mmax -1);
 
     }
 

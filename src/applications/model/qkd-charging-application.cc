@@ -1080,6 +1080,7 @@ void QKDChargingApplication::SendData (void)
   //TODO ver como cuadrar bien esta variable
   //Esto permite que se cifren los paquetes.
   m_sendKeyRateMessage = true;
+  // ENTIENDO si el numero de paquetes enviados es mayor o igual que al tamaño maximo de paquetes, enviamos material de clave?
   if(m_packetNumber >= m_maxPackets)
   {
     m_sendKeyRateMessage = true;
@@ -1089,46 +1090,82 @@ void QKDChargingApplication::SendData (void)
 
   NS_LOG_FUNCTION(this << "m_master" << m_master << "m_sendKeyRateMessage" << m_sendKeyRateMessage);
   if(m_master == true && m_sendKeyRateMessage == true)
-    PrepareOutput("ADDKEY", m_keyRate); 
+    PrepareOutput("ADDKEY", m_keyRate,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress()); 
   else
-    PrepareOutput("QKDPPS", m_packetNumber);
+    PrepareOutput("QKDPPS", m_packetNumber,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress());
 }
 
-void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value)
+void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,const Address& src,const Address& dst)
 {    
-    NS_LOG_DEBUG (this <<  Simulator::Now () << key << value);     
+    std::string realKey = key;
+    uint32_t state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
+    NS_LOG_FUNCTION (this << "GetSourceBufferStatus" << state );
+    int isKeyAdded = -1;
+    //Si no hay que añadir clave se pone la label a QKDPPS
+    do{
+      std::stringstream newKeyMaterial;
+      if(state == 1 || state == 0) {
+        realKey = "QKDPPS";
+        newKeyMaterial << std::string(m_pktSize,'0');
+      }
+      NS_LOG_DEBUG (this <<  Simulator::Now () << realKey << value);     
  
-    std::ostringstream msg; 
-    msg << key << ":" << value << ";";
+      std::ostringstream msg; 
+      msg << realKey << ":" << value << ";";
 
-    //playing with packet size to introduce some randomness 
-    msg << std::string( m_random->GetValue (m_pktSize, m_pktSize*1.5), '0');
-    msg << '\0';
-
-    NS_LOG_FUNCTION (this << "msg:" << msg.str() );
-
-    Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.str().c_str(), msg.str().length());
-
-    NS_LOG_FUNCTION (this << "key" << key );
-    if(key== "ADDKEY"){
-      NS_LOG_FUNCTION (this << "inside of the if to encrypt, key:" << key  );
-      if( GetNode()->GetObject<QKDManager> () != 0 )
-        packet = GetNode()->GetObject<QKDManager> ()->MarkEncrypt (packet);
+      
+      
+      
+      if(realKey== "ADDKEY"){
+        //playing with packet size to introduce some randomness 
+        //msg << std::string( m_random->GetValue (m_pktSize, m_pktSize*1.5), '0');
         
-    }
-    bool encriptado = GetNode()->GetObject<QKDManager> ()->IsMarkedAsEncrypt(packet);
-    NS_LOG_FUNCTION (this << "Esta marcado para encriptar?:" << encriptado << "packet->GetUid():" << packet->GetUid());
+        for(uint32_t i = 0; i < m_pktSize; i++){
+            newKeyMaterial << int(m_random->GetValue(0,9));
+        }
+        NS_LOG_FUNCTION (this << "inside of the if to encrypt, realKey:" << realKey  );
+        isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str());
+        if(isKeyAdded == 0){
+          NS_LOG_FUNCTION (this << "The realKey was added to the source buffer" );
+        }else{
+          NS_LOG_FUNCTION (this << "The realKey can not be added to the source buffer because it was to large, it has to be:" << isKeyAdded);
+          //Esto se hace asi para que si no se puede insertar todo el material de clave se inserta solo el que entra
+          isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str().substr(0,isKeyAdded));
+        }
+        /*if( GetNode()->GetObject<QKDManager> () != 0 )
+          packet = GetNode()->GetObject<QKDManager> ()->MarkEncrypt (packet);*/
+      }
+      //Ya que se inserto menos material de clave, el paquete tiene que ser mas pequeño
+      if(isKeyAdded == 0){
+        msg << newKeyMaterial.str();
+        msg << '\0';
+      }else{
+        msg << newKeyMaterial.str().substr(0,isKeyAdded);
+        msg << '\0';
+      }
+          
 
-    NS_LOG_DEBUG(this << "\t PACKET SIZE:" << packet->GetSize());
+      NS_LOG_FUNCTION (this << "msg:" << msg.str() );
+
+      Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.str().c_str(), msg.str().length());
+
+      /*bool encriptado = GetNode()->GetObject<QKDManager> ()->IsMarkedAsEncrypt(packet);
+      NS_LOG_FUNCTION (this << "Esta marcado para encriptar?:" << encriptado << "packet->GetUid():" << packet->GetUid());*/
+
+      NS_LOG_DEBUG(this << "\t PACKET SIZE:" << packet->GetSize());
+      
+      uint32_t bits = packet->GetSize() * 8;
+      NS_LOG_LOGIC (this << "bits = " << bits);
+
+      Time nextTime (Seconds (bits / static_cast<double>(m_cbrRate.GetBitRate ()))); // Time till next packet
+      NS_LOG_FUNCTION(this << "CALCULATED NEXTTIME:" << bits / m_cbrRate.GetBitRate ());
+
+      NS_LOG_LOGIC ("nextTime = " << nextTime);
+      m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendPacket, this, packet);
+      state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
+      NS_LOG_FUNCTION(this << "state:" << state << "iskeyAdded:" << isKeyAdded );
+    }while(state != 0 && isKeyAdded == 0);
     
-    uint32_t bits = packet->GetSize() * 8;
-    NS_LOG_LOGIC (this << "bits = " << bits);
-
-    Time nextTime (Seconds (bits / static_cast<double>(m_cbrRate.GetBitRate ()))); // Time till next packet
-    NS_LOG_FUNCTION(this << "CALCULATED NEXTTIME:" << bits / m_cbrRate.GetBitRate ());
-
-    NS_LOG_LOGIC ("nextTime = " << nextTime);
-    m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendPacket, this, packet);
 }
 
 void QKDChargingApplication::SendPacket (Ptr<Packet> packet){
@@ -1639,6 +1676,8 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
     std::string s = std::string((char*)buffer);
     delete[] buffer;  
 
+    
+    NS_LOG_FUNCTION(this << "s.size()" << s.size());
     uint32_t packetValue;  
     if(s.size() > 5){
 
@@ -1646,12 +1685,15 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
       sscanf(s.c_str(), "%6[^;]:%d;", labelChar, &packetValue);
       std::string label (labelChar); 
 
+      NS_LOG_FUNCTION(this << "label" << label);
+
       NS_LOG_DEBUG (this << "\tLABEL:\t" <<  label << "\tPACKETVALUE:\t" << packetValue);
 
       if(label == "ADDKEY"){
         m_packetNumber = 0;
         m_sendKeyRateMessage = false;
-
+        int findComa = s.find(";");
+        std::string key = s.substr(findComa + 1,s.size() - findComa);
         //add key to buffer
         if(GetNode ()->GetObject<QKDManager> () != 0){
 
@@ -1662,16 +1704,16 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
             << "\tLABEL:\t" <<  label 
             << "\tPACKETVALUE:\t" << packetValue << "\n";
             */
-            
+            NS_LOG_FUNCTION(this << "Adding new key to dst buffer");
             NS_LOG_DEBUG(this << "\t" << m_sendDevice->GetAddress() << "\t" << m_sinkDevice->GetAddress() );
-            GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(m_sendDevice->GetAddress(), packetValue);
+            GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(m_sinkDevice->GetAddress(), key);
             //m_maxPackets = m_random->GetValue (m_maxPackets * 0.8, m_maxPackets * 1.2);
         }
 
         //prepare response            
         if(m_master == false){ 
             SendMthresholdPacket();
-            PrepareOutput(label, packetValue); 
+            PrepareOutput(label, packetValue, m_sendDevice->GetAddress(), m_sinkDevice->GetAddress()); 
         }else{  
             SendData(); 
         }                 

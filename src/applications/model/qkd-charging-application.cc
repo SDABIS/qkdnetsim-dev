@@ -1102,69 +1102,66 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     NS_LOG_FUNCTION (this << "GetSourceBufferStatus" << state );
     int isKeyAdded = -1;
     //Si no hay que añadir clave se pone la label a QKDPPS
-    do{
-      std::stringstream newKeyMaterial;
-      if(state == 1 || state == 0) {
-        realKey = "QKDPPS";
-        newKeyMaterial << std::string(m_pktSize,'0');
-      }
-      NS_LOG_DEBUG (this <<  Simulator::Now () << realKey << value);     
- 
-      std::ostringstream msg; 
-      msg << realKey << ":" << value << ";";
 
+    std::stringstream newKeyMaterial;
+    if(state == 1 || state == 0) {
+      realKey = "QKDPPS";
+      newKeyMaterial << std::string(m_pktSize,'0');
+    }
+    NS_LOG_DEBUG (this <<  Simulator::Now () << realKey << value);     
+
+    std::ostringstream msg; 
+    msg << realKey << ":" << value << ";";
+    
+    
+    if(realKey== "ADDKEY"){
+      //playing with packet size to introduce some randomness 
+      //msg << std::string( m_random->GetValue (m_pktSize, m_pktSize*1.5), '0');
       
-      
-      
-      if(realKey== "ADDKEY"){
-        //playing with packet size to introduce some randomness 
-        //msg << std::string( m_random->GetValue (m_pktSize, m_pktSize*1.5), '0');
-        
-        for(uint32_t i = 0; i < m_pktSize; i++){
-            newKeyMaterial << int(m_random->GetValue(0,9));
-        }
-        NS_LOG_FUNCTION (this << "inside of the if to encrypt, realKey:" << realKey  );
-        isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str());
-        if(isKeyAdded == 0){
-          NS_LOG_FUNCTION (this << "The realKey was added to the source buffer" );
-        }else{
-          NS_LOG_FUNCTION (this << "The realKey can not be added to the source buffer because it was to large, it has to be:" << isKeyAdded);
-          //Esto se hace asi para que si no se puede insertar todo el material de clave se inserta solo el que entra
-          isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str().substr(0,isKeyAdded));
-        }
-        /*if( GetNode()->GetObject<QKDManager> () != 0 )
-          packet = GetNode()->GetObject<QKDManager> ()->MarkEncrypt (packet);*/
+      for(uint32_t i = 0; i < m_pktSize*4; i++){
+          newKeyMaterial << int(m_random->GetValue(0,9));
       }
-      //Ya que se inserto menos material de clave, el paquete tiene que ser mas pequeño
+      NS_LOG_FUNCTION (this << "inside of the if to encrypt, realKey:" << realKey  );
+      isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str());
       if(isKeyAdded == 0){
-        msg << newKeyMaterial.str();
-        msg << '\0';
+        NS_LOG_FUNCTION (this << "The realKey was added to the source buffer" << isKeyAdded );
       }else{
-        msg << newKeyMaterial.str().substr(0,isKeyAdded);
-        msg << '\0';
+        NS_LOG_FUNCTION (this << "The realKey can not be added to the source buffer because it was to large, it has to be:" << isKeyAdded);
+        //Esto se hace asi para que si no se puede insertar todo el material de clave se inserta solo el que entra
+        isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str().substr(0,isKeyAdded));
       }
-          
+      /*if( GetNode()->GetObject<QKDManager> () != 0 )
+        packet = GetNode()->GetObject<QKDManager> ()->MarkEncrypt (packet);*/
+    }
+    //Ya que se inserto menos material de clave, el paquete tiene que ser mas pequeño
+    if(isKeyAdded == 0){
+      msg << newKeyMaterial.str();
+      msg << '\0';
+    }else{
+      msg << newKeyMaterial.str().substr(0,isKeyAdded);
+      msg << '\0';
+    }
+        
 
-      NS_LOG_FUNCTION (this << "msg:" << msg.str() );
+    NS_LOG_FUNCTION (this << "msg:" << msg.str() );
 
-      Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.str().c_str(), msg.str().length());
+    Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.str().c_str(), msg.str().length());
 
-      /*bool encriptado = GetNode()->GetObject<QKDManager> ()->IsMarkedAsEncrypt(packet);
-      NS_LOG_FUNCTION (this << "Esta marcado para encriptar?:" << encriptado << "packet->GetUid():" << packet->GetUid());*/
+    /*bool encriptado = GetNode()->GetObject<QKDManager> ()->IsMarkedAsEncrypt(packet);
+    NS_LOG_FUNCTION (this << "Esta marcado para encriptar?:" << encriptado << "packet->GetUid():" << packet->GetUid());*/
 
-      NS_LOG_DEBUG(this << "\t PACKET SIZE:" << packet->GetSize());
-      
-      uint32_t bits = packet->GetSize() * 8;
-      NS_LOG_LOGIC (this << "bits = " << bits);
+    NS_LOG_DEBUG(this << "\t PACKET SIZE:" << packet->GetSize());
+    
+    uint32_t bits = packet->GetSize() * 8;
+    NS_LOG_LOGIC (this << "bits = " << bits);
 
-      Time nextTime (Seconds (bits / static_cast<double>(m_cbrRate.GetBitRate ()))); // Time till next packet
-      NS_LOG_FUNCTION(this << "CALCULATED NEXTTIME:" << bits / m_cbrRate.GetBitRate ());
+    Time nextTime (Seconds (bits / static_cast<double>(m_cbrRate.GetBitRate ()))); // Time till next packet
+    NS_LOG_FUNCTION(this << "CALCULATED NEXTTIME:" << bits / m_cbrRate.GetBitRate ());
 
-      NS_LOG_LOGIC ("nextTime = " << nextTime);
-      m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendPacket, this, packet);
-      state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
-      NS_LOG_FUNCTION(this << "state:" << state << "iskeyAdded:" << isKeyAdded );
-    }while(state != 0 && isKeyAdded == 0);
+    NS_LOG_LOGIC ("nextTime = " << nextTime);
+    m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendPacket, this, packet);
+    state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
+    NS_LOG_FUNCTION(this << "state:" << state << "iskeyAdded:" << isKeyAdded );
     
 }
 
@@ -1676,7 +1673,7 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
     std::string s = std::string((char*)buffer);
     delete[] buffer;  
 
-    
+    NS_LOG_FUNCTION(this << "paquete" << s);
     NS_LOG_FUNCTION(this << "s.size()" << s.size());
     uint32_t packetValue;  
     if(s.size() > 5){

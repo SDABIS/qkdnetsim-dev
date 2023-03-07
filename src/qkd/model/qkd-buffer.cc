@@ -573,7 +573,7 @@ QKDBuffer::AddKeyMaterial (std::string newMaterial)
     //si se añade mas material del que puede almacenar el buffer entonces devuelve el error -1
     
 
-    if(m_Mcurrent + newMaterial.size() >= m_Mmax){
+    if(m_Mcurrent + newMaterial.size() > m_Mmax){
 
         NS_LOG_FUNCTION(this << "Buffer is full! Not able to add new " 
             << newMaterial.size() << "since the current is " 
@@ -583,7 +583,7 @@ QKDBuffer::AddKeyMaterial (std::string newMaterial)
         m_McurrentChangeTrace (m_Mcurrent);
         m_McurrentIncreaseTrace (0);
 
-        return (m_Mcurrent + newMaterial.size() - m_Mmax -1);
+        return (m_Mmax - m_Mcurrent);
 
     }
 

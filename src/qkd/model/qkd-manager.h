@@ -215,9 +215,9 @@ namespace ns3 {
         *   Returns true if success, false otherwise.
         *   @param Ptr<NetDevice>
         *   @param std::string
-        *   @return bool        
+        *   @return uint32_t        
         */
-        bool AddNewKeyMaterial (const Address sourceAddress, std::string newKeyMaterial);
+        uint32_t AddNewKeyMaterial (const Address sourceAddress, std::string newKeyMaterial);
      
         /**
         * \brief Called from traffic-control/module/qkd-pfifo-fast-queue-disc

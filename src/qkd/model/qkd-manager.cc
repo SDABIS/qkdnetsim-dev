@@ -1000,7 +1000,7 @@ QKDManager::UpdateQuantumChannelMetric(const Address sourceAddress){
     NS_LOG_FUNCTION (this << sourceAddress);
 }
 
-bool
+uint32_t
 QKDManager::AddNewKeyMaterial (const Address sourceAddress, std::string newKeyMaterial)
 {
     NS_LOG_FUNCTION (this << sourceAddress << newKeyMaterial);
@@ -1011,7 +1011,7 @@ QKDManager::AddNewKeyMaterial (const Address sourceAddress, std::string newKeyMa
         NS_LOG_DEBUG ( this << "\t" << "sourceAddress: \t" << i->first );
         NS_LOG_DEBUG (this << "Adding new key to the buffer! \t" << "keySize:\t" << newKeyMaterial.size() << "\n" );
 
-        bool response = i->second.SrcBuffer->AddKeyMaterial(newKeyMaterial);
+        uint32_t response = i->second.SrcBuffer->AddKeyMaterial(newKeyMaterial);
         UpdatePublicChannelMetric (i->first);
         UpdateQuantumChannelMetric(i->first);
         CalculateLinkThresholdHelpValue();
@@ -1263,6 +1263,7 @@ QKDManager::GetSourceBufferStatus(const Address sourceAddress){
     uint32_t state = -1;
     std::map<Address, QKDManager::Connection >::iterator i = FetchConnection(sourceAddress);
     if(i != m_destinations.end()){
+        i->second.SrcBuffer->CheckState();
         state = i->second.SrcBuffer->FetchState();
     }
     return state;
@@ -1273,6 +1274,7 @@ QKDManager::GetDestinationBufferStatus(const Address sourceAddress){
     uint32_t state = -1;
     std::map<Address, QKDManager::Connection >::iterator i = FetchConnection(sourceAddress);
     if(i != m_destinations.end()){
+        i->second.DstBuffer->CheckState();
         state = i->second.DstBuffer->FetchState();
     }
     return state;

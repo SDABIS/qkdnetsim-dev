@@ -1104,7 +1104,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     //Si no hay que añadir clave se pone la label a QKDPPS
 
     std::stringstream newKeyMaterial;
-    if(state == 1 || state == 0) {
+    if(state == 0) {
       realKey = "QKDPPS";
       newKeyMaterial << std::string(m_pktSize,'0');
     }
@@ -1118,7 +1118,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
       //playing with packet size to introduce some randomness 
       //msg << std::string( m_random->GetValue (m_pktSize, m_pktSize*1.5), '0');
       
-      for(uint32_t i = 0; i < m_pktSize*4; i++){
+      for(uint32_t i = 0; i < m_pktSize; i++){
           newKeyMaterial << int(m_random->GetValue(0,9));
       }
       NS_LOG_FUNCTION (this << "inside of the if to encrypt, realKey:" << realKey  );

@@ -158,9 +158,18 @@ QKDSend::SendPacket (void)
 {
     NS_LOG_FUNCTION (this);
 
-    Ptr<Packet> packet = Create<Packet> (m_packetSize); 
+    std::string msg = "paquete del QKDSend";
+
+    Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.c_str(), m_packetSize); 
     packet = m_socket->GetNode()->GetObject<QKDManager> ()->MarkEncrypt  (packet, QKDCRYPTO_OTP, QKDCRYPTO_AUTH_VMAC); 
     packet = m_socket->GetNode()->GetObject<QKDManager> ()->MarkMaxDelay (packet, m_timeDelayLimit);
+
+    uint8_t *buffer = new uint8_t[packet->GetSize ()];
+    packet->CopyData(buffer, packet->GetSize ());
+    std::string s = std::string((char*)buffer);
+    delete[] buffer; 
+
+    NS_LOG_FUNCTION (this << "Paquete a mandar:" << s );
 
     NS_ASSERT (packet != 0);
     NS_LOG_FUNCTION (this << packet->GetUid() << packet->GetSize() );

@@ -1097,8 +1097,10 @@ void QKDChargingApplication::SendData (void)
 
 void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,const Address& src,const Address& dst)
 {    
+    //TODO analizar si descomentar el GetSourceBufferStatus(dst) es util o no
     std::string realKey = key;
-    uint32_t state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
+    uint32_t state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(src);
+    //GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
     NS_LOG_FUNCTION (this << "GetSourceBufferStatus" << state );
     int isKeyAdded = -1;
     //Si no hay que añadir clave se pone la label a QKDPPS
@@ -1160,7 +1162,8 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
 
     NS_LOG_LOGIC ("nextTime = " << nextTime);
     m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendPacket, this, packet);
-    state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
+    //TODO eliminar o ver que hacer con esto
+    state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(src);
     NS_LOG_FUNCTION(this << "state:" << state << "iskeyAdded:" << isKeyAdded );
     
 }
@@ -1704,6 +1707,7 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
             NS_LOG_FUNCTION(this << "Adding new key to dst buffer");
             NS_LOG_DEBUG(this << "\t" << m_sendDevice->GetAddress() << "\t" << m_sinkDevice->GetAddress() );
             GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(m_sinkDevice->GetAddress(), key);
+            GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(m_sinkDevice->GetAddress());
             //m_maxPackets = m_random->GetValue (m_maxPackets * 0.8, m_maxPackets * 1.2);
         }
 

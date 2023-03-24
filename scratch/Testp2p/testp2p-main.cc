@@ -151,8 +151,8 @@ int main (int argc, char *argv[])
     NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),
         3000,    //min
-        8000, //thr
-        12000,   //max
+        21000, //thr
+        26000,   //max
         0     //current    //20485770
     );
    
@@ -195,7 +195,7 @@ int main (int argc, char *argv[])
     uint16_t sinkPort = 8080;
     QKDSinkAppHelper packetSinkHelper ("ns3::UdpSocketFactory", InetSocketAddress (Ipv4Address::GetAny (), sinkPort));
     ApplicationContainer sinkApps = packetSinkHelper.Install (n.Get (1));
-    sinkApps.Start (Seconds (25.));
+    sinkApps.Start (Seconds (20.));
     sinkApps.Stop (Seconds (300.));
     
     /* Create source app  */
@@ -206,7 +206,7 @@ int main (int argc, char *argv[])
     Ptr<QKDSend> app = CreateObject<QKDSend> ();
     app->Setup (socket, sourceAddress, sinkAddress, 640, 5, DataRate ("160kbps"));
     n.Get (0)->AddApplication (app);
-    app->SetStartTime (Seconds (25.));
+    app->SetStartTime (Seconds (20.));
     app->SetStopTime (Seconds (300.));
   
     //////////////////////////////////////

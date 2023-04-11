@@ -1116,7 +1116,10 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     std::ostringstream msg; 
     msg << realKey << ":" << value << ";";
     
-    
+    if(realKey == "QKDPPS"){
+      return;
+    }
+
     if(realKey== "ADDKEY"){
       //playing with packet size to introduce some randomness 
       //msg << std::string( m_random->GetValue (m_pktSize, m_pktSize*1.5), '0');

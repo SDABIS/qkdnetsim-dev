@@ -1108,17 +1108,15 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     //TODO añadir estado para que solo rellene cuando este por debajo del minimo EMPTY y que rellene hasta READY o hasta estar x cantidad por encima del threshold o 
     std::stringstream newKeyMaterial;
     if(state == 0) {
-      realKey = "QKDPPS";
-      newKeyMaterial << std::string(m_pktSize,'0');
+      /*realKey = "QKDPPS";
+      newKeyMaterial << std::string(m_pktSize,'0');*/
+      //en vez de mandar ningun paquete se termina la funcion y no se manda nada
+      return;
     }
     NS_LOG_DEBUG (this <<  Simulator::Now () << realKey << value);     
 
     std::ostringstream msg; 
     msg << realKey << ":" << value << ";";
-    
-    if(realKey == "QKDPPS"){
-      return;
-    }
 
     if(realKey== "ADDKEY"){
       //playing with packet size to introduce some randomness 

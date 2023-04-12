@@ -86,7 +86,7 @@ QKDCrypto::GetTypeId (void)
                     MakeBooleanAccessor (&QKDCrypto::m_compressionEnabled),
                     MakeBooleanChecker ())
     .AddAttribute ("EncryptionEnabled", "Indicates whether a real encryption of packets is enabled.",
-                    BooleanValue (false),
+                    BooleanValue (true),
                     MakeBooleanAccessor (&QKDCrypto::m_encryptionEnabled),
                     MakeBooleanChecker ())
     

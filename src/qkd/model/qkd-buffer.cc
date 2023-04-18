@@ -632,8 +632,7 @@ QKDBuffer::DeleteKeyID (const uint32_t& keyID)
     {
        NS_LOG_FUNCTION (this << "KeyID is deleted from 'm_keys'" << keyID ); 
         m_keys.erase(keyID);
-        //TODO es necesario
-        //a->second->Dispose();
+        a->second->Dispose();
         return true;
     }else{
       NS_LOG_FUNCTION (this << "KeyID is NOT in the map 'm_keys'" << keyID ); 

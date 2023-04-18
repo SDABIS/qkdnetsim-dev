@@ -1105,7 +1105,6 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     int isKeyAdded = -1;
     //Si no hay que añadir clave se pone la label a QKDPPS
 
-    //TODO añadir estado para que solo rellene cuando este por debajo del minimo EMPTY y que rellene hasta READY o hasta estar x cantidad por encima del threshold o 
     std::stringstream newKeyMaterial;
     if(state == 0) {
       /*realKey = "QKDPPS";

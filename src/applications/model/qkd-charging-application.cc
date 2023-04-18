@@ -1100,7 +1100,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     //TODO analizar si descomentar el GetSourceBufferStatus(dst) es util o no
     std::string realKey = key;
     uint32_t state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(src);
-    //GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
+    GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
     NS_LOG_FUNCTION (this << "GetSourceBufferStatus" << state );
     int isKeyAdded = -1;
     //Si no hay que añadir clave se pone la label a QKDPPS
@@ -1110,6 +1110,10 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
       /*realKey = "QKDPPS";
       newKeyMaterial << std::string(m_pktSize,'0');*/
       //en vez de mandar ningun paquete se termina la funcion y no se manda nada
+      NS_LOG_FUNCTION (this << "No se manda paquete por ser QKDPPS"  );
+      //5 * es para que no se compruebe cada tan poco tiempo. Es para ahorrar tiempo de ejecucion
+      Time nextTime (Seconds (5 * (m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
+      m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
       return;
     }
     NS_LOG_DEBUG (this <<  Simulator::Now () << realKey << value);     
@@ -1133,8 +1137,6 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
         //Esto se hace asi para que si no se puede insertar todo el material de clave se inserta solo el que entra
         isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str().substr(0,isKeyAdded));
       }
-      /*if( GetNode()->GetObject<QKDManager> () != 0 )
-        packet = GetNode()->GetObject<QKDManager> ()->MarkEncrypt (packet);*/
     }
     //Ya que se inserto menos material de clave, el paquete tiene que ser mas pequeño
     if(isKeyAdded == 0){

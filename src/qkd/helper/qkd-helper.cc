@@ -772,12 +772,9 @@ QKDHelper::InstallOverlayQKD(
         ); 
     } 
 
-    /**
-    *   Initial load in QKD Buffers
-    *   @ToDo: Currently buffers do not whole real data due to reduction of simlation time and computation complexity.
-    *           Instead, they only keep the number of current amount of key material, but not the real key material in memory
-    */
-    //TODO cambiar descripcion de arriba
+
+    //Initial load in QKD Buffers
+
     if(m_useRealStorages){ 
         //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ()); 
         //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ());

@@ -1122,7 +1122,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
       //msg << std::string( m_random->GetValue (m_pktSize, m_pktSize*1.5), '0');
       
       for(uint32_t i = 0; i < m_pktSize; i++){
-          newKeyMaterial << int(m_random->GetValue(0,9));
+          newKeyMaterial << int(m_random->GetValue(0,10));
       }
       NS_LOG_FUNCTION (this << "inside of the if to encrypt, realKey:" << realKey  );
       isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str());

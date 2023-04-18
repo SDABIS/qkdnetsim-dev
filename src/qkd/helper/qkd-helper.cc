@@ -777,13 +777,11 @@ QKDHelper::InstallOverlayQKD(
     *   @ToDo: Currently buffers do not whole real data due to reduction of simlation time and computation complexity.
     *           Instead, they only keep the number of current amount of key material, but not the real key material in memory
     */
-
+    //TODO cambiar descripcion de arriba
     if(m_useRealStorages){ 
         //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ()); 
         //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ());
-        Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
-        randomgenerator->SetAttribute("Min", DoubleValue (0.0));
-        randomgenerator->SetAttribute("Min", DoubleValue (9.0));
+        Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
         NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
         uint32_t maxDst = bufferA->GetMmax();
         uint32_t maxSrc = bufferB->GetMmax();
@@ -793,7 +791,7 @@ QKDHelper::InstallOverlayQKD(
 
         std::stringstream aux;
         for(uint32_t i = 0; i < maxSrc; i++){
-            aux << randomgenerator->GetInteger();
+            aux << int(randomgenerator->GetValue(0,10));
         }
         std::string newKeyMaterial = aux.str();
 
@@ -1101,8 +1099,6 @@ QKDHelper::InstallQKD(
         //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
         //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
         Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
-        randomgenerator->SetAttribute("Min", DoubleValue (0.0));
-        randomgenerator->SetAttribute("Min", DoubleValue (9.0));
         NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
 
         uint32_t maxDst = bufferA->GetMmax();
@@ -1113,7 +1109,7 @@ QKDHelper::InstallQKD(
 
         std::stringstream aux;
         for(uint32_t i = 0; i < maxSrc - 1; i++){
-            aux << randomgenerator->GetInteger();
+            aux << int(randomgenerator->GetValue(0,10));
         }
         std::string newKeyMaterial = aux.str();
 

@@ -461,6 +461,13 @@ private:
   uint32_t        m_packetNumber_temp8;
   uint32_t        m_maxPackets_temp8;
 
+  //esta variable controla si hay que seguir mandando paquetes de añadir material de clave.
+  int is_recharging;
+  //esta varable controla si esta quedando poco material
+  bool is_warning;
+  //esta variable controla el intervalo de comprobacion de estado del buffer
+  uint32_t next_check;
+
 
 private:
 

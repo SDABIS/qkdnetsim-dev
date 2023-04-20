@@ -160,7 +160,7 @@ int main (int argc, char *argv[])
         1048576,    //min
         11324620, //thr
         52428800,   //max
-        0     //current    //20485770
+        20485770     //current    //20485770
     );
    
     //Create graph to monitor buffer changes

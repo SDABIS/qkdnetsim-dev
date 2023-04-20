@@ -150,17 +150,17 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1 
     /*NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),
-        10000,    //min
-        15000, //thr
-        27000,   //max
-        27000     //current    //20485770
+        50000,    //min         //10000
+        150000, //thr            //15000
+        200000,   //max          //27000
+        130000     //current    //20485770
     );*/
     NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),
         1048576,    //min
         11324620, //thr
         52428800,   //max
-        20485770     //current    //20485770
+        32428800     //current    //20485770
     );
    
     //Create graph to monitor buffer changes
@@ -203,7 +203,7 @@ int main (int argc, char *argv[])
     QKDSinkAppHelper packetSinkHelper ("ns3::UdpSocketFactory", InetSocketAddress (Ipv4Address::GetAny (), sinkPort));
     ApplicationContainer sinkApps = packetSinkHelper.Install (n.Get (1));
     sinkApps.Start (Seconds (20.));
-    sinkApps.Stop (Seconds (300.));
+    sinkApps.Stop (Seconds (360.));
     
     /* Create source app  */
     Address sinkAddress (InetSocketAddress (i0i1.GetAddress(1), sinkPort));
@@ -214,7 +214,7 @@ int main (int argc, char *argv[])
     app->Setup (socket, sourceAddress, sinkAddress, 640, 5, DataRate ("160kbps"));
     n.Get (0)->AddApplication (app);
     app->SetStartTime (Seconds (20.));
-    app->SetStopTime (Seconds (300.));
+    app->SetStopTime (Seconds (360.));
   
     //////////////////////////////////////
     ////         STATISTICS
@@ -226,7 +226,7 @@ int main (int argc, char *argv[])
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSend/Tx", MakeCallback(&SentPacket));
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSink/Rx", MakeCallback(&ReceivedPacket));
  
-    Simulator::Stop (Seconds (25));
+    Simulator::Stop (Seconds (360));
     Simulator::Run ();
 
     Ratio(app->sendDataStats(), app->sendPacketStats());

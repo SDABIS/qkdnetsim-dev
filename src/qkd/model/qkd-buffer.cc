@@ -592,6 +592,7 @@ QKDBuffer::AddKeyMaterial (std::string newMaterial)
     key_material = aux;
 
     m_Mcurrent = key_material.size();
+    KeyCalculation(); 
     //TODO asegurarse que se actualizan todas las caracteristicas de m_Mcurrent
     //TODO funcion de referencia AddNewContent
 

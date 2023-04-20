@@ -148,11 +148,18 @@ int main (int argc, char *argv[])
  
 
     //create QKD connection between nodes 0 and 1 
-    NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
+    /*NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),
         3000,    //min
         21000, //thr
         26000,   //max
+        0     //current    //20485770
+    );*/
+    NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
+        d0d1.Get(0), d0d1.Get(1),
+        30000,    //min
+        300000, //thr
+        350000,   //max
         0     //current    //20485770
     );
    
@@ -219,7 +226,7 @@ int main (int argc, char *argv[])
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSend/Tx", MakeCallback(&SentPacket));
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSink/Rx", MakeCallback(&ReceivedPacket));
  
-    Simulator::Stop (Seconds (30));
+    Simulator::Stop (Seconds (50));
     Simulator::Run ();
 
     Ratio(app->sendDataStats(), app->sendPacketStats());

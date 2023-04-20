@@ -228,6 +228,10 @@ QKDChargingApplication::GetTypeId (void)
                    AddressValue (),
                    MakeAddressAccessor (&QKDChargingApplication::m_local_temp8),
                    MakeAddressChecker ())   
+    .AddAttribute ("next_check", "Retardo entre la comprobacion del estado del buffer",
+                   UintegerValue (5), 
+                   MakeUintegerAccessor (&QKDChargingApplication::next_check),
+                   MakeUintegerChecker<uint32_t> (1))
 
    .AddTraceSource ("Tx", "A new packet is created and is sent",
                    MakeTraceSourceAccessor (&QKDChargingApplication::m_txTrace),
@@ -258,7 +262,10 @@ QKDChargingApplication::QKDChargingApplication ()
   m_packetNumber_temp5= 0; 
   m_packetNumber_temp6= 0; 
   m_packetNumber_temp7= 0; 
-  m_packetNumber_temp8= 0; 
+  m_packetNumber_temp8= 0;
+  is_recharging = 0;
+  is_warning = false;
+  next_check = 5;
 }
 
 QKDChargingApplication::~QKDChargingApplication ()
@@ -1097,25 +1104,60 @@ void QKDChargingApplication::SendData (void)
 
 void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,const Address& src,const Address& dst)
 {    
-    //TODO analizar si descomentar el GetSourceBufferStatus(dst) es util o no
     std::string realKey = key;
     uint32_t state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(src);
-    GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
-    NS_LOG_FUNCTION (this << "GetSourceBufferStatus" << state );
+    //TODO si el buffer destino esta en estado EMPTY mandar clave automaticamente
+    uint32_t dstStatus = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
+    NS_LOG_FUNCTION (this << "SourceBufferStatus" << state << "DestBufferStatus" << dstStatus );
     int isKeyAdded = -1;
-    //Si no hay que añadir clave se pone la label a QKDPPS
+    
+    if(dstStatus == 3){
+      is_recharging = 500;
+    }
+
+    
+    
 
     std::stringstream newKeyMaterial;
-    if(state == 0) {
-      /*realKey = "QKDPPS";
-      newKeyMaterial << std::string(m_pktSize,'0');*/
-      //en vez de mandar ningun paquete se termina la funcion y no se manda nada
-      NS_LOG_FUNCTION (this << "No se manda paquete por ser QKDPPS"  );
-      //5 * es para que no se compruebe cada tan poco tiempo. Es para ahorrar tiempo de ejecucion
-      Time nextTime (Seconds (5 * (m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
-      m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
-      return;
+    NS_LOG_FUNCTION (this << "state" << state << "is_recharging" << (is_recharging?"true":"false"));
+    if(!is_recharging){
+      //solo el slave usara QKDPPS, por lo que lo mandara para que sea el master el que mande paquetes
+      if(key == "QKDPPS"){
+        realKey = "QKDPPS";
+        newKeyMaterial << std::string(m_pktSize,'0');
+        //para que no entre en ningun otro if
+        state = -1;
+      }
+      //si esta EMPTY se pone un numero en el contador de recargas
+      if(state == 3){
+        is_recharging = 500;
+      }
+      //Si esta READY se espera un tiempo con delay extra
+      if(state == 0) {
+        //next_check es para que no se compruebe cada tan poco tiempo. Es para ahorrar tiempo de ejecucion
+        //TODO cambiar la forma de calcularlo por otra que no dependa del tamaño del paquete??
+        NS_LOG_FUNCTION (this << "READY");
+        Time nextTime (Seconds (next_check * (m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
+        m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
+        return;
+      }
+      //Si esta en warning se espera el tiempo que tardaria en mandar un paquete
+      if(state == 1){
+        //TODO a lo mejor es poco tiempo solo con el tamaño del paquete (puede que no que es como estaba antes, en el estado original)
+        //TODO si no se usa is_warning eliminarla
+        NS_LOG_FUNCTION (this << "WARNING");
+        Time nextTime (Seconds ((m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
+        m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
+        return;
+      }
+    }else{
+      if(state == 0){
+        is_recharging = is_recharging - 1;
+      }
     }
+    
+
+
     NS_LOG_DEBUG (this <<  Simulator::Now () << realKey << value);     
 
     std::ostringstream msg; 
@@ -1133,6 +1175,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
       if(isKeyAdded == 0){
         NS_LOG_FUNCTION (this << "The realKey was added to the source buffer" << isKeyAdded );
       }else{
+        is_recharging = 0;
         NS_LOG_FUNCTION (this << "The realKey can not be added to the source buffer because it was to large, it has to be:" << isKeyAdded);
         //Esto se hace asi para que si no se puede insertar todo el material de clave se inserta solo el que entra
         isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str().substr(0,isKeyAdded));
@@ -1152,9 +1195,6 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
 
     Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.str().c_str(), msg.str().length());
 
-    /*bool encriptado = GetNode()->GetObject<QKDManager> ()->IsMarkedAsEncrypt(packet);
-    NS_LOG_FUNCTION (this << "Esta marcado para encriptar?:" << encriptado << "packet->GetUid():" << packet->GetUid());*/
-
     NS_LOG_DEBUG(this << "\t PACKET SIZE:" << packet->GetSize());
     
     uint32_t bits = packet->GetSize() * 8;
@@ -1165,7 +1205,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
 
     NS_LOG_LOGIC ("nextTime = " << nextTime);
     m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendPacket, this, packet);
-    //TODO eliminar o ver que hacer con esto
+    //actualiza el estado del buffer propio para actualizar las graficas
     state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(src);
     NS_LOG_FUNCTION(this << "state:" << state << "iskeyAdded:" << isKeyAdded );
     

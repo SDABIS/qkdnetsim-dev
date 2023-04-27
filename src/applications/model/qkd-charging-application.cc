@@ -1111,7 +1111,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     NS_LOG_FUNCTION (this << "SourceBufferStatus" << state << "DestBufferStatus" << dstStatus );
     int isKeyAdded = -1;
     
-    if(dstStatus == 3){
+    if(dstStatus != 0){
       is_recharging = 500;
     }
 
@@ -1167,6 +1167,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
       //playing with packet size to introduce some randomness 
       //msg << std::string( m_random->GetValue (m_pktSize, m_pktSize*1.5), '0');
       
+      //TODO a lo mejor cambiar m_pktSize por value ya que se supone que hay que rellenar con el valor que se el indica a la aplicación.
       for(uint32_t i = 0; i < m_pktSize; i++){
           newKeyMaterial << int(m_random->GetValue(0,10));
       }

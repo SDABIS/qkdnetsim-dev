@@ -1084,98 +1084,91 @@ void QKDChargingApplication::SendData (void)
   NS_LOG_DEBUG(this << "\tSendData!\t" << m_sendDevice->GetAddress() << "\t" << m_sinkDevice->GetAddress() );
   NS_LOG_DEBUG (this << "\t Sending packet " << m_packetNumber << " of maximal " << m_maxPackets);
 
-  //TODO ver como cuadrar bien esta variable
   //Esto permite que se cifren los paquetes.
-  m_sendKeyRateMessage = true;
-  // ENTIENDO si el numero de paquetes enviados es mayor o igual que al tamaño maximo de paquetes, enviamos material de clave?
-  if(m_packetNumber >= m_maxPackets)
+  /*if(m_packetNumber >= m_maxPackets)
   {
     m_sendKeyRateMessage = true;
     m_packetNumber = 0;
     m_qkdPacketNumber = 0;
-  }
+  }*/
 
-  NS_LOG_FUNCTION(this << "m_master" << m_master << "m_sendKeyRateMessage" << m_sendKeyRateMessage);
-  if(m_master == true && m_sendKeyRateMessage == true)
-    PrepareOutput("ADDKEY", m_keyRate,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress()); 
-  else
+  uint32_t state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(m_sendDevice->GetAddress());
+  //TODO si el buffer destino esta en estado EMPTY mandar clave automaticamente
+  uint32_t dstStatus = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(m_sinkDevice->GetAddress());
+  NS_LOG_FUNCTION (this << "SourceBufferStatus" << state << "DestBufferStatus" << dstStatus );
+
+  if(m_master == false){
+    //el slave usara QKDPPS para que sigan intercambiando mensajes.
     PrepareOutput("QKDPPS", m_packetNumber,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress());
+  }
+  
+  //si el buffer destino no esta listo (empty, charging o warning) que se recargue
+  if(dstStatus != 0){
+    is_recharging = 500;
+  }
+  NS_LOG_FUNCTION (this << "state" << state << "dstState" << dstStatus << "is_recharging" << (is_recharging?"true":"false"));
+
+  if(is_recharging == false){
+    //si esta EMPTY se pone un numero en el contador de recargas
+    if(state == 3){
+      is_recharging = 500;
+    }
+    //Si esta READY se espera un tiempo con delay extra
+    if(state == 0) {
+      //next_check es para que no se compruebe cada tan poco tiempo. Es para ahorrar tiempo de ejecucion
+      //TODO cambiar la forma de calcularlo por otra que no dependa del tamaño del paquete??
+      NS_LOG_FUNCTION (this << "READY");
+      Time nextTime (Seconds (next_check * (m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
+      m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
+      return;
+    }
+    //Si esta en warning se espera el tiempo que tardaria en mandar un paquete
+      if(state == 1){
+      //TODO a lo mejor es poco tiempo solo con el tamaño del paquete (puede que no que es como estaba antes, en el estado original)
+      //TODO si no se usa is_warning eliminarla
+      NS_LOG_FUNCTION (this << "WARNING");
+      Time nextTime (Seconds ((m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
+      m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
+      return;
+    }
+  }else{
+    if(state == 0){
+      is_recharging = is_recharging - 1;
+    }
+  }
+  
+  NS_LOG_FUNCTION (this << "is_recharging booleano" << (is_recharging?"true":"false"));
+  if(is_recharging){
+    NS_LOG_FUNCTION (this << "antes de PrepareOutput");
+    PrepareOutput("ADDKEY", m_keyRate,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress()); 
+  }else{
+    Time nextTime (Seconds ((m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
+    m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
+    return;
+  }
 }
 
 void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,const Address& src,const Address& dst)
 {    
-    std::string realKey = key;
-    uint32_t state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(src);
-    //TODO si el buffer destino esta en estado EMPTY mandar clave automaticamente
-    uint32_t dstStatus = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(dst);
-    NS_LOG_FUNCTION (this << "SourceBufferStatus" << state << "DestBufferStatus" << dstStatus );
+    //TODO quitar una identacion
     int isKeyAdded = -1;
-    
-    if(dstStatus != 0){
-      is_recharging = 500;
-    }
-
-    
-    
-
     std::stringstream newKeyMaterial;
-    NS_LOG_FUNCTION (this << "state" << state << "is_recharging" << (is_recharging?"true":"false"));
-    if(!is_recharging){
-      //solo el slave usara QKDPPS, por lo que lo mandara para que sea el master el que mande paquetes
-      if(key == "QKDPPS"){
-        realKey = "QKDPPS";
-        newKeyMaterial << std::string(m_pktSize,'0');
-        //para que no entre en ningun otro if
-        state = -1;
-      }
-      //si esta EMPTY se pone un numero en el contador de recargas
-      if(state == 3){
-        is_recharging = 500;
-      }
-      //Si esta READY se espera un tiempo con delay extra
-      if(state == 0) {
-        //next_check es para que no se compruebe cada tan poco tiempo. Es para ahorrar tiempo de ejecucion
-        //TODO cambiar la forma de calcularlo por otra que no dependa del tamaño del paquete??
-        NS_LOG_FUNCTION (this << "READY");
-        Time nextTime (Seconds (next_check * (m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
-        m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
-        return;
-      }
-      //Si esta en warning se espera el tiempo que tardaria en mandar un paquete
-      if(state == 1){
-        //TODO a lo mejor es poco tiempo solo con el tamaño del paquete (puede que no que es como estaba antes, en el estado original)
-        //TODO si no se usa is_warning eliminarla
-        NS_LOG_FUNCTION (this << "WARNING");
-        Time nextTime (Seconds ((m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
-        m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
-        return;
-      }
-    }else{
-      if(state == 0){
-        is_recharging = is_recharging - 1;
-      }
-    }
-    
 
-
-    NS_LOG_DEBUG (this <<  Simulator::Now () << realKey << value);     
+    NS_LOG_DEBUG (this <<  Simulator::Now () << key << value);     
 
     std::ostringstream msg; 
-    msg << realKey << ":" << value << ";";
+    msg << key << ":" << value << ";";
 
-    if(realKey== "ADDKEY"){
-      //playing with packet size to introduce some randomness 
-      //msg << std::string( m_random->GetValue (m_pktSize, m_pktSize*1.5), '0');
-      
+    if(key== "ADDKEY"){
       //TODO a lo mejor cambiar m_pktSize por value ya que se supone que hay que rellenar con el valor que se el indica a la aplicación.
       for(uint32_t i = 0; i < m_pktSize; i++){
           newKeyMaterial << int(m_random->GetValue(0,10));
       }
-      NS_LOG_FUNCTION (this << "inside of the if to encrypt, realKey:" << realKey  );
       isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str());
       if(isKeyAdded == 0){
         NS_LOG_FUNCTION (this << "The realKey was added to the source buffer" << isKeyAdded );
       }else{
+        //el buffer esta lleno asique paramos de recargarlo
         is_recharging = 0;
         NS_LOG_FUNCTION (this << "The realKey can not be added to the source buffer because it was to large, it has to be:" << isKeyAdded);
         //Esto se hace asi para que si no se puede insertar todo el material de clave se inserta solo el que entra
@@ -1207,7 +1200,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     NS_LOG_LOGIC ("nextTime = " << nextTime);
     m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendPacket, this, packet);
     //actualiza el estado del buffer propio para actualizar las graficas
-    state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(src);
+    uint32_t state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(src);
     NS_LOG_FUNCTION(this << "state:" << state << "iskeyAdded:" << isKeyAdded );
     
 }

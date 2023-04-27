@@ -353,6 +353,10 @@ QKDBuffer::ProcessIncomingRequest(const uint32_t& akeyID, const uint32_t& akeySi
       key = FetchKeyOfSize(akeySize);
       if(key == 0) 
         return 0;
+      keySize = key->GetSize();
+      m_Mcurrent = m_Mcurrent - keySize;
+      if(m_Mcurrent <= keySize)
+        return 0;
       
     }else{
     //Otherwise, find the requested key by keyID
@@ -360,14 +364,11 @@ QKDBuffer::ProcessIncomingRequest(const uint32_t& akeyID, const uint32_t& akeySi
       if(key == 0) 
         return 0;
     }
-    keySize = key->GetSize();
+    
 
     NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
-
-    if(m_Mcurrent <= keySize)
-        return 0;
  
-    m_Mcurrent = m_Mcurrent - keySize;
+    
     m_McurrentChangeTrace(m_Mcurrent);
     m_McurrentDecreaseTrace(keySize);
 
@@ -618,6 +619,7 @@ QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
     m_Mcurrent = m_Mcurrent - keySize;
     m_McurrentChangeTrace(m_Mcurrent);
     m_McurrentDecreaseTrace (keySize);
+    NS_LOG_FUNCTION  (this << "Mcurrent:" << m_Mcurrent );
 
     m_bitsUsedInTimePeriod -= keySize;
 

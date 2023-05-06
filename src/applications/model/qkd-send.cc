@@ -181,6 +181,7 @@ QKDSend::SendPacket (void)
 
     if ( m_nPacketSize == 0 ||  m_dataSent < m_nPacketSize )
       ScheduleTx ();
+    ScheduleTx ();
 
     NS_LOG_FUNCTION(this << "m_nPacketSize:" << m_nPacketSize << "m_dataSent:" << m_dataSent << "m_nPacketSize:" << m_nPacketSize);
 }

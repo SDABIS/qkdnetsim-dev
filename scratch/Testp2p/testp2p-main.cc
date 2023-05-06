@@ -150,9 +150,9 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1 
     /*NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),
-        3000,    //min
-        21000, //thr
-        26000,   //max
+        30000,    //min
+        80000, //thr
+        130000,   //max
         0     //current    //20485770
     );*/
     NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
@@ -162,6 +162,13 @@ int main (int argc, char *argv[])
         350000,   //max
         0     //current    //20485770
     );
+    /*NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
+        d0d1.Get(0), d0d1.Get(1),
+        1048576,    //min
+        11324620, //thr
+        52428800,   //max
+        0     //current    //20485770
+    );*/
    
     //Create graph to monitor buffer changes
     QHelper.AddGraph(n.Get(0), d0d1.Get(0)); //srcNode, destinationAddress, BufferTitle

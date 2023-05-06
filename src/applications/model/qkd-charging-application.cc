@@ -1751,20 +1751,15 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
         //prepare response            
         if(m_master == false){ 
             SendMthresholdPacket();
-            PrepareOutput(label, packetValue, m_sendDevice->GetAddress(), m_sinkDevice->GetAddress()); 
+            //PrepareOutput("QKDPPS", packetValue, m_sendDevice->GetAddress(), m_sinkDevice->GetAddress()); 
+            SendData();
         }else{  
             SendData(); 
-        }                 
-
-        //Reset QKDPacketNumber
-        m_qkdPacketNumber = 0; 
+        }
         return;
       }
     }
 
-    if(packetValue < m_maxPackets){
-      m_packetNumber = packetValue + 1; 
-    }
 
     SendData();
 

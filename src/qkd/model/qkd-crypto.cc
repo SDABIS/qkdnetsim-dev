@@ -311,7 +311,7 @@ QKDCrypto::CheckForResourcesToProcessThePacket(
     switch (shouldEncrypt)
     {
         case QKDCRYPTO_OTP:
-            keySize += p->GetSize() * 8;//in bits
+            keySize += p->GetSize() /* * 8 */ ;//in bits
             break;
             
         case QKDCRYPTO_AES:  
@@ -435,11 +435,11 @@ QKDCrypto::ProcessOutgoingPacket (
                     //key = QKDbuffer->ProcessOutgoingRequest ( plainText.size() * 8 ); //In bits
                     NS_LOG_FUNCTION ("Usando nueva generacion de claves");
                     NS_LOG_FUNCTION ("SrcBuffer");
-                    keyID = SrcBuffer->ReserveKeyMaterial(plainText.size() * 8);
+                    keyID = SrcBuffer->ReserveKeyMaterial(plainText.size() /* * 8 */);
                     key = SrcBuffer->FetchKeyByID(keyID);
                     //reservamos el material en el buffer del nodo al que lo vamos a mandar
                     NS_LOG_FUNCTION ("DstBuffer");
-                    DstBuffer->ReserveKeyMaterial(plainText.size() * 8);
+                    DstBuffer->ReserveKeyMaterial(plainText.size() /* * 8 */);
 
 
                 if(key == 0){
@@ -2140,7 +2140,7 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
                 if(QKDbuffer != 0){
                     keyID = qkdHeader.GetEncryptionKeyId();
                     NS_LOG_FUNCTION(this << "qkdHeader.GetEncryptionKeyId()" << keyID );
-                    key = QKDbuffer->ProcessIncomingRequest ( keyID, cipherText.size() * 8 );  //in bits
+                    key = QKDbuffer->ProcessIncomingRequest ( keyID, cipherText.size() /* * 8*/  );  //in bits
                 }
                     
                 if(key == 0){
@@ -2149,6 +2149,7 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
                     return 0;
                 }else{
                     plainText = OTP ( cipherText, key );
+                    NS_LOG_FUNCTION ("plainText == cipherText" << (plainText == cipherText?"TRUE":"FALSE"));
                     if(keyID != 0)
                         QKDbuffer->DeleteKeyID(keyID);
                 }
@@ -2159,7 +2160,7 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
                 if(QKDbuffer != 0){
                     keyID = qkdHeader.GetEncryptionKeyId();
                     NS_LOG_FUNCTION(this << "qkdHeader.GetEncryptionKeyId()" << keyID );
-                    key = QKDbuffer->ProcessIncomingRequest ( keyID, cipherText.size() * 8 );  //in bits
+                    key = QKDbuffer->ProcessIncomingRequest ( keyID, cipherText.size() /* * 8*/  );  //in bits
                 }
 
                 if(key == 0){
@@ -2198,9 +2199,11 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
     // DECRYPT IP HEADER 
     /////////////////////////////
  
+    NS_LOG_FUNCTION ("ipHeaderPlainText.c_str(): " << ipHeaderPlainText.c_str() ); //DEBUG
     const uint8_t* ipBuffer = reinterpret_cast<const uint8_t*>(ipHeaderPlainText.c_str()); 
 
     Buffer ipHeaderBuffer;
+    NS_LOG_FUNCTION ("ipBuffer: " << ipBuffer << "m_ipv4HeaderSize" << m_ipv4HeaderSize ); //DEBUG
     ipHeaderBuffer.Deserialize(ipBuffer, m_ipv4HeaderSize); 
     //delete[] ipBuffer;
 
@@ -3272,20 +3275,27 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
 std::string
 QKDCrypto::OTP (const std::string& data, Ptr<QKDKey> key)
 {
+    NS_LOG_FUNCTION  (this << "m_encryptionEnabled" << (m_encryptionEnabled?"TRUE":"FALSE"));
+    NS_LOG_FUNCTION  (this << "m_encryptionEnabled");
     NS_LOG_FUNCTION  (this << data.size()); 
     if(!m_encryptionEnabled) return data;
 
     std::string encryptData = data; 
     std::string keyString = key->KeyToString();
 
+    NS_LOG_FUNCTION  (this << "keyString.size" << keyString.size() << "encryptData.size()" << encryptData.size()); 
     if(keyString.size() != encryptData.size()){
         NS_LOG_FUNCTION(this << "KEY IS NOT GOOD FOR OTP!");
         return data;
     }
 
+    NS_LOG_FUNCTION  (this << "Empieza encriptado");
+    NS_LOG_FUNCTION  (this << "data:" << encryptData);
     for (uint32_t i = 0; i < encryptData.length(); i++) {
         encryptData[i] ^= keyString[i];
     } 
+    NS_LOG_FUNCTION  (this << "Finaliza encriptado");
+    NS_LOG_FUNCTION  (this << "encryptData:" << encryptData);
 
     return encryptData;
 }

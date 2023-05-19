@@ -928,8 +928,6 @@ QKDManager::ProcessOutgoingRequest (Ptr<NetDevice> dev, Ptr<Packet> p)
 
             if(i->second.crypto == 0)
                 continue;
-            NS_LOG_DEBUG(this << "outgoing-key src:"  <<  i->second.SrcBuffer->GetKeyMaterial()); //DEBUG
-            NS_LOG_DEBUG(this << "outgoing-key dst:"  <<  i->second.DstBuffer->GetKeyMaterial()); //DEBUG
             processedPackets = i->second.crypto->ProcessOutgoingPacket(
                 packet, 
                 i->second.SrcBuffer,

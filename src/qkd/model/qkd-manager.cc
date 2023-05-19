@@ -928,6 +928,8 @@ QKDManager::ProcessOutgoingRequest (Ptr<NetDevice> dev, Ptr<Packet> p)
 
             if(i->second.crypto == 0)
                 continue;
+            NS_LOG_DEBUG(this << "outgoing-key src:"  <<  i->second.SrcBuffer->GetKeyMaterial()); //DEBUG
+            NS_LOG_DEBUG(this << "outgoing-key dst:"  <<  i->second.DstBuffer->GetKeyMaterial()); //DEBUG
             processedPackets = i->second.crypto->ProcessOutgoingPacket(
                 packet, 
                 i->second.SrcBuffer,
@@ -989,7 +991,7 @@ QKDManager::AddNewKeyMaterial (const Address sourceAddress, std::string newKeyMa
     if (i != m_destinations.end ()){
 
         NS_LOG_DEBUG ( this << "\t" << "sourceAddress: \t" << i->first );
-        NS_LOG_DEBUG (this << "Adding new key to the buffer! \t" << "keySize:\t" << newKeyMaterial.size() << "\n" );
+        NS_LOG_DEBUG (this << "Adding new key to the buffer! \t" << "keySize:\t" << newKeyMaterial.size() << "\tkey:\t" << newKeyMaterial );
 
         uint32_t response = i->second.SrcBuffer->AddKeyMaterial(newKeyMaterial);
         UpdatePublicChannelMetric (i->first);

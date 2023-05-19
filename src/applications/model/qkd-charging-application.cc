@@ -1092,15 +1092,18 @@ void QKDChargingApplication::SendData (void)
     m_qkdPacketNumber = 0;
   }*/
 
+  std::string label = "ADDKEY";
+  if(m_master == false){
+    //el slave usara QKDPPS para que sigan intercambiando mensajes.
+    //PrepareOutput("QKDPPS", m_packetNumber,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress());
+    label = "QKDPPS";
+  }
+
   uint32_t state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(m_sendDevice->GetAddress());
   //TODO si el buffer destino esta en estado EMPTY mandar clave automaticamente
   uint32_t dstStatus = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(m_sinkDevice->GetAddress());
   NS_LOG_FUNCTION (this << "SourceBufferStatus" << state << "DestBufferStatus" << dstStatus );
 
-  if(m_master == false){
-    //el slave usara QKDPPS para que sigan intercambiando mensajes.
-    PrepareOutput("QKDPPS", m_packetNumber,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress());
-  }
   
   //si el buffer destino no esta listo (empty, charging o warning) que se recargue
   if(dstStatus != 0){
@@ -1110,7 +1113,7 @@ void QKDChargingApplication::SendData (void)
 
   if(is_recharging == false){
     //si esta EMPTY se pone un numero en el contador de recargas
-    if(state == 3){
+    if(state == 3 && m_master == true){
       is_recharging = 500;
     }
     //Si esta READY se espera un tiempo con delay extra
@@ -1136,11 +1139,10 @@ void QKDChargingApplication::SendData (void)
       is_recharging = is_recharging - 1;
     }
   }
-  
-  NS_LOG_FUNCTION (this << "is_recharging booleano" << (is_recharging?"true":"false"));
+  NS_LOG_DEBUG (this << "is_recharging booleano: " << (is_recharging?"true":"false"));
   if(is_recharging){
     NS_LOG_FUNCTION (this << "antes de PrepareOutput");
-    PrepareOutput("ADDKEY", m_keyRate,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress()); 
+    PrepareOutput(label, m_keyRate,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress()); 
   }else{
     Time nextTime (Seconds ((m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
     m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);

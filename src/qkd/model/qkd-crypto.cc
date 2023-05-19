@@ -2199,7 +2199,7 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
     // DECRYPT IP HEADER 
     /////////////////////////////
  
-    NS_LOG_FUNCTION ("ipHeaderPlainText.c_str(): " << ipHeaderPlainText.c_str() ); //DEBUG
+    NS_LOG_FUNCTION ("ipHeaderPlainText.c_str(): " << ipHeaderPlainText.c_str() << "size" << ipHeaderPlainText.size() << "ipHeaderPlainText" << ipHeaderPlainText); //DEBUG
     const uint8_t* ipBuffer = reinterpret_cast<const uint8_t*>(ipHeaderPlainText.c_str()); 
 
     Buffer ipHeaderBuffer;
@@ -3275,27 +3275,27 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
 std::string
 QKDCrypto::OTP (const std::string& data, Ptr<QKDKey> key)
 {
-    NS_LOG_FUNCTION  (this << "m_encryptionEnabled" << (m_encryptionEnabled?"TRUE":"FALSE"));
-    NS_LOG_FUNCTION  (this << "m_encryptionEnabled");
+    NS_LOG_DEBUG  (this << "m_encryptionEnabled" << (m_encryptionEnabled?"TRUE":"FALSE"));
     NS_LOG_FUNCTION  (this << data.size()); 
     if(!m_encryptionEnabled) return data;
 
     std::string encryptData = data; 
     std::string keyString = key->KeyToString();
 
-    NS_LOG_FUNCTION  (this << "keyString.size" << keyString.size() << "encryptData.size()" << encryptData.size()); 
+    NS_LOG_DEBUG  (this << "keyString" << keyString ); 
+    NS_LOG_DEBUG  (this << "keyString.size" << keyString.size() << "encryptData.size()" << encryptData.size()); 
     if(keyString.size() != encryptData.size()){
         NS_LOG_FUNCTION(this << "KEY IS NOT GOOD FOR OTP!");
         return data;
     }
 
-    NS_LOG_FUNCTION  (this << "Empieza encriptado");
-    NS_LOG_FUNCTION  (this << "data:" << encryptData);
+    NS_LOG_DEBUG  (this << "Empieza encriptado");
+    NS_LOG_DEBUG  (this << "data: " << encryptData);
     for (uint32_t i = 0; i < encryptData.length(); i++) {
         encryptData[i] ^= keyString[i];
     } 
-    NS_LOG_FUNCTION  (this << "Finaliza encriptado");
-    NS_LOG_FUNCTION  (this << "encryptData:" << encryptData);
+    NS_LOG_DEBUG  (this << "Finaliza encriptado");
+    NS_LOG_DEBUG  (this << "encryptData: " << encryptData);
 
     return encryptData;
 }

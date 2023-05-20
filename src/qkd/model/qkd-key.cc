@@ -60,7 +60,7 @@ namespace ns3 {
       NS_LOG_FUNCTION  (this << m_key << size ); 
 
       m_globalUid++;
-      Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
+      //Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
       /*randomgenerator->SetAttribute("Min", DoubleValue (0.0));
       randomgenerator->SetAttribute("Min", DoubleValue (9.0));
       std::stringstream keystream;

@@ -436,10 +436,10 @@ QKDCrypto::ProcessOutgoingPacket (
                     NS_LOG_FUNCTION ("Usando nueva generacion de claves");
                     NS_LOG_FUNCTION ("SrcBuffer");
                     keyID = SrcBuffer->ReserveKeyMaterial(plainText.size() /* * 8 */);
-                    key = SrcBuffer->FetchKeyByID(keyID);
                     //reservamos el material en el buffer del nodo al que lo vamos a mandar
                     NS_LOG_FUNCTION ("DstBuffer");
                     DstBuffer->ReserveKeyMaterial(plainText.size() /* * 8 */);
+                    key = SrcBuffer->FetchKeyByID(keyID);
 
 
                 if(key == 0){
@@ -457,7 +457,10 @@ QKDCrypto::ProcessOutgoingPacket (
             case QKDCRYPTO_AES: 
 
                 if(SrcBuffer != 0 && DstBuffer != 0) 
-                    key = SrcBuffer->ProcessOutgoingRequest ( CryptoPP::AES::MAX_KEYLENGTH ); //AES in bits
+                    NS_LOG_FUNCTION ("SrcBuffer");
+                    keyID = SrcBuffer->ReserveKeyMaterial( CryptoPP::AES::MAX_KEYLENGTH); //AES in bits
+                    DstBuffer->ReserveKeyMaterial(CryptoPP::AES::MAX_KEYLENGTH);
+                    key = SrcBuffer->FetchKeyByID(keyID);
 
                 if(key == 0){
                     NS_LOG_FUNCTION ("NO KEY PROVIDED!");

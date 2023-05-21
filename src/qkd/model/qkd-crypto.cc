@@ -2152,7 +2152,6 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
                     return 0;
                 }else{
                     plainText = OTP ( cipherText, key );
-                    NS_LOG_FUNCTION ("plainText == cipherText" << (plainText == cipherText?"TRUE":"FALSE"));
                     if(keyID != 0)
                         QKDbuffer->DeleteKeyID(keyID);
                 }
@@ -2202,11 +2201,9 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
     // DECRYPT IP HEADER 
     /////////////////////////////
  
-    NS_LOG_FUNCTION ("ipHeaderPlainText.c_str(): " << ipHeaderPlainText.c_str() << "size" << ipHeaderPlainText.size() << "ipHeaderPlainText" << ipHeaderPlainText); //DEBUG
     const uint8_t* ipBuffer = reinterpret_cast<const uint8_t*>(ipHeaderPlainText.c_str()); 
 
     Buffer ipHeaderBuffer;
-    NS_LOG_FUNCTION ("ipBuffer: " << ipBuffer << "m_ipv4HeaderSize" << m_ipv4HeaderSize ); //DEBUG
     ipHeaderBuffer.Deserialize(ipBuffer, m_ipv4HeaderSize); 
     //delete[] ipBuffer;
 
@@ -3322,6 +3319,7 @@ QKDCrypto::AESEncrypt (const std::string& data, Ptr<QKDKey> key)
     stf.MessageEnd(); 
     delete[] Kkey;
      
+    NS_LOG_DEBUG  (this << "encryptData.size" << encryptData.size() << "encryptData" << encryptData); 
     return encryptData;
 }
 
@@ -3344,6 +3342,7 @@ QKDCrypto::AESDecrypt (const std::string& data, Ptr<QKDKey> key)
     stf.MessageEnd();
     delete[] Kkey;
 
+    NS_LOG_DEBUG  (this << "decryptData.size" << decryptData.size() << "decryptData" << decryptData); 
     return decryptData;
 }
 

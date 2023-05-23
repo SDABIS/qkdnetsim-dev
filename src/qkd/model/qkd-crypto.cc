@@ -3280,11 +3280,11 @@ QKDCrypto::OTP (const std::string& data, Ptr<QKDKey> key)
     if(!m_encryptionEnabled) return data;
 
     std::string encryptData = data; 
-    std::string keyString = key->KeyToString();
+    uint8_t * keyString = key->GetKey();
 
     NS_LOG_DEBUG  (this << "keyString" << keyString ); 
-    NS_LOG_DEBUG  (this << "keyString.size" << keyString.size() << "encryptData.size()" << encryptData.size()); 
-    if(keyString.size() != encryptData.size()){
+    NS_LOG_DEBUG  (this << "keyString.size" << keyString << "encryptData.size()" << encryptData.size()); 
+    if(key->GetSize() != encryptData.size()){
         NS_LOG_FUNCTION(this << "KEY IS NOT GOOD FOR OTP!");
         return data;
     }
@@ -3458,7 +3458,8 @@ QKDCrypto::CheckAuthentication(Ptr<Packet> p, Ptr<QKDKey> key, uint8_t authentic
 std::string
 QKDCrypto::VMAC (std::string& inputString, Ptr<QKDKey> key)
 { 
-    NS_LOG_FUNCTION (this << inputString.length() << key->KeyToString() );  
+    NS_LOG_FUNCTION (this << inputString.length() << key->KeyToString() ); 
+    NS_LOG_DEBUG (this << "KeyID:" << key->GetKeyId()); 
     if(!m_encryptionEnabled) 
         return std::string( m_authenticationTagLengthInBits, '0'); 
 

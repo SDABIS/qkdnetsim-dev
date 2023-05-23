@@ -36,6 +36,7 @@
 #include <string>
 #include <iomanip>
 #include <vector>
+#include <cstddef>
 /*
 #include <crypto++/iterhash.h>
 #include <crypto++/secblock.h>
@@ -70,7 +71,7 @@ class QKDKey : public Object
         /**
         * \brief Crea una clave con el material de clave que se le pasa
         */
-        QKDKey (uint32_t keyID, std::string keyMaterial); 
+        QKDKey (uint32_t keyID, std::vector<std::uint8_t> keyMaterial); 
 
         uint32_t        GetKeyId (void) const;
         void            SetKeyId (uint32_t);
@@ -116,7 +117,7 @@ class QKDKey : public Object
         uint32_t            m_id;       //<! QKDKeyID
         static uint32_t     m_globalUid; //<! Global static QKDKeyID
         uint32_t            m_size; //<! QKDKey size
-        std::string         m_key;  //<! QKDKey raw value
+        std::vector<std::uint8_t>         m_key;  //<! QKDKey raw value
         Time                m_timestamp; //<! QKDKey generation timestamp 
         
     };

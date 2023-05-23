@@ -148,7 +148,7 @@ QKDBuffer::Init(){
     m_c = 0;
     m_lastKeyChargingTimeStamp = 0;
 
-    key_material = "";
+    key_material.reserve(m_Mmax);
  
     this->CalculateAverageAmountOfTheKeyInTheBuffer();
 }
@@ -566,7 +566,7 @@ QKDBuffer::GetMmin (void) const
 } 
 
 uint32_t
-QKDBuffer::AddKeyMaterial (std::string newMaterial)
+QKDBuffer::AddKeyMaterial (std::vector<std::uint8_t> newMaterial)
 {
     NS_LOG_FUNCTION(this << newMaterial);
 
@@ -588,11 +588,9 @@ QKDBuffer::AddKeyMaterial (std::string newMaterial)
 
     }
 
-    std::string aux = key_material + newMaterial;
+    key_material.insert(key_material.end(),newMaterial.begin(),newMaterial.end());
 
-    key_material = aux;
-
-    m_Mcurrent = key_material.size();
+    m_Mcurrent = key_material.size();//TODO comprobar que no devuelve siempre el tamaño maximo
     KeyCalculation(); 
     //TODO asegurarse que se actualizan todas las caracteristicas de m_Mcurrent
     //TODO funcion de referencia AddNewContent
@@ -608,13 +606,26 @@ QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
     if(m_Mcurrent <= keySize)
         return 0;
 
-    std::string key = key_material.substr(0,keySize);
-    key_material = key_material.substr(keySize,key_material.size());
+
+    //usamos los primeros bytes del material de clave para hacer la nueva clave
+    std::vector<std::uint8_t>::const_iterator first = key_material.begin() + 0;
+    std::vector<std::uint8_t>::const_iterator last = key_material.begin() + keySize;
+    std::vector<std::uint8_t> key(first, last);
+
+
+    //eliminamos los bytes seleccionados para la nueva clave
+    key_material.erase(key_material.begin(),key_material.begin() + keySize);
     
     m_nextKeyID++;
     Ptr<QKDKey> newKey = CreateObject<QKDKey> (m_nextKeyID, key);
 
     NS_LOG_FUNCTION  (this << "Add keyID:" << m_nextKeyID);
+    NS_LOG_DEBUG (this << " key: \t" << newKey->KeyToString());
+    std::stringstream ss;
+    for(unsigned int i = 0; i < key_material.size(); i++){
+        ss << key_material[i];
+    }
+    NS_LOG_DEBUG (this << " key_material: \t" << ss.str());
     m_keys.insert(std::pair<uint32_t,Ptr<QKDKey>>(m_nextKeyID,newKey));
     m_Mcurrent = m_Mcurrent - keySize;
     m_McurrentChangeTrace(m_Mcurrent);

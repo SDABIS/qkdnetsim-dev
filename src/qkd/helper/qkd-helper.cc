@@ -785,14 +785,13 @@ QKDHelper::InstallOverlayQKD(
         if(maxSrc < maxDst){
             maxSrc = maxDst;
         }
-
-        std::stringstream aux;
-        for(uint32_t i = 0; i < maxSrc; i++){
-            aux << int(randomgenerator->GetValue(0,10));
+        std::vector<std::uint8_t> newKeyMaterial;
+        for(uint32_t i = 0; i < maxSrc - 1; i++){
+            //newKeyMaterial.push_back(int(randomgenerator->GetValue(0,256)));
+            newKeyMaterial.push_back(int(randomgenerator->GetValue(33,127)));//DEBUG
         }
-        std::string newKeyMaterial = aux.str();
 
-        NS_LOG_FUNCTION(this << newKeyMaterial);
+        NS_LOG_FUNCTION(this << newKeyMaterial.size());
 
         bufferA->AddKeyMaterial(newKeyMaterial);
         bufferB->AddKeyMaterial(newKeyMaterial);
@@ -1104,11 +1103,11 @@ QKDHelper::InstallQKD(
             maxSrc = maxDst;
         }
 
-        std::stringstream aux;
+        std::vector<std::uint8_t> newKeyMaterial;
         for(uint32_t i = 0; i < maxSrc - 1; i++){
-            aux << char(int(randomgenerator->GetValue(0,256)));
+            //newKeyMaterial.push_back(int(randomgenerator->GetValue(0,256)));
+            newKeyMaterial.push_back(int(randomgenerator->GetValue(33,127)));//DEBUG
         }
-        std::string newKeyMaterial = aux.str();
 
         NS_LOG_FUNCTION(this << newKeyMaterial);
 

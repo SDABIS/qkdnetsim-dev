@@ -279,7 +279,7 @@ public:
      *   \param newMaterial String de numeros que representa el material que se añade al buffer
      *   \return Un entero que es 0 si todo fue bien o un numero para representar el error que tuvo
     */
-   uint32_t AddKeyMaterial(std::string newMaterial);
+   uint32_t AddKeyMaterial(std::vector<std::uint8_t> newMaterial);
 
     /**
      *   Selecciona el material de clave correspondiente al tamaño que se le pasa. Lo separa y le asigna un keyId
@@ -452,7 +452,7 @@ private:
      *  Es el material de clave que tienen los buffers compartidos entre ellos
     */
 
-    std::string    key_material;        //!< representacion del buffer con el mismo material compartido entre los dos nodos
+    std::vector<std::uint8_t>    key_material;        //!< representacion del buffer con el mismo material compartido entre los dos nodos
 };
 }
 

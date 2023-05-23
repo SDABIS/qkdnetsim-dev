@@ -158,10 +158,10 @@ QKDSend::SendPacket (void)
 {
     NS_LOG_FUNCTION (this);
 
-    std::string msg = "paquete del QKDSend";
+    std::string msg = "paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-";
 
-    Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.c_str(), m_packetSize); 
-    packet = m_socket->GetNode()->GetObject<QKDManager> ()->MarkEncrypt  (packet, QKDCRYPTO_OTP, QKDCRYPTO_AUTH_VMAC); 
+    Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.c_str(), msg.size()); 
+    packet = m_socket->GetNode()->GetObject<QKDManager> ()->MarkEncrypt  (packet, QKDCRYPTO_AES, QKDCRYPTO_AUTH_VMAC); 
     packet = m_socket->GetNode()->GetObject<QKDManager> ()->MarkMaxDelay (packet, m_timeDelayLimit);
 
     uint8_t *buffer = new uint8_t[packet->GetSize ()];

@@ -217,7 +217,7 @@ namespace ns3 {
         *   @param std::string
         *   @return uint32_t        
         */
-        uint32_t AddNewKeyMaterial (const Address sourceAddress, std::string newKeyMaterial);
+        uint32_t AddNewKeyMaterial (const Address sourceAddress, std::vector<std::uint8_t> newKeyMaterial);
      
         /**
         * \brief Called from traffic-control/module/qkd-pfifo-fast-queue-disc

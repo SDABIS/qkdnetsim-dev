@@ -68,12 +68,14 @@ namespace ns3 {
         keystream << randomgenerator->GetInteger();
       }
       m_key = std::string( keystream.str());*/
-      m_key = std::string( size, '0');
+      m_key.reserve(size);
+      std::fill(m_key.begin(),m_key.end(),48);//48 en ASCII es el '0'
+      //TODO comprobar que se crea bien la cadena de 0 de ese tamaño
       m_timestamp = Simulator::Now ();
       NS_LOG_FUNCTION  (this << m_id << m_key  << m_timestamp.GetMilliSeconds() );     
     }
 
-    QKDKey::QKDKey (uint32_t keyID, std::string keyMaterial)
+    QKDKey::QKDKey (uint32_t keyID, std::vector<std::uint8_t> keyMaterial)
       : m_id (keyID),
         m_size (keyMaterial.size())
     {
@@ -121,15 +123,19 @@ namespace ns3 {
     std::string
     QKDKey::KeyToString (void) const
     {
-        return m_key;
+        std::stringstream ss;
+        for(unsigned int i = 0; i < m_key.size(); i++){
+          ss << m_key[i];
+        }
+        return ss.str();
     }
 
     uint8_t *     
     QKDKey::GetKey(void) const
     {
-        NS_LOG_FUNCTION  (this << m_globalUid << m_key.length() ); 
-        uint8_t* temp = new uint8_t [m_key.length()];
-        memcpy( temp, m_key.data(), m_key.length());
+        NS_LOG_FUNCTION  (this << m_globalUid << m_key.size() ); 
+        uint8_t* temp = new uint8_t [m_key.size()];
+        memcpy( temp, m_key.data(), m_key.size());
         return temp;
     }
  

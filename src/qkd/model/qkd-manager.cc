@@ -981,7 +981,7 @@ QKDManager::UpdateQuantumChannelMetric(const Address sourceAddress){
 }
 
 uint32_t
-QKDManager::AddNewKeyMaterial (const Address sourceAddress, std::string newKeyMaterial)
+QKDManager::AddNewKeyMaterial (const Address sourceAddress, std::vector<std::uint8_t> newKeyMaterial)
 {
     NS_LOG_FUNCTION (this << sourceAddress << newKeyMaterial);
 
@@ -989,7 +989,7 @@ QKDManager::AddNewKeyMaterial (const Address sourceAddress, std::string newKeyMa
     if (i != m_destinations.end ()){
 
         NS_LOG_DEBUG ( this << "\t" << "sourceAddress: \t" << i->first );
-        NS_LOG_DEBUG (this << "Adding new key to the buffer! \t" << "keySize:\t" << newKeyMaterial.size() << "\tkey:\t" << newKeyMaterial );
+        NS_LOG_DEBUG (this << "Adding new key to the buffer! \t" << "keySize:\t" << newKeyMaterial.size() << "\t" );
 
         uint32_t response = i->second.SrcBuffer->AddKeyMaterial(newKeyMaterial);
         UpdatePublicChannelMetric (i->first);

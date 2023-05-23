@@ -19,7 +19,7 @@ void OTPcipher()
 
     std::cout << "mensaje: " << msg << std::endl;
 
-    std::string key = "abcdefghi";
+    std::vector<std::uint8_t> key {97, 98, 99, 100, 101, 102, 103, 104, 105};
 
     Ptr<QKDKey> quantumKey = CreateObject<QKDKey>(1,key);
 
@@ -77,7 +77,7 @@ void AEScipher()
     std::string msg = "holamundo";
     std::cout << "mensaje: " << msg << std::endl;
     
-    std::string key = "aaaaaaaaaaaaaaaa";
+    std::vector<std::uint8_t> key {97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97};
     Ptr<QKDKey> quantumKey = CreateObject<QKDKey>(1,key);
     std::string C = crypto->AESEncrypt(msg,quantumKey);
 

@@ -1159,31 +1159,28 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     NS_LOG_DEBUG (this <<  Simulator::Now () << key << value);     
 
     std::ostringstream msg; 
-    msg << key << ":" << value << ";";
+    msg << key << ":";
 
     if(key== "ADDKEY"){
       //TODO a lo mejor cambiar m_pktSize por value ya que se supone que hay que rellenar con el valor que se el indica a la aplicación.
       for(uint32_t i = 0; i < m_pktSize; i++){
-          newKeyMaterial << char(int(m_random->GetValue(0,256)));
+          newKeyMaterial << char(int(m_random->GetValue(33,127)));
       }
       isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str());
       if(isKeyAdded == 0){
         NS_LOG_FUNCTION (this << "The realKey was added to the source buffer" << isKeyAdded );
+        std::string key = newKeyMaterial.str();
+        msg << key.size() << ";" << key;
       }else{
         //el buffer esta lleno asique paramos de recargarlo
         is_recharging = 0;
         NS_LOG_FUNCTION (this << "The realKey can not be added to the source buffer because it was to large, it has to be:" << isKeyAdded);
         //Esto se hace asi para que si no se puede insertar todo el material de clave se inserta solo el que entra
+        std::string key = newKeyMaterial.str().substr(0,isKeyAdded);
         isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str().substr(0,isKeyAdded));
+        msg << key.size() << ";" << key;
+        NS_LOG_FUNCTION (this << "new msg:" << msg.str());//DEBUG
       }
-    }
-    //Ya que se inserto menos material de clave, el paquete tiene que ser mas pequeño
-    if(isKeyAdded == 0){
-      msg << newKeyMaterial.str();
-      msg << '\0';
-    }else{
-      msg << newKeyMaterial.str().substr(0,isKeyAdded);
-      msg << '\0';
     }
         
 
@@ -1732,7 +1729,13 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
         m_packetNumber = 0;
         m_sendKeyRateMessage = false;
         int findComa = s.find(";");
-        std::string key = s.substr(findComa + 1,s.size() - findComa);
+
+        std::string key;
+        for(unsigned int i = 0; i < packetValue; i++){
+          key.push_back(s[i + findComa + 1]);// + 1 porque si no tambien cogeria el ';' 
+        }
+
+        NS_LOG_DEBUG (this << "\tNEW KEY:\t" <<  key);
         //add key to buffer
         if(GetNode ()->GetObject<QKDManager> () != 0){
 

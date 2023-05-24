@@ -1106,7 +1106,7 @@ QKDHelper::InstallQKD(
 
         std::stringstream aux;
         for(uint32_t i = 0; i < maxSrc - 1; i++){
-            aux << char(int(randomgenerator->GetValue(0,256)));
+            aux << char(int(randomgenerator->GetValue(33,127)));
         }
         std::string newKeyMaterial = aux.str();
 

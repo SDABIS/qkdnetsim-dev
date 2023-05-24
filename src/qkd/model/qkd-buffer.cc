@@ -589,9 +589,9 @@ QKDBuffer::AddKeyMaterial (std::string newMaterial)
     }
 
     std::string aux = key_material + newMaterial;
+    NS_LOG_DEBUG  (this << "new Key Complete:" << key_material);
 
     key_material = aux;
-
     m_Mcurrent = key_material.size();
     KeyCalculation(); 
     //TODO asegurarse que se actualizan todas las caracteristicas de m_Mcurrent
@@ -608,6 +608,7 @@ QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
     if(m_Mcurrent <= keySize)
         return 0;
 
+    NS_LOG_DEBUG  (this << "Key Complete:" << key_material);
     std::string key = key_material.substr(0,keySize);
     key_material = key_material.substr(keySize,key_material.size());
     

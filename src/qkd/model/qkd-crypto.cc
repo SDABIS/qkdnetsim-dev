@@ -195,6 +195,7 @@ static void printCardsInfo()
 }
 
 void QKDCrypto::initialiceQRNG(){
+    printCardsInfo();
     std::string params = "u0";
     idQ::random_device rd(params);
     for (unsigned int i = 0; i < 100; ++i)
@@ -202,7 +203,7 @@ void QKDCrypto::initialiceQRNG(){
         std::cout << "  " << rd() << std::dec << std::endl;
     }
 
-    printCardsInfo();
+    
 }
 
 std::vector<uint8_t> 

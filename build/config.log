@@ -1,4 +1,4 @@
-# project ns (3-dev) configured on Sun Feb  5 00:07:11 2023 by
+# project ns (3-dev) configured on Wed May 24 23:48:09 2023 by
 # waf 1.8.19 (abi 98, python 20711f0 on linux2)
 # using ./waf configure
 #
@@ -10,7 +10,7 @@ Setting out to
 /home/qbit/miCodigo/qkdnetsim-dev/build
 ----------------------------------------
 Checking for 'gcc' (C compiler)
-find program=['gcc', 'cc'] paths=['/home/qbit/.vscode-server/bin/97dec172d3256f8ca4bfb2143f3f76b503ca0534/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='CC' -> ['/usr/bin/gcc']
+find program=['gcc', 'cc'] paths=['/home/qbit/.vscode-server/bin/b3e4e68a0bc097f0ae7907b217c1119af9e03435/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='CC' -> ['/usr/bin/gcc']
 ['/usr/bin/gcc', '-dM', '-E', '-']
 out: #define __SSP_STRONG__ 3
 #define __DBL_MIN_EXP__ (-1021)
@@ -360,14 +360,14 @@ out: #define __SSP_STRONG__ 3
 #define __ATOMIC_ACQ_REL 4
 #define __ATOMIC_RELEASE 3
 
-find program=['ar'] paths=['/home/qbit/.vscode-server/bin/97dec172d3256f8ca4bfb2143f3f76b503ca0534/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='AR' -> ['/usr/bin/ar']
+find program=['ar'] paths=['/home/qbit/.vscode-server/bin/b3e4e68a0bc097f0ae7907b217c1119af9e03435/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='AR' -> ['/usr/bin/ar']
 /usr/bin/gcc
 ----------------------------------------
 Checking for cc version
 7.5.0
 ----------------------------------------
 Checking for 'g++' (C++ compiler)
-find program=['g++', 'c++'] paths=['/home/qbit/.vscode-server/bin/97dec172d3256f8ca4bfb2143f3f76b503ca0534/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='CXX' -> ['/usr/bin/g++']
+find program=['g++', 'c++'] paths=['/home/qbit/.vscode-server/bin/b3e4e68a0bc097f0ae7907b217c1119af9e03435/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='CXX' -> ['/usr/bin/g++']
 ['/usr/bin/g++', '-dM', '-E', '-']
 out: #define __SSP_STRONG__ 3
 #define __DBL_MIN_EXP__ (-1021)
@@ -729,35 +729,35 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_1eb622c8dbb576b32547d18edac282da/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_0168aed849dfd0cde36fef6335116dc1/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_1eb622c8dbb576b32547d18edac282da/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_1eb622c8dbb576b32547d18edac282da/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_0168aed849dfd0cde36fef6335116dc1/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_0168aed849dfd0cde36fef6335116dc1/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_1eb622c8dbb576b32547d18edac282da/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lcryptopp']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_0168aed849dfd0cde36fef6335116dc1/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lcryptopp', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------
 Checking for compilation flag -Wl,--soname=foo support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_183d7d148c91321967c02d3952db3c2b/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_fb96eb48fb1993231e29d825033dd515/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-Wl,--soname=foo', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_183d7d148c91321967c02d3952db3c2b/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-Wl,--soname=foo', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_fb96eb48fb1993231e29d825033dd515/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------
 Checking for compilation flag -std=c++11 support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_183d7d148c91321967c02d3952db3c2b/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_fb96eb48fb1993231e29d825033dd515/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_183d7d148c91321967c02d3952db3c2b/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_fb96eb48fb1993231e29d825033dd515/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------
 Checking for program 'python'
 /usr/bin/python
-find program=['python'] paths=['/home/qbit/.vscode-server/bin/97dec172d3256f8ca4bfb2143f3f76b503ca0534/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PYTHON' -> ['/usr/bin/python']
+find program=['python'] paths=['/home/qbit/.vscode-server/bin/b3e4e68a0bc097f0ae7907b217c1119af9e03435/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PYTHON' -> ['/usr/bin/python']
 ['/usr/bin/python', '-c', 'import imp;print(imp.get_tag())']
 err: Traceback (most recent call last):
   File "<string>", line 1, in <module>
@@ -792,8 +792,8 @@ out: '/usr'
 '/usr/include/python2.7'
 1
 ''
-'x86_64-linux-gnu-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -Wl,-z,relro -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
-'-fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
+'x86_64-linux-gnu-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -Wl,-z,relro -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
+'-fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
 ''
 
 '/usr'
@@ -804,8 +804,8 @@ out: '/usr'
 '/usr/include/python2.7'
 1
 ''
-'x86_64-linux-gnu-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -Wl,-z,relro -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
-'-fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
+'x86_64-linux-gnu-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -Wl,-z,relro -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
+'-fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
 ''
 
 Configuration returned from ['/usr/bin/python']:
@@ -817,18 +817,18 @@ LIBPL = '/usr/lib/python2.7/config-x86_64-linux-gnu'
 INCLUDEPY = '/usr/include/python2.7'
 Py_ENABLE_SHARED = 1
 MACOSX_DEPLOYMENT_TARGET = ''
-LDSHARED = 'x86_64-linux-gnu-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -Wl,-z,relro -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
-CFLAGS = '-fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
+LDSHARED = 'x86_64-linux-gnu-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -Wl,-z,relro -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
+CFLAGS = '-fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  '
 LDVERSION = ''
 
 ------------------------------------------------------
 python-config
 /usr/bin/python-config
-find program=['/usr/bin/python-config', 'python2.7-config', 'python-config-2.7', 'python2.7m-config'] paths=['/home/qbit/.vscode-server/bin/97dec172d3256f8ca4bfb2143f3f76b503ca0534/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PYTHON_CONFIG' -> ['/usr/bin/python-config']
+find program=['/usr/bin/python-config', 'python2.7-config', 'python-config-2.7', 'python2.7m-config'] paths=['/home/qbit/.vscode-server/bin/b3e4e68a0bc097f0ae7907b217c1119af9e03435/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PYTHON_CONFIG' -> ['/usr/bin/python-config']
 ------------------------------------------------------------------
 Asking python-config for pyembed '--cflags --libs --ldflags' flags
 ['/usr/bin/python-config', '--cflags', '--libs', '--ldflags']
-out: -I/usr/include/python2.7 -I/usr/include/x86_64-linux-gnu/python2.7  -fno-strict-aliasing -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes
+out: -I/usr/include/python2.7 -I/usr/include/x86_64-linux-gnu/python2.7  -fno-strict-aliasing -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes
 -lpython2.7 -lpthread -ldl  -lutil -lm 
 -L/usr/lib/python2.7/config-x86_64-linux-gnu -L/usr/lib -lpython2.7 -lpthread -ldl  -lutil -lm  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
 
@@ -855,17 +855,17 @@ int main(int argc, char **argv)
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_4a6a7bda009e22cd7e4fc3a07b0619d9/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_261ec78a27899c77dcab1ade16c3d839/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv', '-I/usr/include/python2.7', '-I/usr/include/x86_64-linux-gnu/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYEMBED=1', '-D_FORTIFY_SOURCE=2', '-DNDEBUG', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_4a6a7bda009e22cd7e4fc3a07b0619d9/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_4a6a7bda009e22cd7e4fc3a07b0619d9/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv', '-I/usr/include/python2.7', '-I/usr/include/x86_64-linux-gnu/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYEMBED=1', '-D_FORTIFY_SOURCE=2', '-DNDEBUG', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_261ec78a27899c77dcab1ade16c3d839/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_261ec78a27899c77dcab1ade16c3d839/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Xlinker', '-export-dynamic', '-Wl,-O1', '-Wl,-Bsymbolic-functions', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_4a6a7bda009e22cd7e4fc3a07b0619d9/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-L/usr/lib', '-lpython2.7', '-lpthread', '-ldl', '-lutil', '-lm']
+['/usr/bin/g++', '-Xlinker', '-export-dynamic', '-Wl,-O1', '-Wl,-Bsymbolic-functions', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_261ec78a27899c77dcab1ade16c3d839/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-L/usr/lib', '-lpython2.7', '-lpthread', '-ldl', '-lutil', '-lm', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Asking python-config for pyext '--cflags --libs --ldflags' flags
 ['/usr/bin/python-config', '--cflags', '--libs', '--ldflags']
-out: -I/usr/include/python2.7 -I/usr/include/x86_64-linux-gnu/python2.7  -fno-strict-aliasing -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes
+out: -I/usr/include/python2.7 -I/usr/include/x86_64-linux-gnu/python2.7  -fno-strict-aliasing -Wdate-time -D_FORTIFY_SOURCE=2 -g -fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=. -fstack-protector-strong -Wformat -Werror=format-security  -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes
 -lpython2.7 -lpthread -ldl  -lutil -lm 
 -L/usr/lib/python2.7/config-x86_64-linux-gnu -L/usr/lib -lpython2.7 -lpthread -ldl  -lutil -lm  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
 
@@ -892,30 +892,30 @@ int main(int argc, char **argv)
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_c90c106b05208f1ce02a76727d3a9107/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_38aa89abd494ae5a602a2bc848b86adb/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-fPIC', '-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv', '-I/usr/include/python2.7', '-I/usr/include/x86_64-linux-gnu/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYEMBED=1', '-DHAVE_PYEXT=1', '-D_FORTIFY_SOURCE=2', '-DNDEBUG', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_c90c106b05208f1ce02a76727d3a9107/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_c90c106b05208f1ce02a76727d3a9107/testbuild/testprog.so[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-fPIC', '-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv', '-I/usr/include/python2.7', '-I/usr/include/x86_64-linux-gnu/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYEMBED=1', '-DHAVE_PYEXT=1', '-D_FORTIFY_SOURCE=2', '-DNDEBUG', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_38aa89abd494ae5a602a2bc848b86adb/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_38aa89abd494ae5a602a2bc848b86adb/testbuild/testprog.so[0m
 
-['/usr/bin/g++', '-shared', '-Xlinker', '-export-dynamic', '-Wl,-O1', '-Wl,-Bsymbolic-functions', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_c90c106b05208f1ce02a76727d3a9107/testbuild/testprog.so', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-L/usr/lib', '-lpython2.7', '-lpthread', '-ldl', '-lutil', '-lm']
+['/usr/bin/g++', '-shared', '-Xlinker', '-export-dynamic', '-Wl,-O1', '-Wl,-Bsymbolic-functions', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_38aa89abd494ae5a602a2bc848b86adb/testbuild/testprog.so', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-L/usr/lib', '-lpython2.7', '-lpthread', '-ldl', '-lutil', '-lm', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for compilation flag -fvisibility=hidden support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_183d7d148c91321967c02d3952db3c2b/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_fb96eb48fb1993231e29d825033dd515/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-fvisibility=hidden', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYEMBED=1', '-DHAVE_PYEXT=1', '-DHAVE_PYTHON_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_183d7d148c91321967c02d3952db3c2b/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-fvisibility=hidden', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYEMBED=1', '-DHAVE_PYEXT=1', '-DHAVE_PYTHON_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_fb96eb48fb1993231e29d825033dd515/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------------------
 Checking for compilation flag -Wno-array-bounds support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_183d7d148c91321967c02d3952db3c2b/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_fb96eb48fb1993231e29d825033dd515/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-Wno-array-bounds', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYEMBED=1', '-DHAVE_PYEXT=1', '-DHAVE_PYTHON_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_183d7d148c91321967c02d3952db3c2b/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-Wno-array-bounds', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYEMBED=1', '-DHAVE_PYEXT=1', '-DHAVE_PYTHON_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_fb96eb48fb1993231e29d825033dd515/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------------------
 Checking for pybindgen location
@@ -1109,12 +1109,12 @@ Checking for boost linkage
 int main() { boost::system::error_code c; }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_29d789b74cc594445ae154694c10c387/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_955cdcf89a986c18d74747268fc3cd3c/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-I/usr/include', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYEMBED=1', '-DHAVE_PYEXT=1', '-DHAVE_PYTHON_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_29d789b74cc594445ae154694c10c387/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_29d789b74cc594445ae154694c10c387/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-I/usr/include', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DHAVE_PYEMBED=1', '-DHAVE_PYEXT=1', '-DHAVE_PYTHON_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_955cdcf89a986c18d74747268fc3cd3c/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_955cdcf89a986c18d74747268fc3cd3c/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_29d789b74cc594445ae154694c10c387/testbuild/testprog', '-Wl,-Bstatic', '-L/usr/lib/x86_64-linux-gnu', '-Wl,-Bdynamic', '-L/usr/lib/x86_64-linux-gnu', '-lboost_system', '-lboost_signals', '-lboost_filesystem']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_955cdcf89a986c18d74747268fc3cd3c/testbuild/testprog', '-Wl,-Bstatic', '-L/usr/lib/x86_64-linux-gnu', '-Wl,-Bdynamic', '-L/usr/lib/x86_64-linux-gnu', '-lboost_system', '-lboost_signals', '-lboost_filesystem', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 ok
 ------------------------------------------------------------------
 Checking for click location
@@ -1122,7 +1122,7 @@ not found
 ------------------------------------------------------------------
 Checking for program 'pkg-config'
 /usr/bin/pkg-config
-find program=['pkg-config'] paths=['/home/qbit/.vscode-server/bin/97dec172d3256f8ca4bfb2143f3f76b503ca0534/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PKGCONFIG' -> ['/usr/bin/pkg-config']
+find program=['pkg-config'] paths=['/home/qbit/.vscode-server/bin/b3e4e68a0bc097f0ae7907b217c1119af9e03435/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PKGCONFIG' -> ['/usr/bin/pkg-config']
 ------------------------------------------------------------------
 Checking for 'gtk+-3.0' >= 3.0
 ['/usr/bin/pkg-config', '--atleast-version=3.0', 'gtk+-3.0']
@@ -1149,9 +1149,9 @@ checking for uint128_t
         }
         
 <==
-[1/2] Compiling [32mbuild/.conf_check_8a869a358334ee8ad1dd23719f656d81/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_9d2057719f7a33ae7e3569690e0c0a9c/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_8a869a358334ee8ad1dd23719f656d81/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_9d2057719f7a33ae7e3569690e0c0a9c/testbuild/test.cpp.1.o']
 err: ../test.cpp: In function ‘int main(int, char**)’:
 ../test.cpp:6:7: error: ‘uint128_t’ was not declared in this scope
   if ((uint128_t *) 0) return 0;
@@ -1181,8 +1181,8 @@ from /home/qbit/miCodigo/qkdnetsim-dev/src/core: Test does not build: Traceback 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140139021998416: cxx test.cpp -> test.cpp.1.o}
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_8a869a358334ee8ad1dd23719f656d81/testbuild/test.cpp.1.o']
+	{task 140663987362640: cxx test.cpp -> test.cpp.1.o}
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_9d2057719f7a33ae7e3569690e0c0a9c/testbuild/test.cpp.1.o']
 
 not found
 from /home/qbit/miCodigo/qkdnetsim-dev/src/core: The configuration failed
@@ -1200,12 +1200,12 @@ checking for __uint128_t
         }
         
 <==
-[1/2] Compiling [32mbuild/.conf_check_d94f8f2555cc3c6d84d0ea48f4ae54dd/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_83c397f20230340ed371d4ffe307f938/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_d94f8f2555cc3c6d84d0ea48f4ae54dd/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_d94f8f2555cc3c6d84d0ea48f4ae54dd/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_83c397f20230340ed371d4ffe307f938/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_83c397f20230340ed371d4ffe307f938/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_d94f8f2555cc3c6d84d0ea48f4ae54dd/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_83c397f20230340ed371d4ffe307f938/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking high precision implementation
@@ -1221,12 +1221,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_5748fa1939ca10b268f654efc7fd3809/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_48e20a0134832b963a2bb80238199d21/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_5748fa1939ca10b268f654efc7fd3809/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_5748fa1939ca10b268f654efc7fd3809/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_48e20a0134832b963a2bb80238199d21/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_48e20a0134832b963a2bb80238199d21/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_5748fa1939ca10b268f654efc7fd3809/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_48e20a0134832b963a2bb80238199d21/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header inttypes.h
@@ -1239,12 +1239,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_1dcf6d1ec0a6e5b62eab8228cbde057f/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_7dd9bf99fb9ac10d4e2b218fc8f210a3/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_1dcf6d1ec0a6e5b62eab8228cbde057f/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_1dcf6d1ec0a6e5b62eab8228cbde057f/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_7dd9bf99fb9ac10d4e2b218fc8f210a3/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_7dd9bf99fb9ac10d4e2b218fc8f210a3/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_1dcf6d1ec0a6e5b62eab8228cbde057f/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_7dd9bf99fb9ac10d4e2b218fc8f210a3/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header sys/inttypes.h
@@ -1257,9 +1257,9 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_4dd83dc04a1d67a8dbd988642dd1c8bc/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_49a69304922821c0fb688a5c5341afdc/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_4dd83dc04a1d67a8dbd988642dd1c8bc/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_49a69304922821c0fb688a5c5341afdc/testbuild/test.cpp.1.o']
 err: ../test.cpp:1:10: fatal error: sys/inttypes.h: No existe el archivo o el directorio
  #include <sys/inttypes.h>
           ^~~~~~~~~~~~~~~~
@@ -1272,8 +1272,8 @@ from /home/qbit/miCodigo/qkdnetsim-dev/src/core: Test does not build: Traceback 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140139022101904: cxx test.cpp -> test.cpp.1.o}
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_4dd83dc04a1d67a8dbd988642dd1c8bc/testbuild/test.cpp.1.o']
+	{task 140663987712272: cxx test.cpp -> test.cpp.1.o}
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_49a69304922821c0fb688a5c5341afdc/testbuild/test.cpp.1.o']
 
 not found
 from /home/qbit/miCodigo/qkdnetsim-dev/src/core: The configuration failed
@@ -1288,12 +1288,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_1a7697c948f1db17cd7687881686bffd/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_e61987ece6c771e099283273e54b0bca/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_1a7697c948f1db17cd7687881686bffd/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_1a7697c948f1db17cd7687881686bffd/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_e61987ece6c771e099283273e54b0bca/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_e61987ece6c771e099283273e54b0bca/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_1a7697c948f1db17cd7687881686bffd/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_e61987ece6c771e099283273e54b0bca/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header sys/stat.h
@@ -1306,12 +1306,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_724e30facd9ab57e566cf61283341a64/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_d588921e951d011dcef160b142ac60de/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_724e30facd9ab57e566cf61283341a64/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_724e30facd9ab57e566cf61283341a64/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_d588921e951d011dcef160b142ac60de/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_d588921e951d011dcef160b142ac60de/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_724e30facd9ab57e566cf61283341a64/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_d588921e951d011dcef160b142ac60de/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header dirent.h
@@ -1324,12 +1324,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_0a0504706780164a33715bae9bf177da/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_47360d4687b67da44957c6368d61cf2e/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_0a0504706780164a33715bae9bf177da/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_0a0504706780164a33715bae9bf177da/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_47360d4687b67da44957c6368d61cf2e/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_47360d4687b67da44957c6368d61cf2e/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_0a0504706780164a33715bae9bf177da/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_47360d4687b67da44957c6368d61cf2e/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header stdlib.h
@@ -1342,12 +1342,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_facc3277f2f541ffe1fbea03d0f99b4a/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_ed3ac802f0125d6c11589f50a2f9c53a/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_facc3277f2f541ffe1fbea03d0f99b4a/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_facc3277f2f541ffe1fbea03d0f99b4a/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_ed3ac802f0125d6c11589f50a2f9c53a/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_ed3ac802f0125d6c11589f50a2f9c53a/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_facc3277f2f541ffe1fbea03d0f99b4a/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_ed3ac802f0125d6c11589f50a2f9c53a/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header signal.h
@@ -1360,12 +1360,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_e3ebe531d20747e1005b5393df4b1f1f/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_21256808245af30393dc8c0286024075/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_e3ebe531d20747e1005b5393df4b1f1f/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_e3ebe531d20747e1005b5393df4b1f1f/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_21256808245af30393dc8c0286024075/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_21256808245af30393dc8c0286024075/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_e3ebe531d20747e1005b5393df4b1f1f/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_21256808245af30393dc8c0286024075/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header pthread.h
@@ -1380,12 +1380,12 @@ int main ()
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_76edeb07a1231808ec020b5e407672e5/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_ef7edcc2ba45a2c30e80545487e617ba/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_76edeb07a1231808ec020b5e407672e5/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_76edeb07a1231808ec020b5e407672e5/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_ef7edcc2ba45a2c30e80545487e617ba/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_ef7edcc2ba45a2c30e80545487e617ba/testbuild/testprog[0m
 
-['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_76edeb07a1231808ec020b5e407672e5/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_ef7edcc2ba45a2c30e80545487e617ba/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header stdint.h
@@ -1398,12 +1398,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_5748fa1939ca10b268f654efc7fd3809/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_48e20a0134832b963a2bb80238199d21/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_5748fa1939ca10b268f654efc7fd3809/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_5748fa1939ca10b268f654efc7fd3809/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_48e20a0134832b963a2bb80238199d21/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_48e20a0134832b963a2bb80238199d21/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_5748fa1939ca10b268f654efc7fd3809/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_48e20a0134832b963a2bb80238199d21/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header inttypes.h
@@ -1416,12 +1416,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_1dcf6d1ec0a6e5b62eab8228cbde057f/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_7dd9bf99fb9ac10d4e2b218fc8f210a3/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_1dcf6d1ec0a6e5b62eab8228cbde057f/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_1dcf6d1ec0a6e5b62eab8228cbde057f/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_7dd9bf99fb9ac10d4e2b218fc8f210a3/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_7dd9bf99fb9ac10d4e2b218fc8f210a3/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_1dcf6d1ec0a6e5b62eab8228cbde057f/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_7dd9bf99fb9ac10d4e2b218fc8f210a3/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header sys/inttypes.h
@@ -1434,9 +1434,9 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_4dd83dc04a1d67a8dbd988642dd1c8bc/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_49a69304922821c0fb688a5c5341afdc/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_4dd83dc04a1d67a8dbd988642dd1c8bc/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_49a69304922821c0fb688a5c5341afdc/testbuild/test.cpp.1.o']
 err: ../test.cpp:1:10: fatal error: sys/inttypes.h: No existe el archivo o el directorio
  #include <sys/inttypes.h>
           ^~~~~~~~~~~~~~~~
@@ -1449,8 +1449,8 @@ from /home/qbit/miCodigo/qkdnetsim-dev/src/core: Test does not build: Traceback 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140139035147344: cxx test.cpp -> test.cpp.1.o}
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_4dd83dc04a1d67a8dbd988642dd1c8bc/testbuild/test.cpp.1.o']
+	{task 140663987362640: cxx test.cpp -> test.cpp.1.o}
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_49a69304922821c0fb688a5c5341afdc/testbuild/test.cpp.1.o']
 
 not found
 from /home/qbit/miCodigo/qkdnetsim-dev/src/core: The configuration failed
@@ -1464,12 +1464,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_a981313be38d9b04ba56754cdfe6d390/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_a1a02c065d70a0ff2b449cfdcfef2353/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_a981313be38d9b04ba56754cdfe6d390/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_a981313be38d9b04ba56754cdfe6d390/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_a1a02c065d70a0ff2b449cfdcfef2353/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_a1a02c065d70a0ff2b449cfdcfef2353/testbuild/testprog[0m
 
-['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_a981313be38d9b04ba56754cdfe6d390/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lrt']
+['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_a1a02c065d70a0ff2b449cfdcfef2353/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lrt', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header sys/ioctl.h
@@ -1482,12 +1482,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_0693becbf4d7f26bbebff36e28bb5849/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_41796940a719ae6f5e04bb4889f98499/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_0693becbf4d7f26bbebff36e28bb5849/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_0693becbf4d7f26bbebff36e28bb5849/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_41796940a719ae6f5e04bb4889f98499/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_41796940a719ae6f5e04bb4889f98499/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_0693becbf4d7f26bbebff36e28bb5849/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_41796940a719ae6f5e04bb4889f98499/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header net/if.h
@@ -1500,12 +1500,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_7b44090dd3d9d01a15360dbe6fcb2e0f/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_52fd20a5cdf8ef5e09a02af771a855a2/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_7b44090dd3d9d01a15360dbe6fcb2e0f/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_7b44090dd3d9d01a15360dbe6fcb2e0f/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_52fd20a5cdf8ef5e09a02af771a855a2/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_52fd20a5cdf8ef5e09a02af771a855a2/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_7b44090dd3d9d01a15360dbe6fcb2e0f/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_52fd20a5cdf8ef5e09a02af771a855a2/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header net/ethernet.h
@@ -1518,12 +1518,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_e1f2d440661f3b8fb89a9cd3d9545c84/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_93a9b7e211124672d5690d8381d3a7b8/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_e1f2d440661f3b8fb89a9cd3d9545c84/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_e1f2d440661f3b8fb89a9cd3d9545c84/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_93a9b7e211124672d5690d8381d3a7b8/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_93a9b7e211124672d5690d8381d3a7b8/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_e1f2d440661f3b8fb89a9cd3d9545c84/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_93a9b7e211124672d5690d8381d3a7b8/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header linux/if_tun.h
@@ -1536,12 +1536,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_6f4c982936120e1eef6c4b14716def6b/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_f9a3e34fbbdddd7f92b6845040a77847/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_6f4c982936120e1eef6c4b14716def6b/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_6f4c982936120e1eef6c4b14716def6b/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_f9a3e34fbbdddd7f92b6845040a77847/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_f9a3e34fbbdddd7f92b6845040a77847/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_6f4c982936120e1eef6c4b14716def6b/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_f9a3e34fbbdddd7f92b6845040a77847/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for header netpacket/packet.h
@@ -1554,12 +1554,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_566ce5e4f2e2107d6df73f0f51bdf0af/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_ebee280f333e85c425124052da722a11/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_566ce5e4f2e2107d6df73f0f51bdf0af/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_566ce5e4f2e2107d6df73f0f51bdf0af/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_ebee280f333e85c425124052da722a11/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_ebee280f333e85c425124052da722a11/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_566ce5e4f2e2107d6df73f0f51bdf0af/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_ebee280f333e85c425124052da722a11/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for NSC location
@@ -1584,21 +1584,21 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_6f4c982936120e1eef6c4b14716def6b/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_f9a3e34fbbdddd7f92b6845040a77847/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_6f4c982936120e1eef6c4b14716def6b/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_6f4c982936120e1eef6c4b14716def6b/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_f9a3e34fbbdddd7f92b6845040a77847/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_f9a3e34fbbdddd7f92b6845040a77847/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_6f4c982936120e1eef6c4b14716def6b/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_f9a3e34fbbdddd7f92b6845040a77847/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lusb-1.0', '-L/lib64/', '-lQuantis']
 yes
 ------------------------------------------------------------------
 Checking for program 'sudo'
 /usr/bin/sudo
-find program=['sudo'] paths=['/home/qbit/.vscode-server/bin/97dec172d3256f8ca4bfb2143f3f76b503ca0534/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='SUDO' -> ['/usr/bin/sudo']
+find program=['sudo'] paths=['/home/qbit/.vscode-server/bin/b3e4e68a0bc097f0ae7907b217c1119af9e03435/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='SUDO' -> ['/usr/bin/sudo']
 ------------------------------------------------------------------
 Checking for program 'valgrind'
 /usr/bin/valgrind
-find program=['valgrind'] paths=['/home/qbit/.vscode-server/bin/97dec172d3256f8ca4bfb2143f3f76b503ca0534/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='VALGRIND' -> ['/usr/bin/valgrind']
+find program=['valgrind'] paths=['/home/qbit/.vscode-server/bin/b3e4e68a0bc097f0ae7907b217c1119af9e03435/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='VALGRIND' -> ['/usr/bin/valgrind']
 ------------------------------------------------------------------
 Checking for 'gsl'
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'gsl']
@@ -1612,45 +1612,45 @@ from /home/qbit/miCodigo/qkdnetsim-dev: The configuration failed
 ------------------------------------------------------------------
 python-config
 not found
-find program=['libgcrypt-config'] paths=['/home/qbit/.vscode-server/bin/97dec172d3256f8ca4bfb2143f3f76b503ca0534/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='LIBGCRYPT_CONFIG' -> None
+find program=['libgcrypt-config'] paths=['/home/qbit/.vscode-server/bin/b3e4e68a0bc097f0ae7907b217c1119af9e03435/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='LIBGCRYPT_CONFIG' -> None
 from /home/qbit/miCodigo/qkdnetsim-dev: Could not find the program ['libgcrypt-config']
 ------------------------------------------------------------------
 Checking for compilation flag -fstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_183d7d148c91321967c02d3952db3c2b/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_fb96eb48fb1993231e29d825033dd515/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_183d7d148c91321967c02d3952db3c2b/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_fb96eb48fb1993231e29d825033dd515/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------------------
 Checking for compilation flag -fstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_7ba792e9fa81cd03c511edfcddb3f471/test.c[0m
+[1/1] Compiling [32mbuild/.conf_check_b7aa659c5db91cc0ffdbc505130f9727/test.c[0m
 
-['/usr/bin/gcc', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.c', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_7ba792e9fa81cd03c511edfcddb3f471/testbuild/test.c.1.o']
+['/usr/bin/gcc', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.c', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_b7aa659c5db91cc0ffdbc505130f9727/testbuild/test.c.1.o']
 ok
 ------------------------------------------------------------------
 Checking for compilation flag -Wstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_183d7d148c91321967c02d3952db3c2b/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_fb96eb48fb1993231e29d825033dd515/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_183d7d148c91321967c02d3952db3c2b/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_fb96eb48fb1993231e29d825033dd515/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------------------
 Checking for compilation flag -Wstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_7ba792e9fa81cd03c511edfcddb3f471/test.c[0m
+[1/1] Compiling [32mbuild/.conf_check_b7aa659c5db91cc0ffdbc505130f9727/test.c[0m
 
-['/usr/bin/gcc', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.c', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_7ba792e9fa81cd03c511edfcddb3f471/testbuild/test.c.1.o']
+['/usr/bin/gcc', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.c', '-c', '-o', '/home/qbit/miCodigo/qkdnetsim-dev/build/.conf_check_b7aa659c5db91cc0ffdbc505130f9727/testbuild/test.c.1.o']
 ok
 ------------------------------------------------------------------
 Checking for program 'doxygen'
 /usr/bin/doxygen
-find program=['doxygen'] paths=['/home/qbit/.vscode-server/bin/97dec172d3256f8ca4bfb2143f3f76b503ca0534/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='DOXYGEN' -> ['/usr/bin/doxygen']
+find program=['doxygen'] paths=['/home/qbit/.vscode-server/bin/b3e4e68a0bc097f0ae7907b217c1119af9e03435/bin/remote-cli', '/home/qbit/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='DOXYGEN' -> ['/usr/bin/doxygen']

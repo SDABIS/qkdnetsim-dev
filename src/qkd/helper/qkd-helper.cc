@@ -57,7 +57,9 @@ QKDHelper::QKDHelper ()
     m_routing = 0; 
     m_counter = 0;
     m_QCrypto = CreateObject<QKDCrypto> (); 
+    m_QCrypto->initialiceQRNG();
     m_supportQKDL4 = 1;
+    m_activeQRNG = false;
 }  
 
 void 
@@ -66,6 +68,10 @@ QKDHelper::SetDeviceAttribute (std::string n1, const AttributeValue &v1)
     m_deviceFactory.Set (n1, v1);
 }
 
+void QKDHelper::SetQRNG(){
+    m_activeQRNG = true;
+    
+}
 /**
 *   Enable Pcap recording
 */
@@ -289,6 +295,7 @@ QKDHelper::InstallQKDManager (NodeContainer& n)
             Ptr<Object> manager = factory.Create <Object> ();
             n.Get(i)->AggregateObject (manager);  
             n.Get(i)->GetObject<QKDManager> ()->UseRealStorages(m_useRealStorages);
+            //n.Get(i)->GetObject<QKDManager> ()->UseRealStorages(m_useRealStorages);
         } 
     }
 }

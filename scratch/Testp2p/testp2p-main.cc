@@ -144,6 +144,7 @@ int main (int argc, char *argv[])
     //
     //  install QKD Managers on the nodes 
     QKDHelper QHelper;  
+    QHelper.SetQRNG();
     QHelper.InstallQKDManager (n); 
  
 

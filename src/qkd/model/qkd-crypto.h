@@ -60,8 +60,6 @@
 #include <crypto++/sha.h>
 #include <vector>
 
-#include "Quantis_random_device.hpp"
-
 #define CRYPTOPP_ENABLE_NAMESPACE_WEAK 1
 #include <crypto++/md5.h> 
 
@@ -194,8 +192,6 @@ public:
         uint32_t                TOSBand,
         Ptr<QKDBuffer>          QKDbuffer
     );
-
-    void initialiceQRNG();
 
     //TODO restaurar este cambio
     std::string OTP (const std::string& data, Ptr<QKDKey> key);

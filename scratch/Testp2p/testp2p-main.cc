@@ -144,6 +144,7 @@ int main (int argc, char *argv[])
     //
     //  install QKD Managers on the nodes 
     QKDHelper QHelper;  
+    //activar el dispositivo cuantico
     QHelper.SetQRNG();
     QHelper.InstallQKDManager (n); 
  
@@ -195,6 +196,8 @@ int main (int argc, char *argv[])
 
     /* QKD APPs for charing  */
     QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000);
+    //activar el dispositivo cuantico
+    qkdChargingApp.ActivateQRNG();
     ApplicationContainer qkdChrgApps = qkdChargingApp.Install ( d0d1.Get(0), d0d1.Get(1) );
     qkdChrgApps.Start (Seconds (5.));
     qkdChrgApps.Stop (Seconds (1500.)); 

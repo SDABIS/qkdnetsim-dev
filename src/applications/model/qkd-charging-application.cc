@@ -35,6 +35,7 @@
 #include <fstream> 
 #include <string>
 
+#include "Quantis_random_device.hpp"
 
 NS_LOG_COMPONENT_DEFINE ("QKDChargingApplication");
 
@@ -232,6 +233,10 @@ QKDChargingApplication::GetTypeId (void)
                    UintegerValue (5), 
                    MakeUintegerAccessor (&QKDChargingApplication::next_check),
                    MakeUintegerChecker<uint32_t> (1))
+    .AddAttribute ("m_activeQRNG", "Indica si se usa la generacion aleatoria con dispositivo cuantico",
+                   BooleanValue (false), 
+                   MakeBooleanAccessor (&QKDChargingApplication::m_activeQRNG),
+                   MakeBooleanChecker ())
 
    .AddTraceSource ("Tx", "A new packet is created and is sent",
                    MakeTraceSourceAccessor (&QKDChargingApplication::m_txTrace),
@@ -1160,12 +1165,23 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
 
     std::ostringstream msg; 
     msg << key << ":";
-
     if(key== "ADDKEY"){
       //TODO a lo mejor cambiar m_pktSize por value ya que se supone que hay que rellenar con el valor que se el indica a la aplicación.
-      for(uint32_t i = 0; i < m_pktSize; i++){
-          newKeyMaterial << char(int(m_random->GetValue(1,256)));
-      }
+
+      if(m_activeQRNG){
+          std::cout << "QUANTIS ChargingApp" << std::endl;
+          std::string params = "u0";
+          idQ::random_device rd(params);
+          for (unsigned int i = 0; i < m_pktSize; ++i){
+              newKeyMaterial <<  char(int((rd() % 255) + 1));//evitamos el 0 porque los strings no funcionan bien con el byte con todos los bits a 0
+          }
+        }else{
+          std::cout << "RANDOM ChargingApp" << std::endl;
+          for(uint32_t i = 0; i < m_pktSize; i++){
+            newKeyMaterial << char(int(m_random->GetValue(1,256)));
+          }
+        }
+
       isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial.str());
       if(isKeyAdded == 0){
         NS_LOG_FUNCTION (this << "The realKey was added to the source buffer" << isKeyAdded );

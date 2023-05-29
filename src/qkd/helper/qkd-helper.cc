@@ -42,6 +42,8 @@
 #include "ns3/qkd-graph-manager.h" 
 #include "qkd-helper.h"
 
+#include "Quantis_random_device.hpp"
+
 namespace ns3 {
 
 NS_LOG_COMPONENT_DEFINE ("QKDHelper");
@@ -57,7 +59,6 @@ QKDHelper::QKDHelper ()
     m_routing = 0; 
     m_counter = 0;
     m_QCrypto = CreateObject<QKDCrypto> (); 
-    m_QCrypto->initialiceQRNG();
     m_supportQKDL4 = 1;
     m_activeQRNG = false;
 }  
@@ -72,6 +73,75 @@ void QKDHelper::SetQRNG(){
     m_activeQRNG = true;
     
 }
+
+
+// IMPRIMIR INFORMACION DE LOS DISPOSITIVOS
+static void _printCardsInfo(QuantisDeviceType deviceType)
+{
+
+  try
+  {
+    // Devices count
+    int devicesCount = idQ::Quantis::Count(deviceType);
+    std::cout << "  Found " << devicesCount << " card(s)" << std::endl;
+
+    // Device details
+    for (int i = 0; i < devicesCount; i++)
+    {
+      // Creates a quantis object
+      idQ::Quantis quantis(deviceType, i);
+
+      // Display device info
+      std::cout << "  - Details for device #" << i << std::endl;
+      int driverVersion = quantis.GetDriverVersion();
+      std::cout << "      driver version: " << static_cast<int>(driverVersion / 10)
+           << "." << driverVersion % 10 << std::endl;
+      std::cout << "      core version: " << std::hex << quantis.GetBoardVersion() << std::endl;
+      std::cout << "      serial number: " << std::hex << quantis.GetSerialNumber() << std::endl;
+      std::cout << "      manufacturer: " << std::hex << quantis.GetManufacturer() << std::endl;
+
+      // Display device's modules info
+      for (int j = 0; j < 4; j++)
+      {
+        std::string strMask = "not found";
+        std::string strStatus = "";
+        if (quantis.GetModulesMask() & (1 << j))
+        {
+          strMask = "found";
+          if (quantis.GetModulesStatus() & (1 << j))
+          {
+            strStatus = "(enabled)";
+          }
+          else
+          {
+            strStatus = "(disabled)";
+          }
+        }
+        std::cout << "      module " << j << ": " << strMask << " " << strStatus << std::endl;
+      }
+    }
+  }
+  catch (std::runtime_error &ex)
+  {
+    std::cerr << "Error while getting cards information: " << ex.what() << std::endl;
+  }
+}
+
+// IMPRIMIR INFORMACION DE LOS DISPOSITIVOS
+static void printCardsInfo()
+{
+  std::cout << "Displaying cards info:" << std::endl;
+
+  std::cout << std::endl
+       << "* Searching for PCI devices..." << std::endl;
+  _printCardsInfo(QUANTIS_DEVICE_PCI);
+
+  std::cout << std::endl
+       << "* Searching for USB devices..." << std::endl;
+  _printCardsInfo(QUANTIS_DEVICE_USB);
+}
+
+
 /**
 *   Enable Pcap recording
 */
@@ -785,7 +855,7 @@ QKDHelper::InstallOverlayQKD(
     if(m_useRealStorages){ 
         //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ()); 
         //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ());
-        Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
+        
         NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
         uint32_t maxDst = bufferA->GetMmax();
         uint32_t maxSrc = bufferB->GetMmax();
@@ -794,16 +864,26 @@ QKDHelper::InstallOverlayQKD(
         }
 
         std::stringstream aux;
-        for(uint32_t i = 0; i < maxSrc; i++){
-            aux << int(randomgenerator->GetValue(0,10));
+        if(m_activeQRNG){
+            std::string params = "u0";
+            idQ::random_device rd(params);
+            for (unsigned int i = 0; i < maxSrc; ++i){
+                aux <<  char(int((rd() % 255) + 1));//evitamos el 0 porque los strings no funcionan bien con el byte con todos los bits a 0
+            }
+        }else{
+            Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
+            for(uint32_t i = 0; i < maxSrc; i++){
+                aux << char(int(randomgenerator->GetValue(1,256)));
+            }
+            randomgenerator->Dispose();
         }
+        
         std::string newKeyMaterial = aux.str();
 
         NS_LOG_FUNCTION(this << newKeyMaterial);
 
         bufferA->AddKeyMaterial(newKeyMaterial);
         bufferB->AddKeyMaterial(newKeyMaterial);
-        randomgenerator->Dispose();
     }
     
     if(typeId == "ns3::TcpSocketFactory")
@@ -1102,7 +1182,6 @@ QKDHelper::InstallQKD(
     if(m_useRealStorages){
         //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
         //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
-        Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
         NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
 
         uint32_t maxDst = bufferA->GetMmax();
@@ -1112,17 +1191,29 @@ QKDHelper::InstallQKD(
         }
 
         std::stringstream aux;
-        for(uint32_t i = 0; i < maxSrc - 1; i++){
-            aux << char(int(randomgenerator->GetValue(33,127)));
+        if(m_activeQRNG){
+            std::cout << "QUANTIS helper" << std::endl;
+            std::string params = "u0";
+            idQ::random_device rd(params);
+            for (unsigned int i = 0; i < maxSrc; ++i){
+                aux <<  char(int((rd() % 255) + 1));//evitamos el 0 porque los strings no funcionan bien con el byte con todos los bits a 0
+            }
+        }else{
+            std::cout << "Random helper" << std::endl;
+            Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
+            for(uint32_t i = 0; i < maxSrc; i++){
+                aux << char(int(randomgenerator->GetValue(1,256)));
+            }
+            randomgenerator->Dispose();
         }
+
+
         std::string newKeyMaterial = aux.str();
 
         NS_LOG_FUNCTION(this << newKeyMaterial);
 
         bufferA->AddKeyMaterial(newKeyMaterial);
         bufferB->AddKeyMaterial(newKeyMaterial);
-        randomgenerator->Dispose();
-        
     }
 
     return qkdNetDevices;

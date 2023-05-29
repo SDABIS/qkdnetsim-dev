@@ -93,6 +93,11 @@ public:
    */
   //ApplicationContainer Install (std::string nodeName) const;
 
+  /**
+   * Habilita que se generen los numeros aleatorios con un dispositivo cuantico
+  */
+  void ActivateQRNG();
+
 private:
   /**
    * Install an ns3::QKDSendApplication on the node configured with all the

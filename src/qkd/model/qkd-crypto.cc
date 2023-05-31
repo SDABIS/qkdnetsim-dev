@@ -440,10 +440,11 @@ QKDCrypto::ProcessOutgoingPacket (
                     //key = QKDbuffer->ProcessOutgoingRequest ( plainText.size() * 8 ); //In bits
                     NS_LOG_FUNCTION ("Usando nueva generacion de claves");
                     NS_LOG_FUNCTION ("SrcBuffer");
-                    keyID = SrcBuffer->ReserveKeyMaterial(plainText.size() /* * 8 */);
+                    key = SrcBuffer->ProcessOutgoingRequest(plainText.size() /* * 8 */);
+                    keyID = key->GetKeyId();
                     //reservamos el material en el buffer del nodo al que lo vamos a mandar
                     NS_LOG_FUNCTION ("DstBuffer");
-                    DstBuffer->ReserveKeyMaterial(plainText.size() /* * 8 */);
+                    DstBuffer->ProcessOutgoingRequest(plainText.size() /* * 8 */);
                     key = SrcBuffer->FetchKeyByID(keyID);
 
 

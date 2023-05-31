@@ -322,7 +322,14 @@ QKDBuffer::ProcessOutgoingRequest(const uint32_t& keySize)
     if(m_Mcurrent <= keySize)
         return 0;
 
-    Ptr<QKDKey> key = FetchKeyOfSize(keySize);
+    Ptr<QKDKey> key;
+    if(m_useRealStorages == true){
+        uint32_t keyID = ReserveKeyMaterial(keySize);
+        key = FetchKeyByID(keyID);
+    }else{
+        key = FetchKeyOfSize(keySize);
+    }
+    
 
     m_Mcurrent = m_Mcurrent - keySize;
     m_McurrentChangeTrace(m_Mcurrent);
@@ -568,11 +575,13 @@ QKDBuffer::GetMmin (void) const
 uint32_t
 QKDBuffer::AddKeyMaterial (std::vector<std::uint8_t> newMaterial)
 {
-    NS_LOG_FUNCTION(this << newMaterial);
+    NS_LOG_FUNCTION(this << "size:" << newMaterial.size() << "key material:" << newMaterial);
 
     
     //si se añade mas material del que puede almacenar el buffer entonces devuelve el error -1
-    
+    if(m_useRealStorages == false){
+        return 0;
+    }
 
     if(m_Mcurrent + newMaterial.size() > m_Mmax){
 
@@ -603,8 +612,8 @@ QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
 {
     NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
 
-    if(m_Mcurrent <= keySize)
-        return 0;
+    /*if(m_Mcurrent <= keySize)
+        return 0;*/
 
 
     //usamos los primeros bytes del material de clave para hacer la nueva clave
@@ -621,26 +630,26 @@ QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
 
     NS_LOG_FUNCTION  (this << "Add keyID:" << m_nextKeyID);
     NS_LOG_DEBUG (this << " key: \t" << newKey->KeyToString());
-    std::stringstream ss;
-    for(unsigned int i = 0; i < key_material.size(); i++){
-        ss << key_material[i];
-    }
-    NS_LOG_DEBUG (this << " key_material: \t" << ss.str());
     m_keys.insert(std::pair<uint32_t,Ptr<QKDKey>>(m_nextKeyID,newKey));
-    m_Mcurrent = m_Mcurrent - keySize;
+
+
+    /*m_Mcurrent = m_Mcurrent - keySize;
     m_McurrentChangeTrace(m_Mcurrent);
     m_McurrentDecreaseTrace (keySize);
     NS_LOG_FUNCTION  (this << "Mcurrent:" << m_Mcurrent );
 
     m_bitsUsedInTimePeriod -= keySize;
 
-    KeyCalculation(); 
+    KeyCalculation(); */
     return m_nextKeyID;
 }
 
 bool
 QKDBuffer::DeleteKeyID (const uint32_t& keyID)
 {
+    if(m_useRealStorages == false){
+        return true;
+    }
     std::map<uint32_t, Ptr<QKDKey> >::iterator a = m_keys.find (keyID);
     if (a != m_keys.end () && a->first == keyID)
     {

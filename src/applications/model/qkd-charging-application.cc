@@ -1165,8 +1165,12 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
 
     NS_LOG_DEBUG (this <<  Simulator::Now () << key << value);     
 
-    std::ostringstream msg; 
-    msg << key << ":";
+    std::vector<std::uint8_t> msg;
+    msg.assign(key.begin(),key.end());
+    msg.push_back(int(':'));
+    std::string strMsg1(msg.begin(), msg.end());//DEBUG
+    NS_LOG_FUNCTION (this << "msg str1:" <<  strMsg1);//DEBUG
+    //msg << key << ":";
     if(key== "ADDKEY"){
       //TODO a lo mejor cambiar m_pktSize por value ya que se supone que hay que rellenar con el valor que se el indica a la aplicación.
 
@@ -1179,7 +1183,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
               newKeyMaterial.push_back(int(rd() % 256));
           }
         }else{
-          std::cout << "RANDOM ChargingApp" << std::endl;
+          //std::cout << "RANDOM ChargingApp" << std::endl;
           for(uint32_t i = 0; i < m_pktSize; i++){
             //newKeyMaterial << char(int(m_random->GetValue(1,256)));
             newKeyMaterial.push_back(int(m_random->GetValue(0,256)));
@@ -1189,12 +1193,14 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
       isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial);
       if(isKeyAdded == 0){
         NS_LOG_FUNCTION (this << "The realKey was added to the source buffer" << isKeyAdded );
+        std::ostringstream intToString;
         //añadimos la cantidad de clave que tiene el paquete
-        msg << newKeyMaterial.size() << ";";
-        //añadimos el vector al mensaje a enviar en el paquete
-        for(unsigned int i = 0; i < newKeyMaterial.size(); i++){
-          msg << newKeyMaterial[i];
-        }
+        intToString << newKeyMaterial.size() << ";";
+        std::string stringInt = intToString.str();//se usa para convertir de int a string y añadir el ; de forma sencilla
+        std::vector<uint8_t> strignToVector(stringInt.begin(),stringInt.end());
+        msg.insert(msg.end(),strignToVector.begin(),strignToVector.end());
+        //añadimos el vector de clave al vector de mensaje a enviar en el paquete
+        msg.insert(msg.end(),newKeyMaterial.begin(),newKeyMaterial.end());
       }else{
         //el buffer esta lleno asique paramos de recargarlo
         is_recharging = 0;
@@ -1202,21 +1208,25 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
          //Esto se hace asi para que si no se puede insertar todo el material de clave se inserta solo el que entra
         std::vector<std::uint8_t>::const_iterator first = newKeyMaterial.begin() + 0;
         std::vector<std::uint8_t>::const_iterator last = newKeyMaterial.begin() + isKeyAdded;
-        std::vector<std::uint8_t> key(first, last);
-        isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, key); //TODO comprobar que funciona
+        std::vector<std::uint8_t> subkey(first, last);
+        isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, subkey); //TODO comprobar que funciona
+        std::ostringstream intToString;
         //añadimos la cantidad de clave que tiene el paquete
-        msg << key.size() << ";";
+        intToString << subkey.size() << ";";
+        std::string stringInt = intToString.str();//se usa para convertir de int a string y añadir el ; de forma sencilla
+        std::vector<uint8_t> strignToVector(stringInt.begin(),stringInt.end());
+        msg.insert(msg.end(),strignToVector.begin(),strignToVector.end());
         //añadimos el vector al mensaje a enviar en el paquete
-        for(unsigned int i = 0; i < key.size(); i++){
-          msg << key[i];
-        }
-        NS_LOG_FUNCTION (this << "new msg:" << msg.str());//DEBUG
+        msg.insert(msg.end(),subkey.begin(),subkey.end());
+        NS_LOG_FUNCTION (this << "new msg:" << msg.data());//DEBUG
       }
     }
-        
-    NS_LOG_FUNCTION (this << "msg:" << msg.str() );
+    
+    NS_LOG_FUNCTION (this << "msg:" << msg.data() );
+    std::string strMsg(msg.begin(), msg.end());//DEBUG
+    NS_LOG_FUNCTION (this << "msg str:" <<  strMsg);//DEBUG
 
-    Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.str().c_str(), msg.str().length());
+    Ptr<Packet> packet = Create<Packet> (/*(uint8_t*)*/ msg.data(), msg.size());
 
     NS_LOG_DEBUG(this << "\t PACKET SIZE:" << packet->GetSize());
     
@@ -1739,7 +1749,8 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
     */    
     uint8_t *buffer = new uint8_t[packet->GetSize ()];
     packet->CopyData(buffer, packet->GetSize ());
-    std::string s = std::string((char*)buffer);
+    std::string s = std::string((char*)buffer);//lo mantenemos para conseguir los valores del principio
+    std::vector<uint8_t> vector(&buffer[0],&buffer[packet->GetSize ()]);
     delete[] buffer;  
 
     NS_LOG_FUNCTION(this << "paquete" << s);
@@ -1760,11 +1771,9 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
         m_sendKeyRateMessage = false;
         int findComa = s.find(";");
 
-        std::vector<std::uint8_t> key;
-        key.reserve(packetValue);
-        for(unsigned int i = 0; i < packetValue; i++){
-          key.push_back(s[i + findComa + 1]);// + 1 porque si no tambien cogeria el ';' 
-        }
+        std::vector<std::uint8_t>::const_iterator first = vector.begin() + findComa + 1;
+        std::vector<std::uint8_t>::const_iterator last = vector.end();
+        std::vector<std::uint8_t> key(first, last);
 
         //add key to buffer
         if(GetNode ()->GetObject<QKDManager> () != 0){

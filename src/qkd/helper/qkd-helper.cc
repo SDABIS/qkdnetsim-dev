@@ -873,12 +873,12 @@ QKDHelper::InstallOverlayQKD(
                 newKeyMaterial.push_back(int((rd() % 256)));
             }
         }else{
-            //Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
+            Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
             for(uint32_t i = 0; i < maxSrc; i++){
                 //aux << char(int(randomgenerator->GetValue(1,256)));
                 newKeyMaterial.push_back(int(randomgenerator->GetValue(0,256)));
             }
-            //randomgenerator->Dispose();
+            randomgenerator->Dispose();
         }
         //std::string newKeyMaterial = aux.str();
 
@@ -1203,18 +1203,14 @@ QKDHelper::InstallQKD(
                 newKeyMaterial.push_back(int((rd() % 256)));
             }
         }else{
-            //Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
+            Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
             for(uint32_t i = 0; i < maxSrc; i++){
                 //aux << char(int(randomgenerator->GetValue(1,256)));
                 newKeyMaterial.push_back(int(randomgenerator->GetValue(0,256)));
             }
-            //randomgenerator->Dispose();
+            randomgenerator->Dispose();
         }
         //std::string newKeyMaterial = aux.str();
-
-
-
-        std::string newKeyMaterial = aux.str();
 
         NS_LOG_FUNCTION(this << newKeyMaterial);
 

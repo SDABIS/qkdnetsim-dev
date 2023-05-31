@@ -857,10 +857,9 @@ QKDHelper::InstallOverlayQKD(
         //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ());
         
         NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
-        uint32_t maxDst = bufferA->GetMmax();
-        uint32_t maxSrc = bufferB->GetMmax();
-        if(maxSrc < maxDst){
-            maxSrc = maxDst;
+        uint32_t limite = Mmax;
+        if(Mcurrent < Mmax){
+            limite = Mcurrent;
         }
 
         //std::stringstream aux;
@@ -868,13 +867,13 @@ QKDHelper::InstallOverlayQKD(
         if(m_activeQRNG){
             std::string params = "u0";
             idQ::random_device rd(params);
-            for (unsigned int i = 0; i < maxSrc; ++i){
+            for (unsigned int i = 0; i < limite; ++i){
                 //aux <<  char(int((rd() % 255) + 1));
                 newKeyMaterial.push_back(int((rd() % 256)));
             }
         }else{
             Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
-            for(uint32_t i = 0; i < maxSrc; i++){
+            for(uint32_t i = 0; i < limite; i++){
                 //aux << char(int(randomgenerator->GetValue(1,256)));
                 newKeyMaterial.push_back(int(randomgenerator->GetValue(0,256)));
             }
@@ -1187,10 +1186,9 @@ QKDHelper::InstallQKD(
         //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
         NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
 
-        uint32_t maxDst = bufferA->GetMmax();
-        uint32_t maxSrc = bufferB->GetMmax();
-        if(maxSrc < maxDst){
-            maxSrc = maxDst;
+        uint32_t limite = Mmax;
+        if(Mcurrent < Mmax){
+            limite = Mcurrent;
         }
 
         //std::stringstream aux;
@@ -1198,13 +1196,13 @@ QKDHelper::InstallQKD(
         if(m_activeQRNG){
             std::string params = "u0";
             idQ::random_device rd(params);
-            for (unsigned int i = 0; i < maxSrc; ++i){
+            for (unsigned int i = 0; i < limite; ++i){
                 //aux <<  char(int((rd() % 255) + 1));
                 newKeyMaterial.push_back(int((rd() % 256)));
             }
         }else{
             Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
-            for(uint32_t i = 0; i < maxSrc; i++){
+            for(uint32_t i = 0; i < limite; i++){
                 //aux << char(int(randomgenerator->GetValue(1,256)));
                 newKeyMaterial.push_back(int(randomgenerator->GetValue(0,256)));
             }

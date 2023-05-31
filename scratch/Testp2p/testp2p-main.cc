@@ -161,8 +161,8 @@ int main (int argc, char *argv[])
         d0d1.Get(0), d0d1.Get(1),
         1000,    //min
         10000, //thr
-        20000,   //max
-        0     //current    //20485770
+        40000,   //max
+        20000     //current    //20485770
     );
     /*NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),

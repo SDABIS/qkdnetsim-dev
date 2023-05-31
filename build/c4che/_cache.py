@@ -7,7 +7,7 @@ BUILD_PROFILE = 'debug'
 BUILD_SUFFIX = '-debug'
 CC = ['/usr/bin/gcc']
 CCDEFINES = ['_DEBUG', 'ENABLE_CRYPTOPP']
-CCFLAGS = ['-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing']
+CCFLAGS = ['-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-I/include/', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing']
 CCFLAGS_PTHREAD = '-pthread'
 CCFLAGS_PYEXT = ['-fvisibility=hidden']
 CCLNK_SRC_F = []
@@ -17,19 +17,19 @@ CC_SRC_F = []
 CC_TGT_F = ['-c', '-o']
 CC_VERSION = ('7', '5', '0')
 CFLAGS_MACBUNDLE = ['-fPIC']
-CFLAGS_PYEMBED = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv']
-CFLAGS_PYEXT = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv']
+CFLAGS_PYEMBED = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv']
+CFLAGS_PYEXT = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv']
 CFLAGS_cshlib = ['-fPIC']
 COMPILER_CC = 'gcc'
 COMPILER_CXX = 'g++'
 CPPPATH_ST = '-I%s'
 CXX = ['/usr/bin/g++']
-CXXDEFINES = ['_DEBUG', 'ENABLE_CRYPTOPP']
-CXXFLAGS = ['-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing']
+CXXDEFINES = ['ENABLE_CRYPTOPP']
+CXXFLAGS = ['-I/include/', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing']
 CXXFLAGS_MACBUNDLE = ['-fPIC']
 CXXFLAGS_PTHREAD = '-pthread'
-CXXFLAGS_PYEMBED = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv']
-CXXFLAGS_PYEXT = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-aabR9V/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv', '-fvisibility=hidden', '-Wno-array-bounds']
+CXXFLAGS_PYEMBED = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv']
+CXXFLAGS_PYEXT = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv', '-fvisibility=hidden', '-Wno-array-bounds']
 CXXFLAGS_cxxshlib = ['-fPIC']
 CXXLNK_SRC_F = []
 CXXLNK_TGT_F = ['-o']
@@ -81,6 +81,7 @@ INCLUDES_PYEMBED = ['/usr/include/python2.7', '/usr/include/x86_64-linux-gnu/pyt
 INCLUDES_PYEXT = ['/usr/include/python2.7', '/usr/include/x86_64-linux-gnu/python2.7']
 INFODIR = '/usr/local/share/info'
 INT64X64_USE_128 = 1
+LDFLAGS = ['-lusb-1.0', '-L/lib64/', '-lQuantis']
 LIBDIR = '/usr/local/lib'
 LIBEXECDIR = '/usr/local/libexec'
 LIBPATH_BOOST = ['/usr/lib/x86_64-linux-gnu']

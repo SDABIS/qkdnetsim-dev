@@ -89,6 +89,10 @@ QKDCrypto::GetTypeId (void)
                     BooleanValue (true),
                     MakeBooleanAccessor (&QKDCrypto::m_encryptionEnabled),
                     MakeBooleanChecker ())
+    .AddAttribute ("QRNGEnabled", "Indicates whether a real encryption of packets is enabled.",
+                    BooleanValue (false),
+                    MakeBooleanAccessor (&QKDCrypto::m_QRNGEnabled),
+                    MakeBooleanChecker ())
     
     .AddTraceSource ("PacketEncrypted",
                     "The change trance for currenly ecrypted packet",
@@ -123,6 +127,7 @@ QKDCrypto::~QKDCrypto ()
 {
   //NS_LOG_FUNCTION  (this);  
 }
+
 
 std::vector<uint8_t> 
 QKDCrypto::StringToVector(

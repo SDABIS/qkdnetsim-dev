@@ -382,5 +382,12 @@ QKDAppChargingHelper::InstallPriv (Ptr<NetDevice> net1, Ptr<NetDevice> net2) con
 
     return apps;
 }
+
+void
+QKDAppChargingHelper::ActivateQRNG (){
+    std::cout << "QUANTIS ChargingApp HELPER" << std::endl;
+    m_factory_slave_app.Set ("m_activeQRNG",BooleanValue (true));
+    m_factory_master_app.Set ("m_activeQRNG",BooleanValue (true));
+}
 } // namespace ns3
 

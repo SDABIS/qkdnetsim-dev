@@ -512,6 +512,7 @@ private:
   void RegisterAckTime (Time oldRtt, Time newRtt);
   
   Ptr<UniformRandomVariable> m_random;
+  bool m_activeQRNG;
 };
 
 } // namespace ns3

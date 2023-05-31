@@ -197,6 +197,7 @@ public:
     std::string OTP (const std::string& data, Ptr<QKDKey> key);
     std::string AESEncrypt (const std::string& data, Ptr<QKDKey> key);
     std::string AESDecrypt (const std::string& data, Ptr<QKDKey> key);
+    
 
 private:
 
@@ -381,6 +382,8 @@ private:
         Ptr<QKDBuffer>      QKDBuffer
     );
 
+    
+
     uint32_t    m_authenticationTagLengthInBits; //!< length of the authentication tag in bits (32 by default)
     
     TracedCallback<Ptr<Packet> > m_encryptionTrace; //!< trace callback for encryption
@@ -396,6 +399,7 @@ private:
 
     bool m_compressionEnabled; //!< encryption (ZIP or similar) enabled?
     bool m_encryptionEnabled;  //!< real encryption used?
+    bool m_QRNGEnabled;        // usa QRNG para generar material de clave 
      
 
     /////////////////////////////

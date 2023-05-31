@@ -146,6 +146,7 @@ int main (int argc, char *argv[])
     QKDHelper QHelper;  
     //activar el dispositivo cuantico
     //QHelper.SetQRNG();
+    //QHelper.SetUseRealStorages(false);
     QHelper.InstallQKDManager (n); 
  
 

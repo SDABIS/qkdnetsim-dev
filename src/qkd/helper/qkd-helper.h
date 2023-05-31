@@ -242,6 +242,8 @@ public:
     */
     void SetQRNG();
 
+    void SetUseRealStorages(bool useRealStorages);
+
 private:
 
     /**

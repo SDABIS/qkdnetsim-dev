@@ -789,7 +789,7 @@ QKDHelper::InstallOverlayQKD(
     bufferA->SetAttribute ("Minimal",     UintegerValue (Mmin));
     bufferA->SetAttribute ("Maximal",     UintegerValue (Mmax));
     bufferA->SetAttribute ("Threshold",   UintegerValue (Mthr));
-    bufferA->SetAttribute ("Current",     UintegerValue (Mcurrent));   
+    bufferA->SetAttribute ("Current",     UintegerValue (0));   //se sumara en AddKeyMaterial
 
     NS_LOG_FUNCTION(this << "BUFFERID A:" << bufferA->m_bufferID);
 
@@ -798,7 +798,7 @@ QKDHelper::InstallOverlayQKD(
     bufferB->SetAttribute ("Minimal",     UintegerValue (Mmin));
     bufferB->SetAttribute ("Maximal",     UintegerValue (Mmax));
     bufferB->SetAttribute ("Threshold",   UintegerValue (Mthr));
-    bufferB->SetAttribute ("Current",     UintegerValue (Mcurrent));   
+    bufferB->SetAttribute ("Current",     UintegerValue (0));   //se sumara en AddKeyMaterial
 
     NS_LOG_FUNCTION(this << "BUFFERID B:" << bufferB->m_bufferID);
 
@@ -884,6 +884,10 @@ QKDHelper::InstallOverlayQKD(
 
         NS_LOG_FUNCTION(this << newKeyMaterial.size());
 
+        bufferA->AddKeyMaterial(newKeyMaterial);
+        bufferB->AddKeyMaterial(newKeyMaterial);
+    }else{
+        std::vector<uint8_t> newKeyMaterial(Mcurrent,0);
         bufferA->AddKeyMaterial(newKeyMaterial);
         bufferB->AddKeyMaterial(newKeyMaterial);
     }
@@ -1116,7 +1120,7 @@ QKDHelper::InstallQKD(
     bufferA->SetAttribute ("Minimal",     UintegerValue (Mmin));
     bufferA->SetAttribute ("Maximal",     UintegerValue (Mmax));
     bufferA->SetAttribute ("Threshold",   UintegerValue (Mthr));
-    bufferA->SetAttribute ("Current",     UintegerValue (Mcurrent));   
+    bufferA->SetAttribute ("Current",     UintegerValue (0));   //se sumara en AddKeyMaterial
 
     NS_LOG_FUNCTION(this << "BUFFERID A:" << bufferA->m_bufferID);
 
@@ -1125,7 +1129,7 @@ QKDHelper::InstallQKD(
     bufferB->SetAttribute ("Minimal",     UintegerValue (Mmin));
     bufferB->SetAttribute ("Maximal",     UintegerValue (Mmax));
     bufferB->SetAttribute ("Threshold",   UintegerValue (Mthr));
-    bufferB->SetAttribute ("Current",     UintegerValue (Mcurrent));   
+    bufferB->SetAttribute ("Current",     UintegerValue (0));   //se sumara en AddKeyMaterial
 
     NS_LOG_FUNCTION(this << "BUFFERID B:" << bufferB->m_bufferID);
 
@@ -1212,6 +1216,10 @@ QKDHelper::InstallQKD(
 
         NS_LOG_FUNCTION(this << newKeyMaterial);
 
+        bufferA->AddKeyMaterial(newKeyMaterial);
+        bufferB->AddKeyMaterial(newKeyMaterial);
+    }else{
+        std::vector<uint8_t> newKeyMaterial(Mcurrent,0);
         bufferA->AddKeyMaterial(newKeyMaterial);
         bufferB->AddKeyMaterial(newKeyMaterial);
     }

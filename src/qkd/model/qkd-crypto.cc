@@ -445,7 +445,6 @@ QKDCrypto::ProcessOutgoingPacket (
                     //reservamos el material en el buffer del nodo al que lo vamos a mandar
                     NS_LOG_FUNCTION ("DstBuffer");
                     DstBuffer->ProcessOutgoingRequest(plainText.size() /* * 8 */);
-                    key = SrcBuffer->FetchKeyByID(keyID);
 
 
                 if(key == 0){
@@ -464,9 +463,9 @@ QKDCrypto::ProcessOutgoingPacket (
 
                 if(SrcBuffer != 0 && DstBuffer != 0) 
                     NS_LOG_FUNCTION ("SrcBuffer");
-                    keyID = SrcBuffer->ReserveKeyMaterial( CryptoPP::AES::MAX_KEYLENGTH); //AES in bits
-                    DstBuffer->ReserveKeyMaterial(CryptoPP::AES::MAX_KEYLENGTH);
-                    key = SrcBuffer->FetchKeyByID(keyID);
+                    key = SrcBuffer->ProcessOutgoingRequest( CryptoPP::AES::MAX_KEYLENGTH); //AES in bits
+                    DstBuffer->ProcessOutgoingRequest(CryptoPP::AES::MAX_KEYLENGTH);
+                    keyID = key->GetKeyId();
 
                 if(key == 0){
                     NS_LOG_FUNCTION ("NO KEY PROVIDED!");
@@ -513,11 +512,11 @@ QKDCrypto::ProcessOutgoingPacket (
                 //key = SrcBuffer->ProcessOutgoingRequest ( m_authenticationTagLengthInBits ); //In bits
                 NS_LOG_FUNCTION ("Usando nueva generacion de claves");
                 NS_LOG_FUNCTION ("SrcBuffer");
-                keyID = SrcBuffer->ReserveKeyMaterial(m_authenticationTagLengthInBits);
-                key = SrcBuffer->FetchKeyByID(keyID);
+                key = SrcBuffer->ProcessOutgoingRequest(m_authenticationTagLengthInBits);
+                keyID = key->GetKeyId();
                 //reservamos el material en el buffer del nodo al que lo vamos a mandar
                 NS_LOG_FUNCTION ("DstBuffer");
-                DstBuffer->ReserveKeyMaterial(m_authenticationTagLengthInBits);
+                DstBuffer->ProcessOutgoingRequest(m_authenticationTagLengthInBits);
 
             if(key == 0){
                 NS_LOG_FUNCTION ("NO KEY PROVIDED!");

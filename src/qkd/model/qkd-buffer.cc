@@ -355,15 +355,13 @@ QKDBuffer::ProcessIncomingRequest(const uint32_t& akeyID, const uint32_t& akeySi
     uint32_t keySize; 
     Ptr<QKDKey> key;
 
+
     //If realKeys are NOT used then fetch some key of required size
     if(m_useRealStorages == false){
       key = FetchKeyOfSize(akeySize);
       if(key == 0) 
         return 0;
       keySize = key->GetSize();
-      m_Mcurrent = m_Mcurrent - keySize;
-      if(m_Mcurrent <= keySize)
-        return 0;
       
     }else{
     //Otherwise, find the requested key by keyID
@@ -575,13 +573,11 @@ QKDBuffer::GetMmin (void) const
 uint32_t
 QKDBuffer::AddKeyMaterial (std::vector<std::uint8_t> newMaterial)
 {
-    NS_LOG_FUNCTION(this << "size:" << newMaterial.size() << "key material:" << newMaterial);
+    NS_LOG_FUNCTION(this << "m_Mcurrent:" << m_Mcurrent << "size:" << newMaterial.size() << "key material:" << newMaterial);
 
     
     //si se añade mas material del que puede almacenar el buffer entonces devuelve el error -1
-    if(m_useRealStorages == false){
-        return 0;
-    }
+    
 
     if(m_Mcurrent + newMaterial.size() > m_Mmax){
 
@@ -597,12 +593,14 @@ QKDBuffer::AddKeyMaterial (std::vector<std::uint8_t> newMaterial)
 
     }
 
-    key_material.insert(key_material.end(),newMaterial.begin(),newMaterial.end());
+    if(m_useRealStorages == true){
+        key_material.insert(key_material.end(),newMaterial.begin(),newMaterial.end());
+    }
 
-    m_Mcurrent = key_material.size();//TODO comprobar que no devuelve siempre el tamaño maximo
+    m_Mcurrent += newMaterial.size();
     KeyCalculation(); 
-    //TODO asegurarse que se actualizan todas las caracteristicas de m_Mcurrent
-    //TODO funcion de referencia AddNewContent
+
+    NS_LOG_FUNCTION(this << "m_Mcurrent:" << m_Mcurrent << "key_material size:" << key_material.size());
 
     return 0;
 }
@@ -633,14 +631,6 @@ QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
     m_keys.insert(std::pair<uint32_t,Ptr<QKDKey>>(m_nextKeyID,newKey));
 
 
-    /*m_Mcurrent = m_Mcurrent - keySize;
-    m_McurrentChangeTrace(m_Mcurrent);
-    m_McurrentDecreaseTrace (keySize);
-    NS_LOG_FUNCTION  (this << "Mcurrent:" << m_Mcurrent );
-
-    m_bitsUsedInTimePeriod -= keySize;
-
-    KeyCalculation(); */
     return m_nextKeyID;
 }
 

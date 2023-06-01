@@ -70,7 +70,6 @@ namespace ns3 {
       m_key = std::string( keystream.str());*/
       m_key.reserve(size);
       std::fill(m_key.begin(),m_key.end(),48);//48 en ASCII es el '0'
-      //TODO comprobar que se crea bien la cadena de 0 de ese tamaño
       m_timestamp = Simulator::Now ();
       NS_LOG_FUNCTION  (this << m_id << m_key  << m_timestamp.GetMilliSeconds() );     
     }

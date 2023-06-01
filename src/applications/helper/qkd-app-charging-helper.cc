@@ -35,13 +35,13 @@ namespace ns3 {
 
 uint32_t QKDAppChargingHelper::appCounter = 0;
 
-QKDAppChargingHelper::QKDAppChargingHelper (std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate)
+QKDAppChargingHelper::QKDAppChargingHelper (std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate, bool enableQRNG)
 {
-    SetSettings(protocol, master, slave, keyRate);
+    SetSettings(protocol, master, slave, keyRate, enableQRNG);
 }
 
 void 
-QKDAppChargingHelper::SetSettings ( std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate)
+QKDAppChargingHelper::SetSettings ( std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate, bool enableQRNG)
 {
     uint16_t port;
 
@@ -147,6 +147,8 @@ QKDAppChargingHelper::SetSettings ( std::string protocol, Ipv4Address master, Ip
     m_factory_master_app.Set ("Local_Temp8", AddressValue (sinkAddress_temp8)); 
     m_factory_master_app.Set ("Remote_Temp8", AddressValue (slaveAppRemoteAddress_temp8));
 
+    m_factory_master_app.Set ("m_activeQRNG",BooleanValue (enableQRNG));
+
     /*************************
     //      SLAVE
     **************************/
@@ -188,6 +190,8 @@ QKDAppChargingHelper::SetSettings ( std::string protocol, Ipv4Address master, Ip
 
     m_factory_slave_app.Set ("Local_Temp8", AddressValue (sinkAddress_temp8)); 
     m_factory_slave_app.Set ("Remote_Temp8", AddressValue (masterAppRemoteAddress_temp8));
+
+    m_factory_slave_app.Set ("m_activeQRNG",BooleanValue (enableQRNG));
 
     m_protocol = protocol;
 
@@ -384,10 +388,15 @@ QKDAppChargingHelper::InstallPriv (Ptr<NetDevice> net1, Ptr<NetDevice> net2) con
 }
 
 void
-QKDAppChargingHelper::ActivateQRNG (){
-    std::cout << "QUANTIS ChargingApp HELPER" << std::endl;
-    m_factory_slave_app.Set ("m_activeQRNG",BooleanValue (true));
-    m_factory_master_app.Set ("m_activeQRNG",BooleanValue (true));
+QKDAppChargingHelper::SetPacketSize (uint32_t packetSize){
+    m_factory_slave_app.Set ("PacketSize",UintegerValue (packetSize));
+    m_factory_master_app.Set ("PacketSize",UintegerValue (packetSize));
+}
+
+void
+QKDAppChargingHelper::SetCheckDelay (uint32_t checkDelay){
+    m_factory_slave_app.Set ("next_check",UintegerValue (checkDelay));
+    m_factory_master_app.Set ("next_check",UintegerValue (checkDelay));
 }
 } // namespace ns3
 

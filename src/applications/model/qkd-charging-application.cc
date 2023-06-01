@@ -269,7 +269,6 @@ QKDChargingApplication::QKDChargingApplication ()
   m_packetNumber_temp7= 0; 
   m_packetNumber_temp8= 0;
   is_recharging = 0;
-  is_warning = false;
   next_check = 5;
 }
 
@@ -1105,7 +1104,6 @@ void QKDChargingApplication::SendData (void)
   }
 
   uint32_t state = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(m_sendDevice->GetAddress());
-  //TODO si el buffer destino esta en estado EMPTY mandar clave automaticamente
   uint32_t dstStatus = GetNode()->GetObject<QKDManager> ()->GetSourceBufferStatus(m_sinkDevice->GetAddress());
   NS_LOG_FUNCTION (this << "SourceBufferStatus" << state << "DestBufferStatus" << dstStatus );
 
@@ -1124,7 +1122,6 @@ void QKDChargingApplication::SendData (void)
     //Si esta READY se espera un tiempo con delay extra
     if(state == 0) {
       //next_check es para que no se compruebe cada tan poco tiempo. Es para ahorrar tiempo de ejecucion
-      //TODO cambiar la forma de calcularlo por otra que no dependa del tamaño del paquete??
       NS_LOG_FUNCTION (this << "READY");
       Time nextTime (Seconds (next_check * (m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
       m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
@@ -1132,8 +1129,6 @@ void QKDChargingApplication::SendData (void)
     }
     //Si esta en warning se espera el tiempo que tardaria en mandar un paquete
       if(state == 1){
-      //TODO a lo mejor es poco tiempo solo con el tamaño del paquete (puede que no que es como estaba antes, en el estado original)
-      //TODO si no se usa is_warning eliminarla
       NS_LOG_FUNCTION (this << "WARNING");
       Time nextTime (Seconds ((m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
       m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
@@ -1172,10 +1167,9 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     NS_LOG_FUNCTION (this << "msg str1:" <<  strMsg1);//DEBUG
     //msg << key << ":";
     if(key== "ADDKEY"){
-      //TODO a lo mejor cambiar m_pktSize por value ya que se supone que hay que rellenar con el valor que se el indica a la aplicación.
 
       if(m_activeQRNG){
-          std::cout << "QUANTIS ChargingApp" << std::endl;
+          //std::cout << "QUANTIS ChargingApp" << std::endl;
           std::string params = "u0";
           idQ::random_device rd(params);
           for (unsigned int i = 0; i < m_pktSize; ++i){
@@ -1209,7 +1203,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
         std::vector<std::uint8_t>::const_iterator first = newKeyMaterial.begin() + 0;
         std::vector<std::uint8_t>::const_iterator last = newKeyMaterial.begin() + isKeyAdded;
         std::vector<std::uint8_t> subkey(first, last);
-        isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, subkey); //TODO comprobar que funciona
+        isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, subkey);
         std::ostringstream intToString;
         //añadimos la cantidad de clave que tiene el paquete
         intToString << subkey.size() << ";";

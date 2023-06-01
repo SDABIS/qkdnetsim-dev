@@ -57,7 +57,7 @@ QKDBuffer::GetTypeId (void)
                    UintegerValue (2000000), //2Mb
                    MakeUintegerAccessor (&QKDBuffer::m_Mthr),
                    MakeUintegerChecker<uint32_t> ()) 
-    .AddAttribute ("Current", //TODO quitar esta funcion, debe empezar vacio y llenarse con claves compartidas
+    .AddAttribute ("Current", 
                    "The current amount of key material in QKD storage",
                    UintegerValue (5000000), //5Mb
                    MakeUintegerAccessor (&QKDBuffer::m_Mcurrent),

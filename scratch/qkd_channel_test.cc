@@ -177,12 +177,12 @@ int main (int argc, char *argv[])
     std::cout << "Destination IP address: " << i1i2.GetAddress(1) << std::endl;
 
     /* QKD APPs for charing  */
-    QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000);
+    QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000, false);
     ApplicationContainer qkdChrgApps = qkdChargingApp.Install ( d0d1.Get(0), d0d1.Get(1) );
     qkdChrgApps.Start (Seconds (5.));
     qkdChrgApps.Stop (Seconds (1500.)); 
 
-    QKDAppChargingHelper qkdChargingApp12("ns3::TcpSocketFactory", i1i2.GetAddress(0),  i1i2.GetAddress(1), 3072000);
+    QKDAppChargingHelper qkdChargingApp12("ns3::TcpSocketFactory", i1i2.GetAddress(0),  i1i2.GetAddress(1), 3072000, false);
     ApplicationContainer qkdChrgApps12 = qkdChargingApp12.Install ( d1d2.Get(0), d1d2.Get(1) );
     qkdChrgApps12.Start (Seconds (5.));
     qkdChrgApps12.Stop (Seconds (1500.)); 

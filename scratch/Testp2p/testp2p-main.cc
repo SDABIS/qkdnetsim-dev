@@ -196,9 +196,10 @@ int main (int argc, char *argv[])
     std::cout << "Destination IP address: " << i0i1.GetAddress(1) << std::endl;
 
     /* QKD APPs for charing  */
-    QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000);
-    //activar el dispositivo cuantico
-    //qkdChargingApp.ActivateQRNG();
+    QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000, false);
+    //cambiar el tamaño del paquete y el delay de comprobacion del buffer
+    //qkdChargingApp.SetPacketSize(500);
+    //qkdChargingApp.SetCheckDelay(6);
     ApplicationContainer qkdChrgApps = qkdChargingApp.Install ( d0d1.Get(0), d0d1.Get(1) );
     qkdChrgApps.Start (Seconds (5.));
     qkdChrgApps.Stop (Seconds (1500.)); 

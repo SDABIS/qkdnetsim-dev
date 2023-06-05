@@ -88,6 +88,9 @@ int main (int argc, char *argv[])
 {
     Packet::EnablePrinting(); 
     PacketMetadata::Enable ();
+
+    bool useQuantisDevice = true;
+
     //
     // Explicitly create the nodes required by the topology (shown above).
     //
@@ -145,7 +148,9 @@ int main (int argc, char *argv[])
     //  install QKD Managers on the nodes 
     QKDHelper QHelper;  
     //activar el dispositivo cuantico
-    //QHelper.SetQRNG();
+    if(useQuantisDevice){
+        QHelper.SetQRNG();
+    }
     //QHelper.SetUseRealStorages(false);
     QHelper.InstallQKDManager (n); 
  
@@ -196,7 +201,7 @@ int main (int argc, char *argv[])
     std::cout << "Destination IP address: " << i0i1.GetAddress(1) << std::endl;
 
     /* QKD APPs for charing  */
-    QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000, false);
+    QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000, useQuantisDevice);
     //cambiar el tamaño del paquete y el delay de comprobacion del buffer
     //qkdChargingApp.SetPacketSize(500);
     //qkdChargingApp.SetCheckDelay(6);

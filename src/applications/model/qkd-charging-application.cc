@@ -35,8 +35,6 @@
 #include <fstream> 
 #include <string>
 
-#include "Quantis_random_device.hpp"
-
 NS_LOG_COMPONENT_DEFINE ("QKDChargingApplication");
 
 namespace ns3 {
@@ -270,6 +268,7 @@ QKDChargingApplication::QKDChargingApplication ()
   m_packetNumber_temp8= 0;
   is_recharging = 0;
   next_check = 5;
+  m_randomGenerator = QKDRandomGenerator(false);
 }
 
 QKDChargingApplication::~QKDChargingApplication ()
@@ -486,6 +485,9 @@ void QKDChargingApplication::StartApplication (void) // Called at time specified
   NS_LOG_FUNCTION (this);
 
   m_random = CreateObject<UniformRandomVariable> ();
+  if(m_activeQRNG){
+    m_randomGenerator.ActivateQuantumDevice();
+  }
   //m_maxPackets = m_random->GetValue (m_maxPackets * 0.5, m_maxPackets * 1.5);
   
   //   SINK socket settings
@@ -1110,14 +1112,14 @@ void QKDChargingApplication::SendData (void)
   
   //si el buffer destino no esta listo (empty, charging o warning) que se recargue
   if(dstStatus != 0){
-    is_recharging = 500;
+    is_recharging = 500;//TODO cambiar por una variable configurable desde el helper
   }
   NS_LOG_FUNCTION (this << "state" << state << "dstState" << dstStatus << "is_recharging" << (is_recharging?"true":"false"));
 
   if(is_recharging == false){
     //si esta EMPTY se pone un numero en el contador de recargas
     if(state == 3 && m_master == true){
-      is_recharging = 500;
+      is_recharging = 500;//TODO cambiar por una variable configurable desde el helper
     }
     //Si esta READY se espera un tiempo con delay extra
     if(state == 0) {
@@ -1168,21 +1170,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     //msg << key << ":";
     if(key== "ADDKEY"){
 
-      if(m_activeQRNG){
-          //std::cout << "QUANTIS ChargingApp" << std::endl;
-          std::string params = "u0";
-          idQ::random_device rd(params);
-          for (unsigned int i = 0; i < m_pktSize; ++i){
-              //newKeyMaterial <<  char(int((rd() % 255) + 1));
-              newKeyMaterial.push_back(int(rd() % 256));
-          }
-        }else{
-          //std::cout << "RANDOM ChargingApp" << std::endl;
-          for(uint32_t i = 0; i < m_pktSize; i++){
-            //newKeyMaterial << char(int(m_random->GetValue(1,256)));
-            newKeyMaterial.push_back(int(m_random->GetValue(0,256)));
-          }
-        }
+      newKeyMaterial = m_randomGenerator.generateStream(m_pktSize);
 
       isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial);
       if(isKeyAdded == 0){

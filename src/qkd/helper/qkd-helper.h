@@ -35,6 +35,8 @@
 #include "ns3/qkd-net-device.h"
 #include "ns3/qkd-crypto.h"
 
+#include "ns3/qkd-random-generator.h"
+
 namespace ns3 {
  
 class NetDevice;
@@ -301,7 +303,8 @@ private:
 
     ObjectFactory m_channelFactory;       //!< Channel Factory 
     ObjectFactory m_deviceFactory;        //!< Device Factory
-    bool    m_activeQRNG;                 
+    bool    m_activeQRNG;     
+    QKDRandomGenerator m_randomGenerator;            
 }; 
 } // namespace ns3
 

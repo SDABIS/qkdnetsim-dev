@@ -17,6 +17,7 @@ def build(bld):
         'helper/qkd-helper.cc',
         'model/qkd-packet-filter.cc',
         'model/qkd-queue-disc-item.cc',
+        'model/qkd-random-generator.cc',
         ]
   
     headers = bld(features='ns3header')
@@ -35,6 +36,7 @@ def build(bld):
         'helper/qkd-helper.h',
         'model/qkd-queue-disc-item.h',
         'model/qkd-packet-filter.h',
+        'model/qkd-random-generator.h',
         ]
 
     #if (bld.env['ENABLE_EXAMPLES']):

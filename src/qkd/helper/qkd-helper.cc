@@ -42,7 +42,6 @@
 #include "ns3/qkd-graph-manager.h" 
 #include "qkd-helper.h"
 
-#include "Quantis_random_device.hpp"
 
 namespace ns3 {
 
@@ -61,6 +60,7 @@ QKDHelper::QKDHelper ()
     m_QCrypto = CreateObject<QKDCrypto> (); 
     m_supportQKDL4 = 1;
     m_activeQRNG = false;
+    m_randomGenerator = QKDRandomGenerator(m_activeQRNG);
 }  
 
 void 
@@ -71,7 +71,7 @@ QKDHelper::SetDeviceAttribute (std::string n1, const AttributeValue &v1)
 
 void QKDHelper::SetQRNG(){
     m_activeQRNG = true;
-    
+    m_randomGenerator.ActivateQuantumDevice();
 }
 
 /**
@@ -82,72 +82,6 @@ void QKDHelper::SetUseRealStorages(bool useRealStorages){
     m_useRealStorages = useRealStorages;
     m_QCrypto->SetAttribute("EncryptionEnabled", BooleanValue(useRealStorages));
     
-}
-
-// IMPRIMIR INFORMACION DE LOS DISPOSITIVOS
-static void _printCardsInfo(QuantisDeviceType deviceType)
-{
-
-  try
-  {
-    // Devices count
-    int devicesCount = idQ::Quantis::Count(deviceType);
-    std::cout << "  Found " << devicesCount << " card(s)" << std::endl;
-
-    // Device details
-    for (int i = 0; i < devicesCount; i++)
-    {
-      // Creates a quantis object
-      idQ::Quantis quantis(deviceType, i);
-
-      // Display device info
-      std::cout << "  - Details for device #" << i << std::endl;
-      int driverVersion = quantis.GetDriverVersion();
-      std::cout << "      driver version: " << static_cast<int>(driverVersion / 10)
-           << "." << driverVersion % 10 << std::endl;
-      std::cout << "      core version: " << std::hex << quantis.GetBoardVersion() << std::endl;
-      std::cout << "      serial number: " << std::hex << quantis.GetSerialNumber() << std::endl;
-      std::cout << "      manufacturer: " << std::hex << quantis.GetManufacturer() << std::endl;
-
-      // Display device's modules info
-      for (int j = 0; j < 4; j++)
-      {
-        std::string strMask = "not found";
-        std::string strStatus = "";
-        if (quantis.GetModulesMask() & (1 << j))
-        {
-          strMask = "found";
-          if (quantis.GetModulesStatus() & (1 << j))
-          {
-            strStatus = "(enabled)";
-          }
-          else
-          {
-            strStatus = "(disabled)";
-          }
-        }
-        std::cout << "      module " << j << ": " << strMask << " " << strStatus << std::endl;
-      }
-    }
-  }
-  catch (std::runtime_error &ex)
-  {
-    std::cerr << "Error while getting cards information: " << ex.what() << std::endl;
-  }
-}
-
-// IMPRIMIR INFORMACION DE LOS DISPOSITIVOS
-static void printCardsInfo()
-{
-  std::cout << "Displaying cards info:" << std::endl;
-
-  std::cout << std::endl
-       << "* Searching for PCI devices..." << std::endl;
-  _printCardsInfo(QUANTIS_DEVICE_PCI);
-
-  std::cout << std::endl
-       << "* Searching for USB devices..." << std::endl;
-  _printCardsInfo(QUANTIS_DEVICE_USB);
 }
 
 
@@ -874,12 +808,12 @@ QKDHelper::InstallOverlayQKD(
         //std::stringstream aux;
         std::vector<std::uint8_t> newKeyMaterial;
         if(m_activeQRNG){
-            std::string params = "u0";
+            /*std::string params = "u0";
             idQ::random_device rd(params);
             for (unsigned int i = 0; i < limite; ++i){
                 //aux <<  char(int((rd() % 255) + 1));
                 newKeyMaterial.push_back(int((rd() % 256)));
-            }
+            }*/
         }else{
             Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
             for(uint32_t i = 0; i < limite; i++){
@@ -1206,12 +1140,22 @@ QKDHelper::InstallQKD(
 
         //std::stringstream aux;
         std::vector<std::uint8_t> newKeyMaterial;
-        if(m_activeQRNG){
+        /*if(m_activeQRNG){
+            std::cout << "QUANTIS HELPER" << std::endl;
             std::string params = "u0";
             idQ::random_device rd(params);
-            for (unsigned int i = 0; i < limite; ++i){
+            uint32_t randomNumber = 0;
+            for (unsigned int i = 0; i < limite/4; ++i){//TODO va muy lento, mejor reimplementar la libreria o usar directamente la quantis.
                 //aux <<  char(int((rd() % 255) + 1));
-                newKeyMaterial.push_back(int((rd() % 256)));
+                randomNumber = rd();
+                for(unsigned int j = 0; j < 4; j++){
+                    newKeyMaterial.push_back(randomNumber % 256);
+                    randomNumber = randomNumber / 256;
+                }
+                //newKeyMaterial.push_back(int((rd() % 256)));
+                if(i % 1000 == 0){
+                    std::cout << i << std::endl;
+                }
             }
         }else{
             Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
@@ -1220,8 +1164,8 @@ QKDHelper::InstallQKD(
                 newKeyMaterial.push_back(int(randomgenerator->GetValue(0,256)));
             }
             randomgenerator->Dispose();
-        }
-        //std::string newKeyMaterial = aux.str();
+        }*/
+        newKeyMaterial = m_randomGenerator.generateStream(limite);
 
         NS_LOG_FUNCTION(this << newKeyMaterial);
 

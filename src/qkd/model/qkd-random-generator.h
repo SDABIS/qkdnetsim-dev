@@ -14,7 +14,7 @@ namespace ns3 {
 
 class QKDRandomGenerator{
     private:
-        //void _printCardsInfo(QuantisDeviceType deviceType);
+        void _printCardsInfo(QuantisDeviceType deviceType);
         bool m_activeQRNG;
         Ptr<UniformRandomVariable> randomgenerator;
         //idQ::Quantis *dispositivoCuantico;
@@ -24,7 +24,7 @@ class QKDRandomGenerator{
         QKDRandomGenerator(bool activeQRNG);
         ~QKDRandomGenerator();
         void Dispose();
-        //void printCardsInfo();
+        void printCardsInfo();
         void ActivateQuantumDevice();
         std::vector<uint8_t> generateStream(uint32_t limite);
 

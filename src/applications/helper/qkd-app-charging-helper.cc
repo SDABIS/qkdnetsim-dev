@@ -389,8 +389,12 @@ QKDAppChargingHelper::InstallPriv (Ptr<NetDevice> net1, Ptr<NetDevice> net2) con
 
 void
 QKDAppChargingHelper::SetPacketSize (uint32_t packetSize){
-    m_factory_slave_app.Set ("PacketSize",UintegerValue (packetSize));
-    m_factory_master_app.Set ("PacketSize",UintegerValue (packetSize));
+    uint32_t tamanhopaquete = packetSize;//se limita por problemas de la aplicacion
+    if(tamanhopaquete > 525){
+        tamanhopaquete = 525;
+    }
+    m_factory_slave_app.Set ("PacketSize",UintegerValue (tamanhopaquete));
+    m_factory_master_app.Set ("PacketSize",UintegerValue (tamanhopaquete));
 }
 
 void

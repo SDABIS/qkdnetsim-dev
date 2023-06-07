@@ -807,22 +807,7 @@ QKDHelper::InstallOverlayQKD(
 
         //std::stringstream aux;
         std::vector<std::uint8_t> newKeyMaterial;
-        if(m_activeQRNG){
-            /*std::string params = "u0";
-            idQ::random_device rd(params);
-            for (unsigned int i = 0; i < limite; ++i){
-                //aux <<  char(int((rd() % 255) + 1));
-                newKeyMaterial.push_back(int((rd() % 256)));
-            }*/
-        }else{
-            Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
-            for(uint32_t i = 0; i < limite; i++){
-                //aux << char(int(randomgenerator->GetValue(1,256)));
-                newKeyMaterial.push_back(int(randomgenerator->GetValue(0,256)));
-            }
-            randomgenerator->Dispose();
-        }
-        //std::string newKeyMaterial = aux.str();
+        newKeyMaterial = m_randomGenerator.generateStream(limite);
 
 
         NS_LOG_FUNCTION(this << newKeyMaterial.size());
@@ -1166,6 +1151,7 @@ QKDHelper::InstallQKD(
             randomgenerator->Dispose();
         }*/
         newKeyMaterial = m_randomGenerator.generateStream(limite);
+        std::cout << "cantidad de clave generada " << newKeyMaterial.size() << std::endl;
 
         NS_LOG_FUNCTION(this << newKeyMaterial);
 

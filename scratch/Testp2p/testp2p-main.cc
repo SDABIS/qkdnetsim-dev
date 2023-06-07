@@ -89,7 +89,7 @@ int main (int argc, char *argv[])
     Packet::EnablePrinting(); 
     PacketMetadata::Enable ();
 
-    bool useQuantisDevice = false;
+    bool useQuantisDevice = true;
 
     //
     // Explicitly create the nodes required by the topology (shown above).
@@ -167,9 +167,9 @@ int main (int argc, char *argv[])
     NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),
         1000,    //min
-        10000, //thr
-        20000,   //max
-        20000     //current    //20485770
+        30000, //thr
+        40000,   //max
+        35123     //current    //20485770
     );
     /*NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),
@@ -204,7 +204,7 @@ int main (int argc, char *argv[])
     /* QKD APPs for charing  */
     QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000, useQuantisDevice);
     //cambiar el tamaño del paquete y el delay de comprobacion del buffer
-    //qkdChargingApp.SetPacketSize(500);
+    qkdChargingApp.SetPacketSize(600);
     //qkdChargingApp.SetCheckDelay(6);
     ApplicationContainer qkdChrgApps = qkdChargingApp.Install ( d0d1.Get(0), d0d1.Get(1) );
     qkdChrgApps.Start (Seconds (5.));

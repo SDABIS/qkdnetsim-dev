@@ -10,6 +10,8 @@
 #include <vector>
 #include "Quantis.hpp"
 
+#define IS_DEMO true
+
 namespace ns3 {
 
 class QKDRandomGenerator{

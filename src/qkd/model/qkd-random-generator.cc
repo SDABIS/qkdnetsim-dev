@@ -15,10 +15,9 @@ QKDRandomGenerator::QKDRandomGenerator(){
 QKDRandomGenerator::QKDRandomGenerator(bool activeQRNG){
     m_activeQRNG = activeQRNG;
     randomgenerator = CreateObject<UniformRandomVariable> ();
-    if(activeQRNG){//TODO comprobar si lo inicializa
+    if(activeQRNG){
       std::cout << "inicializamos con booleano" << std::endl;
       printCardsInfo();
-        //dispositivoCuantico = idQ::Quantis(QUANTIS_DEVICE_USB,0);
     }
 }
 
@@ -37,8 +36,9 @@ QKDRandomGenerator::Dispose(){
 void
 QKDRandomGenerator::ActivateQuantumDevice(){
     m_activeQRNG = true;
-    //TODO
-    std::cout << "inicializamos con ActivateQuantumDevice" << std::endl;
+    if(IS_DEMO){
+     std::cout << "inicializamos con ActivateQuantumDevice" << std::endl; 
+    }
     printCardsInfo();
 }
 
@@ -46,72 +46,56 @@ std::vector<uint8_t>
 QKDRandomGenerator::generateStream(uint32_t limite){
     std::vector<uint8_t> keyMaterial; 
     keyMaterial.reserve(limite);
-    //TODO prueba
-    if(m_activeQRNG == true){
-        /*idQ::Quantis dispositivoCuantico(QUANTIS_DEVICE_USB,0);
-        int aux = dispositivoCuantico.ReadInt(0,255);
-        std::cout << "numero aleatorio generado" << aux << std::endl;
-        uint8_t buffer[32];
-        dispositivoCuantico.Read(&buffer,32);
-        std::cout << "buffer[32]" << buffer << std::endl;
-
-        std::cout << "Read de 16.777.217" << buffer << std::endl;
-        uint8_t buffer1[16777217];
-        dispositivoCuantico.Read(&buffer1,16777217);
-        std::cout << "buffer1[16777217]" << buffer1 << std::endl;
-
-        uint8_t buffer2[16777216];
-        dispositivoCuantico.Read(&buffer2,16777216);
-        std::cout << "buffer1[16777216]" << buffer2 << std::endl;*/
-    }
-
     if(m_activeQRNG){
-        /*std::cout << "QUANTIS ChargingApp" << std::endl;
-        std::string params = "u0";
-        idQ::random_device rd(params);
-        uint32_t randomNumber = 0;
-        for (unsigned int i = 0; i < limite/4; ++i){
-            //aux <<  char(int((rd() % 255) + 1));
-            randomNumber = rd();
-            for(unsigned int j = 0; j < 4; j++){
-                keyMaterial.push_back(randomNumber % 256);
-                randomNumber = randomNumber / 256;
-            }
-            //newKeyMaterial.push_back(int((rd() % 256)));
-        }*/
-        //TODO hacer comprobacion de tamaño
+      if(IS_DEMO){
         std::cout << "comenzamos a pedir material, tamaño: " << limite << std::endl;
-        idQ::Quantis dispositivoCuantico(QUANTIS_DEVICE_USB,0);
-        std::cout << "Dispositivo USB inicializado" << std::endl;
-        if(limite < 500){
+      }
+      idQ::Quantis dispositivoCuantico(QUANTIS_DEVICE_USB,0);
+      if(IS_DEMO){
+        std::cout << "Dispositivo USB inicializado" << std::endl; 
+      }
+      if(limite < 10000){
+        if(IS_DEMO){
           std::cout << "Llamada unica" << std::endl;
-          uint8_t buffer[limite];
-          dispositivoCuantico.Read(&buffer,limite);
-          std::vector<uint8_t> my_vector(&buffer[0], &buffer[limite]);
-          keyMaterial = my_vector;
-          //std::cout << "vector: [" << keyMaterial.data() << "]";
-        }else{
-          uint32_t tamanho = 10000;
-          //en std::cout tamanho lo pone en hexadecimal
-          std::cout << "Llamadas de " << tamanho << " en " << tamanho << std::endl;
-          uint8_t buffer[tamanho];
-          uint32_t recorrido = limite/tamanho;
-          for(uint32_t i = 0; i < recorrido; i++){
-            std::cout << "iteraccion numero " << i << " de " << recorrido << "." << std::endl;
-            dispositivoCuantico.Read(&buffer,tamanho);
-            std::cout << "dispositivo leido con exito" << std::endl;
-            for(uint32_t j = 0; j < tamanho; j++){
-              keyMaterial.push_back(buffer[j]);
-            }
-            std::cout << "agregado al vector principal con exito" << std::endl;
-          }
-          //std::cout << "vector: [" << keyMaterial.data() << "]";
         }
-        
-        
-        
-        
-
+        uint8_t buffer[limite];
+        dispositivoCuantico.Read(&buffer,limite);
+        std::vector<uint8_t> my_vector(&buffer[0], &buffer[limite]);
+        keyMaterial = my_vector;
+        //std::cout << "vector: [" << keyMaterial.data() << "]";
+      }else{
+        uint32_t tamanho = 10000;
+        //en std::cout tamanho lo pone en hexadecimal
+        if(IS_DEMO){
+          std::cout << "Llamadas de " << tamanho << " en " << tamanho << std::endl;
+        }
+        uint8_t buffer[tamanho];
+        uint32_t recorrido = limite/tamanho;
+        for(uint32_t i = 0; i < recorrido; i++){
+          if(IS_DEMO){
+            std::cout << "iteraccion numero " << i << " de " << recorrido << "." << std::endl;
+          }
+          dispositivoCuantico.Read(&buffer,tamanho);
+          if(IS_DEMO){
+            std::cout << "dispositivo leido con exito" << std::endl;
+          }
+          for(uint32_t j = 0; j < tamanho; j++){
+            keyMaterial.push_back(buffer[j]);
+          }
+        }
+        if(tamanho * recorrido != limite){
+          if(IS_DEMO){
+            std::cout << "iteraccion extra para completar el tamaño de la clave pedido" << std::endl;
+          }
+          uint32_t ultimoNumero = limite - ((limite / tamanho) * tamanho);
+          uint8_t buffer[ultimoNumero];
+          dispositivoCuantico.Read(&buffer,ultimoNumero);
+          for(uint32_t j = 0; j < ultimoNumero; j++){
+            keyMaterial.push_back(buffer[j]);
+          }
+        }
+        //std::cout << "vector: [" << keyMaterial.data() << "]";
+      }  
     }else{
         //std::cout << "RANDOM ChargingApp" << std::endl;
         for(uint32_t i = 0; i < limite; i++){
@@ -184,6 +168,7 @@ void QKDRandomGenerator::printCardsInfo(){
   std::cout << std::endl
        << "* Searching for USB devices..." << std::endl;
   _printCardsInfo(QUANTIS_DEVICE_USB);
+  std::cout << std::dec;
 }
 
 }

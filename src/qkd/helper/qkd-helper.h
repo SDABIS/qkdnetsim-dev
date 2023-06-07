@@ -245,6 +245,7 @@ public:
     void SetQRNG();
 
     void SetUseRealStorages(bool useRealStorages);
+    void SetEncryptionEnabled(bool EncryptionEnabled);
 
 private:
 

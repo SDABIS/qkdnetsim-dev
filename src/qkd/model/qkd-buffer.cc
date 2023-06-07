@@ -627,7 +627,7 @@ QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
     Ptr<QKDKey> newKey = CreateObject<QKDKey> (m_nextKeyID, key);
 
     NS_LOG_FUNCTION  (this << "Add keyID:" << m_nextKeyID);
-    NS_LOG_DEBUG (this << " key: \t" << newKey->KeyToString());
+    //NS_LOG_DEBUG (this << " key: \t" << newKey->KeyToString());
     m_keys.insert(std::pair<uint32_t,Ptr<QKDKey>>(m_nextKeyID,newKey));
 
 

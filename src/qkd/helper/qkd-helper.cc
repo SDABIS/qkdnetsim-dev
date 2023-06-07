@@ -74,16 +74,16 @@ void QKDHelper::SetQRNG(){
     m_randomGenerator.ActivateQuantumDevice();
 }
 
-/**
- *  If this function set m_useRealStorages it disables the m_encryptionEnabled
- *  variable in the QKDCrypto because it will fail when tries to encrypt
-*/
+
 void QKDHelper::SetUseRealStorages(bool useRealStorages){
     m_useRealStorages = useRealStorages;
-    m_QCrypto->SetAttribute("EncryptionEnabled", BooleanValue(useRealStorages));
     
 }
 
+void QKDHelper::SetEncryptionEnabled(bool EncryptionEnabled){
+    m_QCrypto->SetAttribute("EncryptionEnabled", BooleanValue(EncryptionEnabled));
+    
+}
 
 /**
 *   Enable Pcap recording

@@ -89,7 +89,7 @@ int main (int argc, char *argv[])
     Packet::EnablePrinting(); 
     PacketMetadata::Enable ();
 
-    bool useQuantisDevice = true;
+    bool useQuantisDevice = false;
 
     //
     // Explicitly create the nodes required by the topology (shown above).
@@ -152,6 +152,7 @@ int main (int argc, char *argv[])
         QHelper.SetQRNG();
     }
     //QHelper.SetUseRealStorages(false);
+    //QHelper.SetEncryptionEnabled(false);
     QHelper.InstallQKDManager (n); 
  
 

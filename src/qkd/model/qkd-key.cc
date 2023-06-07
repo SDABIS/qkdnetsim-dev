@@ -60,16 +60,10 @@ namespace ns3 {
       NS_LOG_FUNCTION  (this << m_key << size ); 
 
       m_globalUid++;
-      //Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable>();
-      /*randomgenerator->SetAttribute("Min", DoubleValue (0.0));
-      randomgenerator->SetAttribute("Min", DoubleValue (9.0));
-      std::stringstream keystream;
-      for(uint32_t i = 0; i < size; i++){
-        keystream << randomgenerator->GetInteger();
-      }
-      m_key = std::string( keystream.str());*/
       m_key.reserve(size);
-      std::fill(m_key.begin(),m_key.end(),48);//48 en ASCII es el '0'
+      for(uint32_t i = 0; i < size; i++){
+        m_key.push_back(48);//48 en ASCII es el '0'
+      }
       m_timestamp = Simulator::Now ();
       NS_LOG_FUNCTION  (this << m_id << m_key  << m_timestamp.GetMilliSeconds() );     
     }
@@ -122,6 +116,7 @@ namespace ns3 {
     std::string
     QKDKey::KeyToString (void) const
     {
+        NS_LOG_FUNCTION  (this << "key.data()" << m_key ); 
         std::stringstream ss;
         for(unsigned int i = 0; i < m_key.size(); i++){
           ss << m_key[i];

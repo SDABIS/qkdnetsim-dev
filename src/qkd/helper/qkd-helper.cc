@@ -72,6 +72,9 @@ QKDHelper::SetDeviceAttribute (std::string n1, const AttributeValue &v1)
 void QKDHelper::SetQRNG(){
     m_activeQRNG = true;
     m_randomGenerator.ActivateQuantumDevice();
+    std::cout << "Información de los dispositivos cuanticos:" << std::endl << std::endl; 
+    m_randomGenerator.printCardsInfo();
+    std::cout << std::endl << std::endl; 
 }
 
 
@@ -1151,7 +1154,6 @@ QKDHelper::InstallQKD(
             randomgenerator->Dispose();
         }*/
         newKeyMaterial = m_randomGenerator.generateStream(limite);
-        std::cout << "cantidad de clave generada " << newKeyMaterial.size() << std::endl;
 
         NS_LOG_FUNCTION(this << newKeyMaterial);
 

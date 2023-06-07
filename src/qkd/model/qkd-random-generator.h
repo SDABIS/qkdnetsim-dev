@@ -11,6 +11,7 @@
 #include "Quantis.hpp"
 
 #define IS_DEMO true
+#define MAX_BUFFER_SIZE 16*1024*1024
 
 namespace ns3 {
 
@@ -19,6 +20,7 @@ class QKDRandomGenerator{
         void _printCardsInfo(QuantisDeviceType deviceType);
         bool m_activeQRNG;
         Ptr<UniformRandomVariable> randomgenerator;
+        uint32_t buffer_size;
         //idQ::Quantis *dispositivoCuantico;
 
     public:

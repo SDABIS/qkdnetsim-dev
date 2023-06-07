@@ -9,16 +9,14 @@ namespace ns3 {
 
 QKDRandomGenerator::QKDRandomGenerator(){
     m_activeQRNG = false;
+    buffer_size = 100000;
     randomgenerator = CreateObject<UniformRandomVariable> ();
 }
 
 QKDRandomGenerator::QKDRandomGenerator(bool activeQRNG){
     m_activeQRNG = activeQRNG;
+    buffer_size = 100000;
     randomgenerator = CreateObject<UniformRandomVariable> ();
-    if(activeQRNG){
-      std::cout << "inicializamos con booleano" << std::endl;
-      printCardsInfo();
-    }
 }
 
 QKDRandomGenerator::~QKDRandomGenerator(){
@@ -29,17 +27,13 @@ void
 QKDRandomGenerator::Dispose(){
     randomgenerator->Dispose();
     if(m_activeQRNG == true){
-        //dispositivoCuantico.~Quantis();
+      //dispositivoCuantico.~Quantis();
     }
 }
 
 void
 QKDRandomGenerator::ActivateQuantumDevice(){
     m_activeQRNG = true;
-    if(IS_DEMO){
-     std::cout << "inicializamos con ActivateQuantumDevice" << std::endl; 
-    }
-    printCardsInfo();
 }
 
 std::vector<uint8_t> 
@@ -48,15 +42,12 @@ QKDRandomGenerator::generateStream(uint32_t limite){
     keyMaterial.reserve(limite);
     if(m_activeQRNG){
       if(IS_DEMO){
-        std::cout << "comenzamos a pedir material, tamaño: " << limite << std::endl;
+        std::cout << "Comenzamos a pedir material, tamaño total: " << limite << std::endl << std::endl;
       }
       idQ::Quantis dispositivoCuantico(QUANTIS_DEVICE_USB,0);
-      if(IS_DEMO){
-        std::cout << "Dispositivo USB inicializado" << std::endl; 
-      }
       if(limite < 10000){
         if(IS_DEMO){
-          std::cout << "Llamada unica" << std::endl;
+          std::cout << "Llamada única" << std::endl;
         }
         uint8_t buffer[limite];
         dispositivoCuantico.Read(&buffer,limite);
@@ -64,10 +55,14 @@ QKDRandomGenerator::generateStream(uint32_t limite){
         keyMaterial = my_vector;
         //std::cout << "vector: [" << keyMaterial.data() << "]";
       }else{
-        uint32_t tamanho = 10000;
-        //en std::cout tamanho lo pone en hexadecimal
+        uint32_t tamanho = buffer_size;
+        uint32_t max = MAX_BUFFER_SIZE;
+        if(tamanho > max){
+          tamanho = max;
+        }
         if(IS_DEMO){
           std::cout << "Llamadas de " << tamanho << " en " << tamanho << std::endl;
+          std::cout << "---------------------------------------" << std::endl;
         }
         uint8_t buffer[tamanho];
         uint32_t recorrido = limite/tamanho;
@@ -86,6 +81,7 @@ QKDRandomGenerator::generateStream(uint32_t limite){
         if(tamanho * recorrido != limite){
           if(IS_DEMO){
             std::cout << "iteraccion extra para completar el tamaño de la clave pedido" << std::endl;
+            std::cout << "---------------------------------------" << std::endl;
           }
           uint32_t ultimoNumero = limite - ((limite / tamanho) * tamanho);
           uint8_t buffer[ultimoNumero];
@@ -94,14 +90,11 @@ QKDRandomGenerator::generateStream(uint32_t limite){
             keyMaterial.push_back(buffer[j]);
           }
         }
-        //std::cout << "vector: [" << keyMaterial.data() << "]";
       }  
     }else{
-        //std::cout << "RANDOM ChargingApp" << std::endl;
         for(uint32_t i = 0; i < limite; i++){
             keyMaterial.push_back(int(randomgenerator->GetValue(0,256)));
         }
-        //std::cout << "FIN RANDOM ChargingApp" << std::endl;
     }
     return keyMaterial;
 }

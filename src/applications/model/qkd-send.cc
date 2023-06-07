@@ -158,7 +158,8 @@ QKDSend::SendPacket (void)
 {
     NS_LOG_FUNCTION (this);
 
-    std::string msg = "paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-";
+    //std::string msg = "paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-";
+    std::string msg = "paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend";
 
     Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.c_str(), msg.size()); 
     packet = m_socket->GetNode()->GetObject<QKDManager> ()->MarkEncrypt  (packet, QKDCRYPTO_OTP, QKDCRYPTO_AUTH_VMAC); 
@@ -204,7 +205,7 @@ QKDSend::ScheduleTx (void)
   if (m_running)
   {
     NS_LOG_FUNCTION (this << "QKDSend is running!" << m_running);
-    Time tNext (Seconds (m_packetSize * 8 / static_cast<double> (m_dataRate.GetBitRate ())));
+    Time tNext (Seconds (m_packetSize * 8 * 8 / static_cast<double> (m_dataRate.GetBitRate ())));
     m_sendEvent = Simulator::Schedule (tNext, &QKDSend::SendPacket, this);
   }else{
     NS_LOG_FUNCTION (this << "QKDSend is ***NOT*** running!" << m_running);

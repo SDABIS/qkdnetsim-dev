@@ -513,7 +513,6 @@ QKDCrypto::ProcessOutgoingPacket (
                 NS_LOG_FUNCTION ("Usando nueva generacion de claves");
                 NS_LOG_FUNCTION ("SrcBuffer");
                 key = SrcBuffer->ProcessOutgoingRequest(m_authenticationTagLengthInBits);
-                keyID = key->GetKeyId();
                 //reservamos el material en el buffer del nodo al que lo vamos a mandar
                 NS_LOG_FUNCTION ("DstBuffer");
                 DstBuffer->ProcessOutgoingRequest(m_authenticationTagLengthInBits);
@@ -522,6 +521,8 @@ QKDCrypto::ProcessOutgoingPacket (
                 NS_LOG_FUNCTION ("NO KEY PROVIDED!");
                 NS_LOG_WARN ("NO ENOUGH KEY IN THE BUFFER! BUFFER IS EMPTY! ABORT ENCRYPTION and AUTHENTICATION PROCESS");
                 return packetOutput;
+            }else{
+                keyID = key->GetKeyId();
             }
         }else
             key = 0;
@@ -533,6 +534,10 @@ QKDCrypto::ProcessOutgoingPacket (
         qkdHeader.SetAuthenticationKeyId(keyID); 
         qkdHeader.SetAuthTag(authTag); 
         qkdHeader.SetAuthenticated (shouldAuthenticate);
+
+        if(key != 0){
+            SrcBuffer->DeleteKeyID(keyID);
+        }
 
     }else{
         

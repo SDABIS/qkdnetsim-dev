@@ -3287,8 +3287,7 @@ QKDCrypto::OTP (const std::string& data, Ptr<QKDKey> key)
     std::string encryptData = data; 
     uint8_t * keyString = key->GetKey();
 
-    NS_LOG_DEBUG  (this << "keyString" << keyString ); 
-    NS_LOG_DEBUG  (this << "keyString.size" << keyString << "encryptData.size()" << encryptData.size()); 
+    NS_LOG_DEBUG  (this << "keyString" << keyString << "keySting.size()" << encryptData.size()); 
     if(key->GetSize() != encryptData.size()){
         NS_LOG_FUNCTION(this << "KEY IS NOT GOOD FOR OTP!");
         return data;

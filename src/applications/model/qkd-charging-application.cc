@@ -1112,14 +1112,14 @@ void QKDChargingApplication::SendData (void)
   
   //si el buffer destino no esta listo (empty, charging o warning) que se recargue
   if(dstStatus != 0){
-    is_recharging = 500;//TODO cambiar por una variable configurable desde el helper
+    is_recharging = 100;//TODO cambiar por una variable configurable desde el helper
   }
   NS_LOG_FUNCTION (this << "state" << state << "dstState" << dstStatus << "is_recharging" << (is_recharging?"true":"false"));
 
   if(is_recharging == false){
     //si esta EMPTY se pone un numero en el contador de recargas
     if(state == 3 && m_master == true){
-      is_recharging = 500;//TODO cambiar por una variable configurable desde el helper
+      is_recharging = 100;//TODO cambiar por una variable configurable desde el helper
     }
     //Si esta READY se espera un tiempo con delay extra
     if(state == 0) {
@@ -1229,6 +1229,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
 void QKDChargingApplication::SendPacket (Ptr<Packet> packet){
 
     NS_LOG_DEBUG (this << "\t" << packet << "PACKETID: " << packet->GetUid() << packet->GetSize() );
+    NS_LOG_FUNCTION(this << "m_connected" << (m_connected?"true":"false"));
     if(m_connected){ 
       m_txTrace (packet);
       m_sendSocket->Send (packet); 

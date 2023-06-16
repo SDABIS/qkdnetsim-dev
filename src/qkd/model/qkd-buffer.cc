@@ -319,6 +319,10 @@ QKDBuffer::ProcessOutgoingRequest(const uint32_t& keySize)
 {    
     NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
 
+    if(m_Mcurrent - keySize < m_Mmin){
+        return 0;
+    }
+
     if(m_Mcurrent <= keySize)
         return 0;
 

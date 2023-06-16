@@ -132,10 +132,10 @@ int main (int argc, char *argv[])
     NS_LOG_INFO ("Assign IP Addresses.");
     Ipv4AddressHelper ipv4;
 
-    ipv4.SetBase ("10.1.1.0", "255.255.255.0");
+    ipv4.SetBase ("11.11.11.0", "255.255.255.0");
     Ipv4InterfaceContainer i0i1 = ipv4.Assign (d0d1);
 
-    ipv4.SetBase ("10.1.2.0", "255.255.255.0");
+    ipv4.SetBase ("22.22.22.0", "255.255.255.0");
     Ipv4InterfaceContainer i1i2 = ipv4.Assign (d1d2);
      
     //
@@ -152,7 +152,7 @@ int main (int argc, char *argv[])
         1048576,    //min
         11324620, //thr
         52428800,   //max
-        0     //current    //20485770
+        52428800     //current    //20485770
     );
    
     //Create graph to monitor buffer changes
@@ -165,7 +165,7 @@ int main (int argc, char *argv[])
         1048576,    //min
         11324620, //thr
         52428800,   //max
-        0     //current    //20485770
+        52428800     //current    //20485770
     );
     
     //Create graph to monitor buffer changes
@@ -217,7 +217,7 @@ int main (int argc, char *argv[])
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSend/Tx", MakeCallback(&SentPacket));
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSink/Rx", MakeCallback(&ReceivedPacket));
  
-    Simulator::Stop (Seconds (50));
+    Simulator::Stop (Seconds (30));
     Simulator::Run ();
 
     Ratio(app->sendDataStats(), app->sendPacketStats());

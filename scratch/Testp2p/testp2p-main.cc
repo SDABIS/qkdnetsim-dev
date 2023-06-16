@@ -89,7 +89,7 @@ int main (int argc, char *argv[])
     Packet::EnablePrinting(); 
     PacketMetadata::Enable ();
 
-    bool useQuantisDevice = true;
+    bool useQuantisDevice = false;
 
     //
     // Explicitly create the nodes required by the topology (shown above).
@@ -166,10 +166,10 @@ int main (int argc, char *argv[])
     );*/
     NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),
-        150000,    //min
-        399997, //thr
-        400000,   //max
-        399997     //current    //20485770
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //20485770
     );
     /*NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),
@@ -245,7 +245,7 @@ int main (int argc, char *argv[])
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSend/Tx", MakeCallback(&SentPacket));
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSink/Rx", MakeCallback(&ReceivedPacket));
  
-    Simulator::Stop (Seconds (30));
+    Simulator::Stop (Seconds (50));
     Simulator::Run ();
 
     Ratio(app->sendDataStats(), app->sendPacketStats());

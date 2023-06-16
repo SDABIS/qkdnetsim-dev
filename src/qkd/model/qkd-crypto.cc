@@ -441,7 +441,6 @@ QKDCrypto::ProcessOutgoingPacket (
                     NS_LOG_FUNCTION ("Usando nueva generacion de claves");
                     NS_LOG_FUNCTION ("SrcBuffer");
                     key = SrcBuffer->ProcessOutgoingRequest(plainText.size() /* * 8 */);
-                    keyID = key->GetKeyId();
                     //reservamos el material en el buffer del nodo al que lo vamos a mandar
                     NS_LOG_FUNCTION ("DstBuffer");
                     DstBuffer->ProcessOutgoingRequest(plainText.size() /* * 8 */);
@@ -452,6 +451,7 @@ QKDCrypto::ProcessOutgoingPacket (
                     NS_LOG_WARN ("NO ENOUGH KEY IN THE BUFFER! BUFFER IS EMPTY! ABORT ENCRYPTION and AUTHENTICATION PROCESS");
                     return packetOutput;
                 }else{
+                    keyID = key->GetKeyId();
                     cipherText = OTP ( plainText, key );
                     m_encryptionTrace (p);
                     if(keyID != 0)
@@ -465,19 +465,19 @@ QKDCrypto::ProcessOutgoingPacket (
                     NS_LOG_FUNCTION ("SrcBuffer");
                     key = SrcBuffer->ProcessOutgoingRequest( CryptoPP::AES::MAX_KEYLENGTH); //AES in bits
                     DstBuffer->ProcessOutgoingRequest(CryptoPP::AES::MAX_KEYLENGTH);
-                    keyID = key->GetKeyId();
+                    
 
                 if(key == 0){
                     NS_LOG_FUNCTION ("NO KEY PROVIDED!");
                     NS_LOG_WARN ("NO ENOUGH KEY IN THE BUFFER! BUFFER IS EMPTY! ABORT ENCRYPTION and AUTHENTICATION PROCESS");
                     return packetOutput;
                 }else{
+                    keyID = key->GetKeyId();
                     cipherText = AESEncrypt ( plainText, key );
                     m_encryptionTrace (p);
                 }
                 break;
         }
-
         qkdHeader.SetEncryptionKeyId(keyID); 
         qkdHeader.SetEncrypted (shouldEncrypt);
 

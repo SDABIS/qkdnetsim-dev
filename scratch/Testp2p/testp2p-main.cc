@@ -245,7 +245,7 @@ int main (int argc, char *argv[])
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSend/Tx", MakeCallback(&SentPacket));
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSink/Rx", MakeCallback(&ReceivedPacket));
  
-    Simulator::Stop (Seconds (50));
+    Simulator::Stop (Seconds (30));
     Simulator::Run ();
 
     Ratio(app->sendDataStats(), app->sendPacketStats());

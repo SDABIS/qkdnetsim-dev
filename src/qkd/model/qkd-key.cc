@@ -116,7 +116,6 @@ namespace ns3 {
     std::string
     QKDKey::KeyToString (void) const
     {
-        NS_LOG_FUNCTION  (this << "key.data()" << m_key ); 
         std::stringstream ss;
         for(unsigned int i = 0; i < m_key.size(); i++){
           ss << m_key[i];

@@ -577,10 +577,18 @@ QKDBuffer::GetMmin (void) const
 uint32_t
 QKDBuffer::AddKeyMaterial (std::vector<std::uint8_t> newMaterial)
 {
-    NS_LOG_FUNCTION(this << "m_Mcurrent:" << m_Mcurrent << "size:" << newMaterial.size() << "key material:" << newMaterial);
+    if(newMaterial.size() >= 600){//600 porque sino empezaria a ocupar mucho en el log
+        std::vector<std::uint8_t>::const_iterator first = newMaterial.begin() ;
+        std::vector<std::uint8_t>::const_iterator last = newMaterial.begin() + 30;
+        std::vector<std::uint8_t> initVec(first, last);
+        first = newMaterial.end() - 30 ;
+        last = newMaterial.end();
+        std::vector<std::uint8_t> endVec(first, last);
+        NS_LOG_FUNCTION(this << "m_Mcurrent:" << m_Mcurrent << "size:" << newMaterial.size() << "key material[0-30]:" << initVec << "key material[(end - 30) - end]:" << endVec);
+    }else{
+        NS_LOG_FUNCTION(this << "m_Mcurrent:" << m_Mcurrent << "size:" << newMaterial.size() << "key material:" << newMaterial);
+    }
 
-    
-    //si se añade mas material del que puede almacenar el buffer entonces devuelve el error -1
     
 
     if(m_Mcurrent + newMaterial.size() > m_Mmax){
@@ -605,6 +613,10 @@ QKDBuffer::AddKeyMaterial (std::vector<std::uint8_t> newMaterial)
     KeyCalculation(); 
 
     NS_LOG_FUNCTION(this << "m_Mcurrent:" << m_Mcurrent << "key_material size:" << key_material.size());
+    std::vector<std::uint8_t>::const_iterator first = key_material.end() - 30;
+    std::vector<std::uint8_t>::const_iterator last = key_material.end();
+    std::vector<std::uint8_t> finalMaterial(first, last);
+    NS_LOG_FUNCTION(this << "m_Mcurrent:" << m_Mcurrent << "buffer final material:" << finalMaterial);
 
     return 0;
 }

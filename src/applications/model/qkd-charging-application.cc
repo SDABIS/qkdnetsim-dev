@@ -1111,10 +1111,9 @@ void QKDChargingApplication::SendData (void)
 
   
   //si el buffer destino no esta listo (empty, charging o warning) que se recargue
-  if(dstStatus != 0){
+  if(state != 0){
     is_recharging = 100;//TODO cambiar por una variable configurable desde el helper
   }
-  NS_LOG_FUNCTION (this << "state" << state << "dstState" << dstStatus << "is_recharging" << (is_recharging?"true":"false"));
 
   if(is_recharging == false){
     //si esta EMPTY se pone un numero en el contador de recargas
@@ -1143,7 +1142,6 @@ void QKDChargingApplication::SendData (void)
   }
   NS_LOG_DEBUG (this << "is_recharging booleano: " << (is_recharging?"true":"false"));
   if(is_recharging){
-    NS_LOG_FUNCTION (this << "antes de PrepareOutput");
     PrepareOutput(label, m_keyRate,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress()); 
   }else{
     Time nextTime (Seconds ((m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
@@ -1165,8 +1163,6 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     std::vector<std::uint8_t> msg;
     msg.assign(key.begin(),key.end());
     msg.push_back(int(':'));
-    std::string strMsg1(msg.begin(), msg.end());//DEBUG
-    NS_LOG_FUNCTION (this << "msg str1:" <<  strMsg1);//DEBUG
     //msg << key << ":";
     if(key== "ADDKEY"){
 
@@ -1200,13 +1196,9 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
         msg.insert(msg.end(),strignToVector.begin(),strignToVector.end());
         //añadimos el vector al mensaje a enviar en el paquete
         msg.insert(msg.end(),subkey.begin(),subkey.end());
-        NS_LOG_FUNCTION (this << "new msg:" << msg.data());//DEBUG
       }
     }
     
-    NS_LOG_FUNCTION (this << "msg:" << msg.data() );
-    std::string strMsg(msg.begin(), msg.end());//DEBUG
-    NS_LOG_FUNCTION (this << "msg str:" <<  strMsg);//DEBUG
 
     Ptr<Packet> packet = Create<Packet> (/*(uint8_t*)*/ msg.data(), msg.size());
 
@@ -1736,8 +1728,6 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
     std::vector<uint8_t> vector(&buffer[0],&buffer[packet->GetSize ()]);
     delete[] buffer;  
 
-    NS_LOG_FUNCTION(this << "paquete" << s);
-    NS_LOG_FUNCTION(this << "s.size()" << s.size());
     uint32_t packetValue;  
     if(s.size() > 5){
 

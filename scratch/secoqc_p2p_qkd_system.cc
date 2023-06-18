@@ -100,7 +100,7 @@ int main (int argc, char *argv[])
 
     bool enableFlowMonitor = false;  
     bool enableApplication = true;
-    double simulationTime = 300; 
+    double simulationTime = 30; 
     bool useSeparetedIPAddresses = false;
     std::string lat = "2ms";
     std::string rate = "10Mb/s"; // P2P link
@@ -231,10 +231,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_0_1 = QHelper.InstallQKD (
         devices_0_1.Get(0), devices_0_1.Get(1),  
-        1048576,    //min
-        11324620, //thr
-        52428800,   //max
-        52428800     //current    //20485770
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //20485770
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(0), devices_0_1.Get(0)); //srcNode, destinationAddress, BufferTitle
@@ -242,10 +242,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_1_2 = QHelper.InstallQKD (
         devices_1_2.Get(0), devices_1_2.Get(1),  
-        1548576,    //min
-        11324620, //thr
-        52428800,   //max
-        52428800     //current    //20485770
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //20485770
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(1), devices_1_2.Get(1)); //srcNode, destinationAddress, BufferTitle
@@ -253,10 +253,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_2_4 = QHelper.InstallQKD (
         devices_2_4.Get(0), devices_2_4.Get(1),  
-        1048576,    //min
-        11324620, //thr
-        52428800,   //max
-        10485760     //current    //10485760
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //10485760
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(2), devices_2_4.Get(1)); //srcNode, destinationAddress, BufferTitle
@@ -264,10 +264,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_1_3 = QHelper.InstallQKD (
         devices_1_3.Get(0), devices_1_3.Get(1),  
-        1048576,    //min
-        11324620, //thr
-        52428800,   //max
-        52428800     //current    //20485770
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //20485770
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(1), devices_1_3.Get(1)); //srcNode, destihnationAddress, BufferTitle
@@ -275,10 +275,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_3_4 = QHelper.InstallQKD (
         devices_3_4.Get(0), devices_3_4.Get(1),  
-        1048576,    //min
-        11324620, //thr
-        52428800,   //max
-        12485760     //current    //12485760
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //12485760
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(3), devices_3_4.Get(1)); //srcNode, destinationAddress, BufferTitle
@@ -286,10 +286,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_4_5 = QHelper.InstallQKD (
         devices_4_5.Get(0), devices_4_5.Get(1),  
-        1048576,    //min
-        11324620, //thr
-        52428800,   //max
-        52428800     //current    //20485770
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //20485770
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(4), devices_4_5.Get(1)); //srcNode, destinationAddress, BufferTitle
@@ -357,7 +357,7 @@ int main (int argc, char *argv[])
         uint16_t sinkPort = 8080;
         QKDSinkAppHelper packetSinkHelper ("ns3::UdpSocketFactory", InetSocketAddress (Ipv4Address::GetAny (), sinkPort));
         ApplicationContainer sinkApps = packetSinkHelper.Install (nodes.Get (5));
-        sinkApps.Start (Seconds (15.));
+        sinkApps.Start (Seconds (20.));
         sinkApps.Stop (Seconds (500.));
 
         /* Create source app */
@@ -367,7 +367,7 @@ int main (int argc, char *argv[])
 
         app->Setup (socket, sourceAddress, sinkAddress, 512, 0, DataRate ("160kbps"));
         nodes.Get (0)->AddApplication (app);
-        app->SetStartTime (Seconds (15.));
+        app->SetStartTime (Seconds (20.));
         app->SetStopTime (Seconds (500.));  
     }
     //////////////////////////////////////

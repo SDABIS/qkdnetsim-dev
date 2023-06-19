@@ -228,8 +228,12 @@ QKDChargingApplication::GetTypeId (void)
                    MakeAddressAccessor (&QKDChargingApplication::m_local_temp8),
                    MakeAddressChecker ())   
     .AddAttribute ("next_check", "Retardo entre la comprobacion del estado del buffer",
-                   UintegerValue (5), 
+                   UintegerValue (1), 
                    MakeUintegerAccessor (&QKDChargingApplication::next_check),
+                   MakeUintegerChecker<uint32_t> (1))
+    .AddAttribute ("packetSend", "Retardo entre la comprobacion del estado del buffer",
+                   UintegerValue (100), 
+                   MakeUintegerAccessor (&QKDChargingApplication::packetSend),
                    MakeUintegerChecker<uint32_t> (1))
     .AddAttribute ("m_activeQRNG", "Indica si se usa la generacion aleatoria con dispositivo cuantico",
                    BooleanValue (false), 
@@ -267,7 +271,6 @@ QKDChargingApplication::QKDChargingApplication ()
   m_packetNumber_temp7= 0; 
   m_packetNumber_temp8= 0;
   is_recharging = 0;
-  next_check = 5;
   m_randomGenerator = QKDRandomGenerator(false);
 }
 
@@ -1110,28 +1113,19 @@ void QKDChargingApplication::SendData (void)
   NS_LOG_FUNCTION (this << "SourceBufferStatus" << state << "DestBufferStatus" << dstStatus );
 
   
-  //si el buffer destino no esta listo (empty, charging o warning) que se recargue
-  if(state != 0){
-    is_recharging = 100;//TODO cambiar por una variable configurable desde el helper
-  }
 
   if(is_recharging == false){
-    //si esta EMPTY se pone un numero en el contador de recargas
-    if(state == 3 && m_master == true){
-      is_recharging = 100;//TODO cambiar por una variable configurable desde el helper
+    //si es distinto de READY
+    if(state != 0 || dstStatus != 0){
+      std::cout << "packetSend" << packetSend << std::endl;
+      is_recharging = packetSend;
     }
     //Si esta READY se espera un tiempo con delay extra
     if(state == 0) {
       //next_check es para que no se compruebe cada tan poco tiempo. Es para ahorrar tiempo de ejecucion
       NS_LOG_FUNCTION (this << "READY");
-      Time nextTime (Seconds (next_check * (m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
-      m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
-      return;
-    }
-    //Si esta en warning se espera el tiempo que tardaria en mandar un paquete
-      if(state == 1){
-      NS_LOG_FUNCTION (this << "WARNING");
-      Time nextTime (Seconds ((m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
+      NS_LOG_FUNCTION (this << "next_check" << next_check);
+      Time nextTime (Seconds (next_check * 0.1 * (m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
       m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
       return;
     }
@@ -1140,6 +1134,8 @@ void QKDChargingApplication::SendData (void)
       is_recharging = is_recharging - 1;
     }
   }
+
+
   NS_LOG_DEBUG (this << "is_recharging booleano: " << (is_recharging?"true":"false"));
   if(is_recharging){
     PrepareOutput(label, m_keyRate,m_sendDevice->GetAddress(),m_sinkDevice->GetAddress()); 

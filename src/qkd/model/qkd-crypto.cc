@@ -3468,7 +3468,7 @@ QKDCrypto::CheckAuthentication(Ptr<Packet> p, Ptr<QKDKey> key, uint8_t authentic
 std::string
 QKDCrypto::VMAC (std::string& inputString, Ptr<QKDKey> key)
 { 
-    NS_LOG_FUNCTION (this << inputString.length() << key->KeyToString() ); 
+    NS_LOG_FUNCTION (this << inputString.length() << key->GetSize() << key->KeyToString() ); 
     NS_LOG_DEBUG (this << "KeyID:" << key->GetKeyId()); 
     if(!m_encryptionEnabled) 
         return std::string( m_authenticationTagLengthInBits, '0'); 

@@ -204,7 +204,8 @@ int main (int argc, char *argv[])
     /* QKD APPs for charing  */
     QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000, useQuantisDevice);
     //cambiar el tamaño del paquete y el delay de comprobacion del buffer
-    qkdChargingApp.SetPacketSize(600);
+    qkdChargingApp.SetPacketSize(500);
+    qkdChargingApp.SetPacketSend(300);
     //qkdChargingApp.SetCheckDelay(6);
     ApplicationContainer qkdChrgApps = qkdChargingApp.Install ( d0d1.Get(0), d0d1.Get(1) );
     qkdChrgApps.Start (Seconds (5.));

@@ -319,7 +319,8 @@ QKDBuffer::ProcessOutgoingRequest(const uint32_t& keySize)
 {    
     NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
 
-    if(m_Mcurrent - keySize < m_Mmin){
+    if(m_Mcurrent - keySize <= m_Mmin){
+        NS_LOG_FUNCTION  (this << "no hay suficiente material para reservar"); 
         return 0;
     }
 

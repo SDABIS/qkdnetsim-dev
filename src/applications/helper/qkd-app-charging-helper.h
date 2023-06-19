@@ -112,6 +112,13 @@ public:
   */
   void SetCheckDelay(uint32_t checkDelay);
 
+
+  /**
+   * Permite cambiar la cantidad de paquetes que rellenara la QKDChargingApplication
+   * \param packetSend Cantidad de paquetes que se mandaran como maximo.
+  */
+  void SetPacketSend(uint32_t packetSend);
+
 private:
   /**
    * Install an ns3::QKDSendApplication on the node configured with all the

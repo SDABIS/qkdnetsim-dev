@@ -402,5 +402,11 @@ QKDAppChargingHelper::SetCheckDelay (uint32_t checkDelay){
     m_factory_slave_app.Set ("next_check",UintegerValue (checkDelay));
     m_factory_master_app.Set ("next_check",UintegerValue (checkDelay));
 }
+
+void
+QKDAppChargingHelper::SetPacketSend (uint32_t packetSend){
+    m_factory_slave_app.Set ("packetSend",UintegerValue (packetSend));
+    m_factory_master_app.Set ("packetSend",UintegerValue (packetSend));
+}
 } // namespace ns3
 

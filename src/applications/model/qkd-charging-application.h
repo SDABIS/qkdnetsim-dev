@@ -467,6 +467,7 @@ private:
   int is_recharging;
   //esta variable controla el intervalo de comprobacion de estado del buffer
   uint32_t next_check;
+  uint32_t packetSend;
 
 
 private:

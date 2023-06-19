@@ -1114,10 +1114,9 @@ void QKDChargingApplication::SendData (void)
 
   
 
-  if(is_recharging == false){
+  if(is_recharging == 0){
     //si es distinto de READY
     if(state != 0 || dstStatus != 0){
-      std::cout << "packetSend" << packetSend << std::endl;
       is_recharging = packetSend;
     }
     //Si esta READY se espera un tiempo con delay extra
@@ -1125,7 +1124,7 @@ void QKDChargingApplication::SendData (void)
       //next_check es para que no se compruebe cada tan poco tiempo. Es para ahorrar tiempo de ejecucion
       NS_LOG_FUNCTION (this << "READY");
       NS_LOG_FUNCTION (this << "next_check" << next_check);
-      Time nextTime (Seconds (next_check * 0.1 * (m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
+      Time nextTime (Seconds (next_check * (m_pktSize * 8) / static_cast<double>(m_cbrRate.GetBitRate ())));
       m_sendEvent = Simulator::Schedule (nextTime, &QKDChargingApplication::SendData, this);
       return;
     }
@@ -1743,6 +1742,10 @@ void QKDChargingApplication::ProcessIncomingPacket(Ptr<Packet> packet, Ptr<Socke
         std::vector<std::uint8_t>::const_iterator first = vector.begin() + findComa + 1;
         std::vector<std::uint8_t>::const_iterator last = vector.end();
         std::vector<std::uint8_t> key(first, last);
+
+        if(packetValue != m_pktSize){
+          is_recharging = 0;
+        }
 
         //add key to buffer
         if(GetNode ()->GetObject<QKDManager> () != 0){

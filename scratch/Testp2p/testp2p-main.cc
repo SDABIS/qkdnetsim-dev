@@ -205,7 +205,7 @@ int main (int argc, char *argv[])
     QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000, useQuantisDevice);
     //cambiar el tamaño del paquete y el delay de comprobacion del buffer
     qkdChargingApp.SetPacketSize(500);
-    qkdChargingApp.SetPacketSend(300);
+    qkdChargingApp.SetPacketSend(400);
     //qkdChargingApp.SetCheckDelay(6);
     ApplicationContainer qkdChrgApps = qkdChargingApp.Install ( d0d1.Get(0), d0d1.Get(1) );
     qkdChrgApps.Start (Seconds (5.));
@@ -246,7 +246,7 @@ int main (int argc, char *argv[])
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSend/Tx", MakeCallback(&SentPacket));
     Config::Connect("/NodeList/*/ApplicationList/*/$ns3::QKDSink/Rx", MakeCallback(&ReceivedPacket));
  
-    Simulator::Stop (Seconds (30));
+    Simulator::Stop (Seconds (100));
     Simulator::Run ();
 
     Ratio(app->sendDataStats(), app->sendPacketStats());

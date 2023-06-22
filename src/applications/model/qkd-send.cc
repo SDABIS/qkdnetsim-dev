@@ -206,7 +206,7 @@ QKDSend::ScheduleTx (void)
   {
     NS_LOG_FUNCTION (this << "QKDSend is running!" << m_running);
     //Time tNext (Seconds (m_packetSize * 8 *4 / static_cast<double> (m_dataRate.GetBitRate ())));
-    Time tNext (Seconds (m_packetSize * 8 /** 8*/ / static_cast<double> (m_dataRate.GetBitRate ())));
+    Time tNext (Seconds (m_packetSize * 8 * 8 / static_cast<double> (m_dataRate.GetBitRate ())));
     m_sendEvent = Simulator::Schedule (tNext, &QKDSend::SendPacket, this);
   }else{
     NS_LOG_FUNCTION (this << "QKDSend is ***NOT*** running!" << m_running);

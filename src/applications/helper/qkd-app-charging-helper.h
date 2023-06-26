@@ -51,8 +51,8 @@ public:
    * \param address the address of the remote node to send traffic
    *        to.
    */
-  QKDAppChargingHelper (std::string protocol, Address address);
-  QKDAppChargingHelper (std::string protocol, Ipv4Address addressSrc, Ipv4Address addressDst, uint32_t keyRate);
+  //QKDAppChargingHelper (std::string protocol, Address address);
+  QKDAppChargingHelper (std::string protocol, Ipv4Address addressSrc, Ipv4Address addressDst, uint32_t keyRate, bool enableQRNG);
 
   /**
    * Helper function used to set the underlying application attributes, 
@@ -72,7 +72,7 @@ public:
    * \returns Container of Ptr to the applications installed.
    */
   //ApplicationContainer Install (NodeContainer c) const;
-  void SetSettings ( std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate);
+  void SetSettings ( std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate, bool enableQRNG);
 
   /**
    * Install an ns3::QKDSendApplication on the node configured with all the
@@ -92,6 +92,32 @@ public:
    * \returns Container of Ptr to the applications installed.
    */
   //ApplicationContainer Install (std::string nodeName) const;
+
+  /**
+   * Permite cambiar el tamaño del paquete que usa la Charging application.
+   * \param packetSize Numero de bytes que va a ocupar el material de clave 
+   * del paquete.
+   * 
+   * Es necesario
+  */
+  void SetPacketSize(uint32_t packetSize);
+
+  /**
+   * Permite cambiar el delay con el que se comprueba el estado de los buffers.
+   * La forma en la que funciona el delay es esperar el tiempo que le llevaria 
+   * a un paquete mandarse. Con este numero que le pasamos lo multiplicamos al 
+   * paquete haciendo que espere checkDelay * packetSize.
+   * \param checkDelay Multiplicador del delay que hara la aplicacion para volver 
+   * a comprobar el buffer si esta en estado READY.
+  */
+  void SetCheckDelay(uint32_t checkDelay);
+
+
+  /**
+   * Permite cambiar la cantidad de paquetes que rellenara la QKDChargingApplication
+   * \param packetSend Cantidad de paquetes que se mandaran como maximo.
+  */
+  void SetPacketSend(uint32_t packetSend);
 
 private:
   /**

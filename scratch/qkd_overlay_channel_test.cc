@@ -211,12 +211,12 @@ int main (int argc, char *argv[])
     /* QKD APPs for charing */
     //Config::SetDefault ("ns3::TcpSocket::SegmentSize", UintegerValue (2536)); 
     
-    QKDAppChargingHelper qkdChargingApp02("ns3::VirtualTcpSocketFactory", va02_0.GetLocal (), va02_2.GetLocal (), 200000);
+    QKDAppChargingHelper qkdChargingApp02("ns3::VirtualTcpSocketFactory", va02_0.GetLocal (), va02_2.GetLocal (), 200000, false);
     ApplicationContainer qkdChrgApps02 = qkdChargingApp02.Install ( qkdNetDevices02.Get (0), qkdNetDevices02.Get (1) );
     qkdChrgApps02.Start (Seconds (10.));
     qkdChrgApps02.Stop (Seconds (120.));
 
-    QKDAppChargingHelper qkdChargingApp24("ns3::VirtualTcpSocketFactory", va24_2.GetLocal (), va24_4.GetLocal (), 200000);
+    QKDAppChargingHelper qkdChargingApp24("ns3::VirtualTcpSocketFactory", va24_2.GetLocal (), va24_4.GetLocal (), 200000, false);
     ApplicationContainer qkdChrgApps24 = qkdChargingApp24.Install ( qkdNetDevices24.Get (0), qkdNetDevices24.Get (1) );
     qkdChrgApps24.Start (Seconds (10.));
     qkdChrgApps24.Stop (Seconds (120.));

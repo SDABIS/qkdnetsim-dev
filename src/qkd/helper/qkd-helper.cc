@@ -42,6 +42,7 @@
 #include "ns3/qkd-graph-manager.h" 
 #include "qkd-helper.h"
 
+
 namespace ns3 {
 
 NS_LOG_COMPONENT_DEFINE ("QKDHelper");
@@ -51,19 +52,40 @@ QKDHelper::QKDHelper ()
     m_deviceFactory.SetTypeId ("ns3::QKDNetDevice"); 
     m_tcpFactory.SetTypeId ("ns3::VirtualTcpL4Protocol");
 
-    m_useRealStorages = false;
+    m_useRealStorages = true;
     m_portOverlayNumber = 667; 
     m_channelID = 0; 
     m_routing = 0; 
     m_counter = 0;
     m_QCrypto = CreateObject<QKDCrypto> (); 
     m_supportQKDL4 = 1;
+    m_activeQRNG = false;
+    m_randomGenerator = QKDRandomGenerator(m_activeQRNG);
 }  
 
 void 
 QKDHelper::SetDeviceAttribute (std::string n1, const AttributeValue &v1)
 {
     m_deviceFactory.Set (n1, v1);
+}
+
+void QKDHelper::SetQRNG(){
+    m_activeQRNG = true;
+    m_randomGenerator.ActivateQuantumDevice();
+    std::cout << "Información de los dispositivos cuanticos:" << std::endl << std::endl; 
+    m_randomGenerator.printCardsInfo();
+    std::cout << std::endl << std::endl; 
+}
+
+
+void QKDHelper::SetUseRealStorages(bool useRealStorages){
+    m_useRealStorages = useRealStorages;
+    
+}
+
+void QKDHelper::SetEncryptionEnabled(bool EncryptionEnabled){
+    m_QCrypto->SetAttribute("EncryptionEnabled", BooleanValue(EncryptionEnabled));
+    
 }
 
 /**
@@ -289,6 +311,7 @@ QKDHelper::InstallQKDManager (NodeContainer& n)
             Ptr<Object> manager = factory.Create <Object> ();
             n.Get(i)->AggregateObject (manager);  
             n.Get(i)->GetObject<QKDManager> ()->UseRealStorages(m_useRealStorages);
+            //n.Get(i)->GetObject<QKDManager> ()->UseRealStorages(m_useRealStorages);
         } 
     }
 }
@@ -707,6 +730,25 @@ QKDHelper::InstallOverlayQKD(
     // which are in charge to create QKD buffers  
     /////////////////////////////////
  
+    NS_LOG_FUNCTION (this << "CREATE NEW BUFFER 'A'!");
+    Ptr<QKDBuffer> bufferA = CreateObject<QKDBuffer> (a->GetId(), b->GetId(), m_useRealStorages );
+    bufferA->SetAttribute ("Minimal",     UintegerValue (Mmin));
+    bufferA->SetAttribute ("Maximal",     UintegerValue (Mmax));
+    bufferA->SetAttribute ("Threshold",   UintegerValue (Mthr));
+    bufferA->SetAttribute ("Current",     UintegerValue (0));   //se sumara en AddKeyMaterial
+
+    NS_LOG_FUNCTION(this << "BUFFERID A:" << bufferA->m_bufferID);
+
+    NS_LOG_FUNCTION (this << "CREATE NEW BUFFER 'B'!");
+     Ptr<QKDBuffer> bufferB = CreateObject<QKDBuffer> (a->GetId(), b->GetId(), m_useRealStorages );
+    bufferB->SetAttribute ("Minimal",     UintegerValue (Mmin));
+    bufferB->SetAttribute ("Maximal",     UintegerValue (Mmax));
+    bufferB->SetAttribute ("Threshold",   UintegerValue (Mthr));
+    bufferB->SetAttribute ("Current",     UintegerValue (0));   //se sumara en AddKeyMaterial
+
+    NS_LOG_FUNCTION(this << "BUFFERID B:" << bufferB->m_bufferID);
+
+
     //MASTER on node A
     if(a->GetObject<QKDManager> () != 0){
         a->GetObject<QKDManager> ()->AddNewLink( 
@@ -724,16 +766,14 @@ QKDHelper::InstallOverlayQKD(
             netA,  //IP Src Address - underlay device
             netB,  //IP Dst Address - underlay device 
             true,  
-            Mmin, 
-            Mthr, 
-            Mmax, 
-            Mcurrent,
+            bufferA,
+            bufferB,
             m_channelID
         ); 
     }
     
     //SLAVE on node B
-    if(b->GetObject<QKDManager> () != 0){
+    if(b->GetObject<QKDManager> () != 0){  
         b->GetObject<QKDManager> ()->AddNewLink( 
             devB, //QKDNetDevice on node B
             devA, //QKDNetDevice on node A
@@ -749,33 +789,39 @@ QKDHelper::InstallOverlayQKD(
             netB,  //IP Dst Address - underlay device 
             netA,  //IP Src Address - underlay device
             false,              
-            Mmin, 
-            Mthr, 
-            Mmax, 
-            Mcurrent,
+            bufferB,
+            bufferA,
             m_channelID++
         ); 
     } 
 
-    /**
-    *   Initial load in QKD Buffers
-    *   @ToDo: Currently buffers do not whole real data due to reduction of simlation time and computation complexity.
-    *           Instead, they only keep the number of current amount of key material, but not the real key material in memory
-    */
+
+    //Initial load in QKD Buffers
+
     if(m_useRealStorages){ 
-        Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ()); 
-        Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ());
-
-        NS_LOG_FUNCTION(this << "!!!!!!!!!!!!!!" << bufferA->GetBufferId() << bufferB->GetBufferId() );
-
-        uint32_t packetSize = 32;
-        for(uint32_t i = 0; i < Mcurrent; i++ )
-        {
-            bufferA->AddNewContent(packetSize);
-            bufferB->AddNewContent(packetSize);
+        //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressB.GetLocal ()); 
+        //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(IPQKDaddressA.GetLocal ());
+        
+        NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
+        uint32_t limite = Mmax;
+        if(Mcurrent < Mmax){
+            limite = Mcurrent;
         }
-    }
 
+        //std::stringstream aux;
+        std::vector<std::uint8_t> newKeyMaterial;
+        newKeyMaterial = m_randomGenerator.generateStream(limite);
+
+
+        NS_LOG_FUNCTION(this << newKeyMaterial.size());
+
+        bufferA->AddKeyMaterial(newKeyMaterial);
+        bufferB->AddKeyMaterial(newKeyMaterial);
+    }else{
+        std::vector<uint8_t> newKeyMaterial(Mcurrent,0);
+        bufferA->AddKeyMaterial(newKeyMaterial);
+        bufferB->AddKeyMaterial(newKeyMaterial);
+    }
     
     if(typeId == "ns3::TcpSocketFactory")
         m_portOverlayNumber++;
@@ -999,6 +1045,26 @@ QKDHelper::InstallQKD(
     // which are in charge to create QKD buffers  
     /////////////////////////////////
  
+
+    NS_LOG_FUNCTION (this << "CREATE NEW BUFFER 'A'!");
+    Ptr<QKDBuffer> bufferA = CreateObject<QKDBuffer> (a->GetId(), b->GetId(), m_useRealStorages );
+    bufferA->SetAttribute ("Minimal",     UintegerValue (Mmin));
+    bufferA->SetAttribute ("Maximal",     UintegerValue (Mmax));
+    bufferA->SetAttribute ("Threshold",   UintegerValue (Mthr));
+    bufferA->SetAttribute ("Current",     UintegerValue (0));   //se sumara en AddKeyMaterial
+
+    NS_LOG_FUNCTION(this << "BUFFERID A:" << bufferA->m_bufferID);
+
+    NS_LOG_FUNCTION (this << "CREATE NEW BUFFER 'B'!");
+     Ptr<QKDBuffer> bufferB = CreateObject<QKDBuffer> (a->GetId(), b->GetId(), m_useRealStorages );
+    bufferB->SetAttribute ("Minimal",     UintegerValue (Mmin));
+    bufferB->SetAttribute ("Maximal",     UintegerValue (Mmax));
+    bufferB->SetAttribute ("Threshold",   UintegerValue (Mthr));
+    bufferB->SetAttribute ("Current",     UintegerValue (0));   //se sumara en AddKeyMaterial
+
+    NS_LOG_FUNCTION(this << "BUFFERID B:" << bufferB->m_bufferID);
+
+
     //MASTER on node A
     if(a->GetObject<QKDManager> () != 0){
         a->GetObject<QKDManager> ()->AddNewLink( 
@@ -1016,10 +1082,8 @@ QKDHelper::InstallQKD(
             netA,  //IP Src Address - underlay device
             netB,  //IP Dst Address - underlay device 
             true,  
-            Mmin, 
-            Mthr, 
-            Mmax, 
-            Mcurrent,
+            bufferA,
+            bufferB,
             m_channelID
         ); 
     }
@@ -1041,10 +1105,8 @@ QKDHelper::InstallQKD(
             netB,  //IP Dst Address - underlay device 
             netA,  //IP Src Address - underlay device
             false,              
-            Mmin, 
-            Mthr, 
-            Mmax, 
-            Mcurrent,
+            bufferB,
+            bufferA,
             m_channelID++
         ); 
     }  
@@ -1055,21 +1117,52 @@ QKDHelper::InstallQKD(
     *           Instead, they only keep the number of current amount of key material, but not the real key material in memory
     */
     if(m_useRealStorages){
+        //Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
+        //Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferByBufferPosition(0);
+        NS_LOG_FUNCTION(this << "inicializacion de las claves de los buffers:" << bufferA << bufferB );
 
-        //Get buffer on node A which is pointed from netA 
-        Ptr<QKDBuffer> bufferA = a->GetObject<QKDManager> ()->GetBufferBySourceAddress(netA.GetLocal ());
-
-        //Get buffer on node B which is pointed from netB 
-        Ptr<QKDBuffer> bufferB = b->GetObject<QKDManager> ()->GetBufferBySourceAddress(netB.GetLocal ()); 
-
-        NS_LOG_FUNCTION(this << "!!!!!!!!!!!!!!" << bufferA->GetBufferId() << bufferB->GetBufferId() );
-
-        uint32_t packetSize = 32;
-        for(uint32_t i = 0; i < Mcurrent; i++ )
-        {
-            bufferA->AddNewContent(packetSize);
-            bufferB->AddNewContent(packetSize);
+        uint32_t limite = Mmax;
+        if(Mcurrent < Mmax){
+            limite = Mcurrent;
         }
+
+        //std::stringstream aux;
+        std::vector<std::uint8_t> newKeyMaterial;
+        /*if(m_activeQRNG){
+            std::cout << "QUANTIS HELPER" << std::endl;
+            std::string params = "u0";
+            idQ::random_device rd(params);
+            uint32_t randomNumber = 0;
+            for (unsigned int i = 0; i < limite/4; ++i){//TODO va muy lento, mejor reimplementar la libreria o usar directamente la quantis.
+                //aux <<  char(int((rd() % 255) + 1));
+                randomNumber = rd();
+                for(unsigned int j = 0; j < 4; j++){
+                    newKeyMaterial.push_back(randomNumber % 256);
+                    randomNumber = randomNumber / 256;
+                }
+                //newKeyMaterial.push_back(int((rd() % 256)));
+                if(i % 1000 == 0){
+                    std::cout << i << std::endl;
+                }
+            }
+        }else{
+            Ptr<UniformRandomVariable> randomgenerator = CreateObject<UniformRandomVariable> ();
+            for(uint32_t i = 0; i < limite; i++){
+                //aux << char(int(randomgenerator->GetValue(1,256)));
+                newKeyMaterial.push_back(int(randomgenerator->GetValue(0,256)));
+            }
+            randomgenerator->Dispose();
+        }*/
+        newKeyMaterial = m_randomGenerator.generateStream(limite);
+
+        NS_LOG_FUNCTION(this << newKeyMaterial);
+
+        bufferA->AddKeyMaterial(newKeyMaterial);
+        bufferB->AddKeyMaterial(newKeyMaterial);
+    }else{
+        std::vector<uint8_t> newKeyMaterial(Mcurrent,0);
+        bufferA->AddKeyMaterial(newKeyMaterial);
+        bufferB->AddKeyMaterial(newKeyMaterial);
     }
 
     return qkdNetDevices;

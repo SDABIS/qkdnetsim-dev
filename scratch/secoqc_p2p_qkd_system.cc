@@ -100,7 +100,7 @@ int main (int argc, char *argv[])
 
     bool enableFlowMonitor = false;  
     bool enableApplication = true;
-    double simulationTime = 300; 
+    double simulationTime = 30; 
     bool useSeparetedIPAddresses = false;
     std::string lat = "2ms";
     std::string rate = "10Mb/s"; // P2P link
@@ -231,10 +231,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_0_1 = QHelper.InstallQKD (
         devices_0_1.Get(0), devices_0_1.Get(1),  
-        1048576,    //min
-        11324620, //thr
-        52428800,   //max
-        52428800     //current    //20485770
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //20485770
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(0), devices_0_1.Get(0)); //srcNode, destinationAddress, BufferTitle
@@ -242,10 +242,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_1_2 = QHelper.InstallQKD (
         devices_1_2.Get(0), devices_1_2.Get(1),  
-        1548576,    //min
-        11324620, //thr
-        52428800,   //max
-        52428800     //current    //20485770
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //20485770
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(1), devices_1_2.Get(1)); //srcNode, destinationAddress, BufferTitle
@@ -253,10 +253,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_2_4 = QHelper.InstallQKD (
         devices_2_4.Get(0), devices_2_4.Get(1),  
-        1048576,    //min
-        11324620, //thr
-        52428800,   //max
-        10485760     //current    //10485760
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //10485760
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(2), devices_2_4.Get(1)); //srcNode, destinationAddress, BufferTitle
@@ -264,10 +264,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_1_3 = QHelper.InstallQKD (
         devices_1_3.Get(0), devices_1_3.Get(1),  
-        1048576,    //min
-        11324620, //thr
-        52428800,   //max
-        52428800     //current    //20485770
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //20485770
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(1), devices_1_3.Get(1)); //srcNode, destihnationAddress, BufferTitle
@@ -275,10 +275,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_3_4 = QHelper.InstallQKD (
         devices_3_4.Get(0), devices_3_4.Get(1),  
-        1048576,    //min
-        11324620, //thr
-        52428800,   //max
-        12485760     //current    //12485760
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //12485760
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(3), devices_3_4.Get(1)); //srcNode, destinationAddress, BufferTitle
@@ -286,10 +286,10 @@ int main (int argc, char *argv[])
     //create QKD connection between nodes 0 and 1
     NetDeviceContainer qkdNetDevices_4_5 = QHelper.InstallQKD (
         devices_4_5.Get(0), devices_4_5.Get(1),  
-        1048576,    //min
-        11324620, //thr
-        52428800,   //max
-        52428800     //current    //20485770
+        15000,    //min
+        50000, //thr
+        100000,   //max
+        51000     //current    //20485770
     ); 
     //Create graph to monitor buffer changes
     QHelper.AddGraph(nodes.Get(4), devices_4_5.Get(1)); //srcNode, destinationAddress, BufferTitle
@@ -314,37 +314,37 @@ int main (int argc, char *argv[])
 
     /* QKD APPs for charing */
     //QKD LINK 0_1 
-    QKDAppChargingHelper qkdChargingApp_0_1("ns3::TcpSocketFactory", ifconf_0_1.GetAddress(0),  ifconf_0_1.GetAddress(1), 3072000); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_0_1("ns3::TcpSocketFactory", ifconf_0_1.GetAddress(0),  ifconf_0_1.GetAddress(1), 3072000, false); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_0_1 = qkdChargingApp_0_1.Install ( devices_0_1.Get(0), devices_0_1.Get(1) );
     qkdChrgApps_0_1.Start (Seconds (5.));
     qkdChrgApps_0_1.Stop (Seconds (500.)); 
      
     //QKD LINK 1_2
-    QKDAppChargingHelper qkdChargingApp_1_2("ns3::TcpSocketFactory", ifconf_1_2.GetAddress(0),  ifconf_1_2.GetAddress(1), 3072000); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_1_2("ns3::TcpSocketFactory", ifconf_1_2.GetAddress(0),  ifconf_1_2.GetAddress(1), 3072000, false); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_1_2 = qkdChargingApp_1_2.Install ( devices_1_2.Get(0), devices_1_2.Get(1) );
     qkdChrgApps_1_2.Start (Seconds (5.));
     qkdChrgApps_1_2.Stop (Seconds (500.)); 
    
     //QKD LINK 2_4
-    QKDAppChargingHelper qkdChargingApp_2_4("ns3::TcpSocketFactory", ifconf_2_4.GetAddress(0),  ifconf_2_4.GetAddress(1), 3072000); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_2_4("ns3::TcpSocketFactory", ifconf_2_4.GetAddress(0),  ifconf_2_4.GetAddress(1), 3072000, false); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_2_4 = qkdChargingApp_2_4.Install ( devices_2_4.Get(0), devices_2_4.Get(1) );
     qkdChrgApps_2_4.Start (Seconds (5.));
     qkdChrgApps_2_4.Stop (Seconds (500.)); 
 
     //QKD LINK 1_3 
-    QKDAppChargingHelper qkdChargingApp_1_3("ns3::TcpSocketFactory", ifconf_1_3.GetAddress(0),  ifconf_1_3.GetAddress(1), 3072000); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_1_3("ns3::TcpSocketFactory", ifconf_1_3.GetAddress(0),  ifconf_1_3.GetAddress(1), 3072000, false); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_1_3 = qkdChargingApp_1_3.Install ( devices_1_3.Get(0), devices_1_3.Get(1) );
     qkdChrgApps_1_3.Start (Seconds (5.));
     qkdChrgApps_1_3.Stop (Seconds (500.)); 
 
     //QKD LINK 3_4
-    QKDAppChargingHelper qkdChargingApp_3_4("ns3::TcpSocketFactory", ifconf_3_4.GetAddress(0),  ifconf_3_4.GetAddress(1), 3072000); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_3_4("ns3::TcpSocketFactory", ifconf_3_4.GetAddress(0),  ifconf_3_4.GetAddress(1), 3072000, false); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_3_4 = qkdChargingApp_3_4.Install ( devices_3_4.Get(0), devices_3_4.Get(1) );
     qkdChrgApps_3_4.Start (Seconds (5.));
     qkdChrgApps_3_4.Stop (Seconds (500.)); 
 
     //QKD LINK 4_5
-    QKDAppChargingHelper qkdChargingApp_4_5("ns3::TcpSocketFactory", ifconf_4_5.GetAddress(0),  ifconf_4_5.GetAddress(1), 3072000); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_4_5("ns3::TcpSocketFactory", ifconf_4_5.GetAddress(0),  ifconf_4_5.GetAddress(1), 3072000, false); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_4_5 = qkdChargingApp_4_5.Install ( devices_4_5.Get(0), devices_4_5.Get(1) );
     qkdChrgApps_4_5.Start (Seconds (5.));
     qkdChrgApps_4_5.Stop (Seconds (500.)); 
@@ -357,7 +357,7 @@ int main (int argc, char *argv[])
         uint16_t sinkPort = 8080;
         QKDSinkAppHelper packetSinkHelper ("ns3::UdpSocketFactory", InetSocketAddress (Ipv4Address::GetAny (), sinkPort));
         ApplicationContainer sinkApps = packetSinkHelper.Install (nodes.Get (5));
-        sinkApps.Start (Seconds (15.));
+        sinkApps.Start (Seconds (20.));
         sinkApps.Stop (Seconds (500.));
 
         /* Create source app */
@@ -367,7 +367,7 @@ int main (int argc, char *argv[])
 
         app->Setup (socket, sourceAddress, sinkAddress, 512, 0, DataRate ("160kbps"));
         nodes.Get (0)->AddApplication (app);
-        app->SetStartTime (Seconds (15.));
+        app->SetStartTime (Seconds (20.));
         app->SetStopTime (Seconds (500.));  
     }
     //////////////////////////////////////

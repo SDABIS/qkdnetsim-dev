@@ -170,6 +170,13 @@ void QKDSink::HandleRead (Ptr<Socket> socket)
           break;
         }
 
+      uint8_t *buffer = new uint8_t[p->GetSize ()];
+      p->CopyData(buffer, p->GetSize ());
+      std::string s = std::string((char*)buffer);
+      delete[] buffer; 
+
+      NS_LOG_FUNCTION (this << "Paquete recibido:" << s );
+
       NS_LOG_FUNCTION(this << p->GetUid() << p->GetSize() );
       
       m_totalRx += p->GetSize ();

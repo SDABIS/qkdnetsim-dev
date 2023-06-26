@@ -174,7 +174,8 @@ public:
     */
     std::vector<Ptr<Packet> > ProcessOutgoingPacket (
         Ptr<Packet>     p, 
-        Ptr<QKDBuffer>  QKDBuffer,
+        Ptr<QKDBuffer>  SrcBuffer,
+        Ptr<QKDBuffer>  DstBuffer,
         uint32_t        channelID
     ); 
 
@@ -191,6 +192,12 @@ public:
         uint32_t                TOSBand,
         Ptr<QKDBuffer>          QKDbuffer
     );
+
+    //TODO restaurar este cambio
+    std::string OTP (const std::string& data, Ptr<QKDKey> key);
+    std::string AESEncrypt (const std::string& data, Ptr<QKDKey> key);
+    std::string AESDecrypt (const std::string& data, Ptr<QKDKey> key);
+    
 
 private:
 
@@ -260,7 +267,7 @@ private:
     *   @param  Ptr<QKDKey> key
     *   @return std::string
     */
-    std::string OTP (const std::string& data, Ptr<QKDKey> key);
+    //std::string OTP (const std::string& data, Ptr<QKDKey> key);
         
     /**
     *   AES encryption
@@ -268,7 +275,7 @@ private:
     *   @param  Ptr<QKDKey> key
     *   @return std::string
     */
-    std::string AESEncrypt (const std::string& data, Ptr<QKDKey> key);
+    //std::string AESEncrypt (const std::string& data, Ptr<QKDKey> key);
 
     /**
     *   AES decryption
@@ -276,7 +283,7 @@ private:
     *   @param  Ptr<QKDKey> key
     *   @return std::string
     */
-    std::string AESDecrypt (const std::string& data, Ptr<QKDKey> key);
+    //std::string AESDecrypt (const std::string& data, Ptr<QKDKey> key);
 
     /**
     *   Help parent function used for calling child authentication functions
@@ -375,6 +382,8 @@ private:
         Ptr<QKDBuffer>      QKDBuffer
     );
 
+    
+
     uint32_t    m_authenticationTagLengthInBits; //!< length of the authentication tag in bits (32 by default)
     
     TracedCallback<Ptr<Packet> > m_encryptionTrace; //!< trace callback for encryption
@@ -390,6 +399,7 @@ private:
 
     bool m_compressionEnabled; //!< encryption (ZIP or similar) enabled?
     bool m_encryptionEnabled;  //!< real encryption used?
+    bool m_QRNGEnabled;        // usa QRNG para generar material de clave 
      
 
     /////////////////////////////

@@ -272,16 +272,40 @@ public:
     uint32_t            m_bufferID;     //!< unique buffer ID
 
     static uint32_t     nBuffers;       //!< number of created buffers - static value
- 
-private:
 
     /**
+     *   Añade al material de clave actual el string que se le pasa
+     * 
+     *   \param newMaterial String de numeros que representa el material que se añade al buffer
+     *   \return Un entero que es 0 si todo fue bien o un numero para representar el error que tuvo
+    */
+   uint32_t AddKeyMaterial(std::vector<std::uint8_t> newMaterial);
+
+    /**
+     *   Selecciona el material de clave correspondiente al tamaño que se le pasa. Lo separa y le asigna un keyId
+     *   \param keySize entero que representa el tamaño de la clave
+     *   \return Identificador de la clave, se usara para recuperarla e identificarla en los dos buffers.
+    */
+   uint32_t ReserveKeyMaterial(const uint32_t& keySize);
+
+   /**
     *   Check whether key exists in the buffer
     *  
     *   \param uint32_t keyID
     *   \return Ptr to the key
     */
     Ptr<QKDKey>     FetchKeyByID (const uint32_t& keyID);
+
+    /**
+     *  Borra del mapa de claves la clave que se le indica
+     * 
+     *   \param uint32_t keyID
+     *   \return booleano que si es verdadero es que se elimino y falso si no estaba en el mapa
+    */
+
+    bool    DeleteKeyID (const uint32_t& keyID);
+ 
+private:
 
     /**
     *   Find the key of required size to be used for encryption
@@ -422,7 +446,13 @@ private:
     TracedCallback<uint32_t > m_McurrentDecreaseTrace;
     TracedCallback<uint32_t > m_StatusChangeTrace;   
     TracedCallback<double   > m_CMetricChangeTrace;   
-    TracedCallback<double  > m_AverageKeyChargingTimePeriodTrace;    
+    TracedCallback<double  > m_AverageKeyChargingTimePeriodTrace; 
+
+    /**
+     *  Es el material de clave que tienen los buffers compartidos entre ellos
+    */
+
+    std::vector<std::uint8_t>    key_material;        //!< representacion del buffer con el mismo material compartido entre los dos nodos
 };
 }
 

@@ -74,12 +74,14 @@ namespace ns3 {
  
         struct Connection
         {
-            uint32_t                bufferId;
+            uint32_t                SrcBufferId;
+            uint32_t                DstBufferId;
             Ptr<QKDNetDevice>       QKDNetDeviceSrc;
             Ptr<QKDNetDevice>       QKDNetDeviceDst;
             Ptr<NetDevice>          IPNetDeviceSrc;
             Ptr<NetDevice>          IPNetDeviceDst;
-            Ptr<QKDBuffer>          buffer;
+            Ptr<QKDBuffer>          SrcBuffer;
+            Ptr<QKDBuffer>          DstBuffer;
             Ptr<QKDCrypto>          crypto;
             Ptr<Socket>             socket;
             Ptr<Socket>             socketSink;
@@ -102,7 +104,7 @@ namespace ns3 {
                 QKDNetDeviceDst = 0;
                 IPNetDeviceSrc = 0;
                 IPNetDeviceDst = 0;
-                buffer = 0;
+                SrcBuffer = 0;
                 crypto = 0;
                 socket = 0;
                 socketSink = 0;
@@ -161,8 +163,8 @@ namespace ns3 {
         *    @param     bool
         *    @param     bool
         *    @param     uint32_t
-        *    @param     uint32_t
-        *    @param     uint32_t
+        *    @param     Ptr<QKDBuffer>
+        *    @param     Ptr<QKDBuffer>
         *    @param     uint32_t
         */
         void AddNewLink ( 
@@ -180,10 +182,8 @@ namespace ns3 {
             Ipv4InterfaceAddress    IPSrc,  //IP Src Address - underlay device
             Ipv4InterfaceAddress    IPDst,  //IP Dst Address - underlay device 
             bool                    isMaster,  
-            uint32_t                Mmin, 
-            uint32_t                Mthr, 
-            uint32_t                Mmax, 
-            uint32_t                Mcurrent,
+            Ptr<QKDBuffer>          SrcBuffer,
+            Ptr<QKDBuffer>          DstBuffer,
             uint32_t                channelID
         ); 
 
@@ -214,10 +214,10 @@ namespace ns3 {
         *   \brief Add new key material to the corresponding QKD Buffer. 
         *   Returns true if success, false otherwise.
         *   @param Ptr<NetDevice>
-        *   @param uint32_t&
-        *   @return bool        
+        *   @param std::string
+        *   @return uint32_t        
         */
-        bool AddNewKeyMaterial (const Address sourceAddress, uint32_t& newKey);
+        uint32_t AddNewKeyMaterial (const Address sourceAddress, std::vector<std::uint8_t> newKeyMaterial);
      
         /**
         * \brief Called from traffic-control/module/qkd-pfifo-fast-queue-disc
@@ -515,6 +515,10 @@ namespace ns3 {
         *   \brief Fetch performances of the public channel. 
         */
         double  FetchPublicChannelPerformance (Ipv4Address nextHop);
+
+        uint32_t GetSourceBufferStatus(const Address sourceAddress);
+
+        uint32_t GetDestinationBufferStatus(const Address sourceAddress);
  
     protected: 
       /**

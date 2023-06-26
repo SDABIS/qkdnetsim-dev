@@ -21,8 +21,8 @@
 
 // Network topology
 //
-//       n0 ---p2p-- n1 --p2p-- n2
-//        |---------qkd---------|
+//       n0 --p2p-- n1
+//        |---qkd---|
 //
 // - udp flows from n0 to n2
 
@@ -88,15 +88,19 @@ int main (int argc, char *argv[])
 {
     Packet::EnablePrinting(); 
     PacketMetadata::Enable ();
+
+    bool useQuantisDevice = true;
+
     //
     // Explicitly create the nodes required by the topology (shown above).
     //
     NS_LOG_INFO ("Create nodes.");
     NodeContainer n;
-    n.Create (3); 
+    //n.Create (3); 
+    n.Create (2);
 
     NodeContainer n0n1 = NodeContainer (n.Get(0), n.Get (1));
-    NodeContainer n1n2 = NodeContainer (n.Get(1), n.Get (2)); 
+    //NodeContainer n1n2 = NodeContainer (n.Get(1), n.Get (2)); 
 
     //Enable OLSR
     //AodvHelper routingProtocol;
@@ -112,7 +116,7 @@ int main (int argc, char *argv[])
     Ptr<ListPositionAllocator> positionAlloc = CreateObject <ListPositionAllocator>();
     positionAlloc ->Add(Vector(0, 200, 0)); // node0 
     positionAlloc ->Add(Vector(200, 200, 0)); // node1
-    positionAlloc ->Add(Vector(400, 200, 0)); // node2 
+    //positionAlloc ->Add(Vector(400, 200, 0)); // node2 
     mobility.SetPositionAllocator(positionAlloc);
     mobility.SetMobilityModel("ns3::ConstantPositionMobilityModel");
     mobility.Install(n);
@@ -124,7 +128,7 @@ int main (int argc, char *argv[])
     p2p.SetChannelAttribute ("Delay", StringValue ("2ms")); 
 
     NetDeviceContainer d0d1 = p2p.Install (n0n1); 
-    NetDeviceContainer d1d2 = p2p.Install (n1n2);
+    //NetDeviceContainer d1d2 = p2p.Install (n1n2);
  
     //
     // We've got the "hardware" in place.  Now we need to add IP addresses.
@@ -132,41 +136,61 @@ int main (int argc, char *argv[])
     NS_LOG_INFO ("Assign IP Addresses.");
     Ipv4AddressHelper ipv4;
 
-    ipv4.SetBase ("11.11.11.0", "255.255.255.0");
+    ipv4.SetBase ("10.1.1.0", "255.255.255.0");
     Ipv4InterfaceContainer i0i1 = ipv4.Assign (d0d1);
 
-    ipv4.SetBase ("22.22.22.0", "255.255.255.0");
-    Ipv4InterfaceContainer i1i2 = ipv4.Assign (d1d2);
+    /*ipv4.SetBase ("10.1.2.0", "255.255.255.0");
+    Ipv4InterfaceContainer i1i2 = ipv4.Assign (d1d2);*/
      
     //
     // Explicitly create the channels required by the topology (shown above).
     //
     //  install QKD Managers on the nodes 
     QKDHelper QHelper;  
+    //activar el dispositivo cuantico
+    if(useQuantisDevice){
+        QHelper.SetQRNG();
+    }
+    //QHelper.SetUseRealStorages(false);
+    //QHelper.SetEncryptionEnabled(false);
     QHelper.InstallQKDManager (n); 
  
 
     //create QKD connection between nodes 0 and 1 
+    /*NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
+        d0d1.Get(0), d0d1.Get(1),
+        30000,    //min
+        80000, //thr
+        130000,   //max
+        0     //current    //20485770
+    );*/
     NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
+        d0d1.Get(0), d0d1.Get(1),
+        150000,    //min
+        399997, //thr
+        400000,   //max
+        399997     //current    //20485770
+    );
+    /*NetDeviceContainer qkdNetDevices01 = QHelper.InstallQKD (
         d0d1.Get(0), d0d1.Get(1),
         1048576,    //min
         11324620, //thr
         52428800,   //max
-        52428800     //current    //20485770
-    );
+        0     //current    //20485770
+    );*/
    
     //Create graph to monitor buffer changes
     QHelper.AddGraph(n.Get(0), d0d1.Get(0)); //srcNode, destinationAddress, BufferTitle
  
 
     //create QKD connection between nodes 1 and 2 
-    NetDeviceContainer qkdNetDevices12 = QHelper.InstallQKD (
+    /*NetDeviceContainer qkdNetDevices12 = QHelper.InstallQKD (
         d1d2.Get(0), d1d2.Get(1),
         1048576,    //min
         11324620, //thr
         52428800,   //max
-        52428800     //current    //20485770
-    );
+        0     //current    //20485770
+    );*/
     
     //Create graph to monitor buffer changes
     QHelper.AddGraph(n.Get(1), d0d1.Get(0)); //srcNode, destinationAddress, BufferTitle
@@ -174,37 +198,41 @@ int main (int argc, char *argv[])
     NS_LOG_INFO ("Create Applications.");
 
     std::cout << "Source IP address: " << i0i1.GetAddress(0) << std::endl;
-    std::cout << "Destination IP address: " << i1i2.GetAddress(1) << std::endl;
+    //std::cout << "Destination IP address: " << i1i2.GetAddress(1) << std::endl;
+    std::cout << "Destination IP address: " << i0i1.GetAddress(1) << std::endl;
 
     /* QKD APPs for charing  */
-    QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000, false);
+    QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000, useQuantisDevice);
+    //cambiar el tamaño del paquete y el delay de comprobacion del buffer
+    qkdChargingApp.SetPacketSize(600);
+    //qkdChargingApp.SetCheckDelay(6);
     ApplicationContainer qkdChrgApps = qkdChargingApp.Install ( d0d1.Get(0), d0d1.Get(1) );
     qkdChrgApps.Start (Seconds (5.));
     qkdChrgApps.Stop (Seconds (1500.)); 
 
-    QKDAppChargingHelper qkdChargingApp12("ns3::TcpSocketFactory", i1i2.GetAddress(0),  i1i2.GetAddress(1), 3072000, false);
+    /*QKDAppChargingHelper qkdChargingApp12("ns3::TcpSocketFactory", i1i2.GetAddress(0),  i1i2.GetAddress(1), 3072000);
     ApplicationContainer qkdChrgApps12 = qkdChargingApp12.Install ( d1d2.Get(0), d1d2.Get(1) );
     qkdChrgApps12.Start (Seconds (5.));
-    qkdChrgApps12.Stop (Seconds (1500.)); 
+    qkdChrgApps12.Stop (Seconds (1500.)); */
     
    
     /* Create user's traffic between v0 and v1 */
     /* Create sink app */
     uint16_t sinkPort = 8080;
     QKDSinkAppHelper packetSinkHelper ("ns3::UdpSocketFactory", InetSocketAddress (Ipv4Address::GetAny (), sinkPort));
-    ApplicationContainer sinkApps = packetSinkHelper.Install (n.Get (2));
-    sinkApps.Start (Seconds (25.));
+    ApplicationContainer sinkApps = packetSinkHelper.Install (n.Get (1));
+    sinkApps.Start (Seconds (20.));
     sinkApps.Stop (Seconds (300.));
     
     /* Create source app  */
-    Address sinkAddress (InetSocketAddress (i1i2.GetAddress(1), sinkPort));
+    Address sinkAddress (InetSocketAddress (i0i1.GetAddress(1), sinkPort));
     Address sourceAddress (InetSocketAddress (i0i1.GetAddress(0), sinkPort));
     Ptr<Socket> socket = Socket::CreateSocket (n.Get (0), UdpSocketFactory::GetTypeId ());
  
     Ptr<QKDSend> app = CreateObject<QKDSend> ();
     app->Setup (socket, sourceAddress, sinkAddress, 640, 5, DataRate ("160kbps"));
     n.Get (0)->AddApplication (app);
-    app->SetStartTime (Seconds (25.));
+    app->SetStartTime (Seconds (20.));
     app->SetStopTime (Seconds (300.));
   
     //////////////////////////////////////

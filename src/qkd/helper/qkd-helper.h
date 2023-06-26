@@ -35,6 +35,8 @@
 #include "ns3/qkd-net-device.h"
 #include "ns3/qkd-crypto.h"
 
+#include "ns3/qkd-random-generator.h"
+
 namespace ns3 {
  
 class NetDevice;
@@ -235,6 +237,16 @@ public:
     */
     void SetRoutingHelper (const Ipv4RoutingHelper &routing);
 
+
+    /**
+    * Activa la generacion de material de clave con QRNG, 
+    * pero tiene que hacerse antes de instalar el QKDManager
+    */
+    void SetQRNG();
+
+    void SetUseRealStorages(bool useRealStorages);
+    void SetEncryptionEnabled(bool EncryptionEnabled);
+
 private:
 
     /**
@@ -292,6 +304,8 @@ private:
 
     ObjectFactory m_channelFactory;       //!< Channel Factory 
     ObjectFactory m_deviceFactory;        //!< Device Factory
+    bool    m_activeQRNG;     
+    QKDRandomGenerator m_randomGenerator;            
 }; 
 } // namespace ns3
 

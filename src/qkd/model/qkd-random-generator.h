@@ -46,33 +46,25 @@
 #include <crypto++/secblock.h>
 #include <crypto++/sha.h>
 #include <vector>
-#include "Quantis.hpp"
+//#include "Quantis.hpp"
 
 
 #define MAX_BUFFER_SIZE 16*1024*1024
 
 namespace ns3 {
 
-class QKDRandomGenerator : public Object {
+class QKDRandomGenerator {
     private:
-        void _printCardsInfo(QuantisDeviceType deviceType);
-        bool m_activeQRNG;
         Ptr<UniformRandomVariable> randomgenerator;
         uint32_t buffer_size;
-        //idQ::Quantis *quantumdevice;
-
-        //bool m_isDemo = true;
         uint32_t m_maxReq = 100000;
 
     public:
         static TypeId GetTypeId (void);
         QKDRandomGenerator();
-        QKDRandomGenerator(bool activeQRNG);
         ~QKDRandomGenerator();
         void Dispose();
         void printCardsInfo();
-        void ActivateQuantumDevice();
-        void SetDemo(bool isDemo);
         std::vector<uint8_t> generateStream(uint32_t amount);
 
 };

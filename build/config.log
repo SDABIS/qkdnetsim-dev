@@ -1,4 +1,4 @@
-# project ns (3-dev) configured on Mon Oct  9 10:11:21 2023 by
+# project ns (3-dev) configured on Tue Oct 24 09:37:25 2023 by
 # waf 1.8.19 (abi 98, python 20712f0 on linux2)
 # using ./waf configure
 #
@@ -10,7 +10,7 @@ Setting out to
 /home/ubuntu/Documents/qkdnetsim-dev/build
 ----------------------------------------
 Checking for 'gcc' (C compiler)
-find program=['gcc', 'cc'] paths=['/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin', '/snap/bin'] var='CC' -> ['/usr/bin/gcc']
+find program=['gcc', 'cc'] paths=['/home/ubuntu/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli', '/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='CC' -> ['/usr/bin/gcc']
 ['/usr/bin/gcc', '-dM', '-E', '-']
 out: #define __SSP_STRONG__ 3
 #define __DBL_MIN_EXP__ (-1021)
@@ -380,14 +380,14 @@ out: #define __SSP_STRONG__ 3
 #define __ATOMIC_ACQ_REL 4
 #define __ATOMIC_RELEASE 3
 
-find program=['ar'] paths=['/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin', '/snap/bin'] var='AR' -> ['/usr/bin/ar']
+find program=['ar'] paths=['/home/ubuntu/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli', '/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='AR' -> ['/usr/bin/ar']
 /usr/bin/gcc
 ----------------------------------------
 Checking for cc version
 11.4.0
 ----------------------------------------
 Checking for 'g++' (C++ compiler)
-find program=['g++', 'c++'] paths=['/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin', '/snap/bin'] var='CXX' -> ['/usr/bin/g++']
+find program=['g++', 'c++'] paths=['/home/ubuntu/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli', '/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='CXX' -> ['/usr/bin/g++']
 ['/usr/bin/g++', '-dM', '-E', '-']
 out: #define __SSP_STRONG__ 3
 #define __DBL_MIN_EXP__ (-1021)
@@ -769,35 +769,35 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_49bc7156c2c04bd3100f0c380864b5bf/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_ee4a0f5d8e79a8c500fa1ab3a1bb6a3a/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_49bc7156c2c04bd3100f0c380864b5bf/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_49bc7156c2c04bd3100f0c380864b5bf/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_ee4a0f5d8e79a8c500fa1ab3a1bb6a3a/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_ee4a0f5d8e79a8c500fa1ab3a1bb6a3a/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_49bc7156c2c04bd3100f0c380864b5bf/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lcryptopp', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_ee4a0f5d8e79a8c500fa1ab3a1bb6a3a/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lcryptopp']
 yes
 ------------------------------------------------------
 Checking for compilation flag -Wl,--soname=foo support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_4ecfdc48fe344d7927ceefb4015fdf6c/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_f09b1c2613881963693e23fd10fbe444/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-Wl,--soname=foo', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4ecfdc48fe344d7927ceefb4015fdf6c/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-Wl,--soname=foo', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_f09b1c2613881963693e23fd10fbe444/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------
 Checking for compilation flag -std=c++11 support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_4ecfdc48fe344d7927ceefb4015fdf6c/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_f09b1c2613881963693e23fd10fbe444/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4ecfdc48fe344d7927ceefb4015fdf6c/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_f09b1c2613881963693e23fd10fbe444/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------
 Checking for program 'python'
 /usr/bin/python2.7
-find program=['python'] paths=['/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin', '/snap/bin'] var='PYTHON' -> ['/usr/bin/python2.7']
+find program=['python'] paths=['/home/ubuntu/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli', '/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PYTHON' -> ['/usr/bin/python2.7']
 ['/usr/bin/python2.7', '-c', 'import imp;print(imp.get_tag())']
 err: Traceback (most recent call last):
   File "<string>", line 1, in <module>
@@ -864,7 +864,7 @@ LDVERSION = ''
 ------------------------------------------------------
 python-config
 not found
-find program=['/usr/bin/python2.7-config', 'python2.7-config', 'python-config-2.7', 'python2.7m-config'] paths=['/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin', '/snap/bin'] var='PYTHON_CONFIG' -> None
+find program=['/usr/bin/python2.7-config', 'python2.7-config', 'python-config-2.7', 'python2.7m-config'] paths=['/home/ubuntu/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli', '/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PYTHON_CONFIG' -> None
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Could not find the program ['/usr/bin/python2.7-config', 'python2.7-config', 'python-config-2.7', 'python2.7m-config']
 
 
@@ -880,12 +880,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_43c1ad033f10118aeee5c7b83b405759/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_e4028d8a6849fab69d9d960c6bf364f7/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_43c1ad033f10118aeee5c7b83b405759/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_43c1ad033f10118aeee5c7b83b405759/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_e4028d8a6849fab69d9d960c6bf364f7/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_e4028d8a6849fab69d9d960c6bf364f7/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_43c1ad033f10118aeee5c7b83b405759/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lQuantis', '-lpython2.7', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_e4028d8a6849fab69d9d960c6bf364f7/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lpython2.7']
 err: /usr/bin/ld: cannot find -lpython2.7: No such file or directory
 collect2: error: ld returned 1 exit status
 
@@ -896,8 +896,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Test does not build: 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259292197072: cxxprogram test.cpp.1.o -> testprog}
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_43c1ad033f10118aeee5c7b83b405759/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lQuantis', '-lpython2.7', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+	{task 140607319934736: cxxprogram test.cpp.1.o -> testprog}
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_e4028d8a6849fab69d9d960c6bf364f7/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lpython2.7']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: The configuration failed
@@ -915,12 +915,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_66a43c294809268a4ae81d0c2f0ed64a/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_9f0a68397f5332e08a2b580db49ed475/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_66a43c294809268a4ae81d0c2f0ed64a/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_66a43c294809268a4ae81d0c2f0ed64a/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_9f0a68397f5332e08a2b580db49ed475/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_9f0a68397f5332e08a2b580db49ed475/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_66a43c294809268a4ae81d0c2f0ed64a/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lQuantis', '-lpython2.7', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_9f0a68397f5332e08a2b580db49ed475/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lpython2.7']
 err: /usr/bin/ld: cannot find -lpython2.7: No such file or directory
 collect2: error: ld returned 1 exit status
 
@@ -931,8 +931,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Test does not build: 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259291878480: cxxprogram test.cpp.1.o -> testprog}
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_66a43c294809268a4ae81d0c2f0ed64a/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lQuantis', '-lpython2.7', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+	{task 140607319227408: cxxprogram test.cpp.1.o -> testprog}
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_9f0a68397f5332e08a2b580db49ed475/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lpython2.7']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: The configuration failed
@@ -950,12 +950,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_94faa77dd39c9c0e06424d0560af6285/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_8e8cc6e973e3b0e1efe1944a7596bdee/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_94faa77dd39c9c0e06424d0560af6285/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_94faa77dd39c9c0e06424d0560af6285/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8e8cc6e973e3b0e1efe1944a7596bdee/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_8e8cc6e973e3b0e1efe1944a7596bdee/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_94faa77dd39c9c0e06424d0560af6285/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lQuantis', '-lpython2.7', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8e8cc6e973e3b0e1efe1944a7596bdee/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lpython2.7']
 err: /usr/bin/ld: cannot find -lpython2.7: No such file or directory
 collect2: error: ld returned 1 exit status
 
@@ -966,8 +966,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Test does not build: 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259291880144: cxxprogram test.cpp.1.o -> testprog}
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_94faa77dd39c9c0e06424d0560af6285/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lQuantis', '-lpython2.7', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+	{task 140607319258256: cxxprogram test.cpp.1.o -> testprog}
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8e8cc6e973e3b0e1efe1944a7596bdee/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lpython2.7']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: The configuration failed
@@ -985,12 +985,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_d2ac678eff1c18bb65364a0c9e5685b0/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_f2ff4f719825167a4a9734cda0eb9b9f/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_d2ac678eff1c18bb65364a0c9e5685b0/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_d2ac678eff1c18bb65364a0c9e5685b0/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_f2ff4f719825167a4a9734cda0eb9b9f/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_f2ff4f719825167a4a9734cda0eb9b9f/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_d2ac678eff1c18bb65364a0c9e5685b0/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lQuantis', '-lpython2.7m', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_f2ff4f719825167a4a9734cda0eb9b9f/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lpython2.7m']
 err: /usr/bin/ld: cannot find -lpython2.7m: No such file or directory
 collect2: error: ld returned 1 exit status
 
@@ -1001,8 +1001,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Test does not build: 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259291927376: cxxprogram test.cpp.1.o -> testprog}
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_d2ac678eff1c18bb65364a0c9e5685b0/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lQuantis', '-lpython2.7m', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+	{task 140607319259920: cxxprogram test.cpp.1.o -> testprog}
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_f2ff4f719825167a4a9734cda0eb9b9f/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lpython2.7m']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: The configuration failed
@@ -1020,12 +1020,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_ad013e8d96cb4f9e754ae530f3fbf2b6/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_318616fdbb3b8908643d5cc6c0af75cf/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_ad013e8d96cb4f9e754ae530f3fbf2b6/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_ad013e8d96cb4f9e754ae530f3fbf2b6/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_318616fdbb3b8908643d5cc6c0af75cf/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_318616fdbb3b8908643d5cc6c0af75cf/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_ad013e8d96cb4f9e754ae530f3fbf2b6/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lQuantis', '-lpython2.7m', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_318616fdbb3b8908643d5cc6c0af75cf/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lpython2.7m']
 err: /usr/bin/ld: cannot find -lpython2.7m: No such file or directory
 collect2: error: ld returned 1 exit status
 
@@ -1036,8 +1036,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Test does not build: 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259291929488: cxxprogram test.cpp.1.o -> testprog}
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_ad013e8d96cb4f9e754ae530f3fbf2b6/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lQuantis', '-lpython2.7m', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+	{task 140607319307152: cxxprogram test.cpp.1.o -> testprog}
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_318616fdbb3b8908643d5cc6c0af75cf/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lpython2.7m']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: The configuration failed
@@ -1055,12 +1055,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_2b16de48ed3b2c237797ee929a4c8674/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_5e27d4fcca7a3617e5a2891c534dc9da/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2b16de48ed3b2c237797ee929a4c8674/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_2b16de48ed3b2c237797ee929a4c8674/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5e27d4fcca7a3617e5a2891c534dc9da/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_5e27d4fcca7a3617e5a2891c534dc9da/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2b16de48ed3b2c237797ee929a4c8674/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lQuantis', '-lpython2.7m', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5e27d4fcca7a3617e5a2891c534dc9da/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lpython2.7m']
 err: /usr/bin/ld: cannot find -lpython2.7m: No such file or directory
 collect2: error: ld returned 1 exit status
 
@@ -1071,8 +1071,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Test does not build: 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259291972368: cxxprogram test.cpp.1.o -> testprog}
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2b16de48ed3b2c237797ee929a4c8674/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lQuantis', '-lpython2.7m', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+	{task 140607319309008: cxxprogram test.cpp.1.o -> testprog}
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5e27d4fcca7a3617e5a2891c534dc9da/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lpython2.7m']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: The configuration failed
@@ -1090,12 +1090,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_4457851c084bf0dc02a6f0079260d50c/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_1dc5dd25cb6115ee41431981c580eb46/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4457851c084bf0dc02a6f0079260d50c/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_4457851c084bf0dc02a6f0079260d50c/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_1dc5dd25cb6115ee41431981c580eb46/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_1dc5dd25cb6115ee41431981c580eb46/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4457851c084bf0dc02a6f0079260d50c/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lQuantis', '-lpython27', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_1dc5dd25cb6115ee41431981c580eb46/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lpython27']
 err: /usr/bin/ld: cannot find -lpython27: No such file or directory
 collect2: error: ld returned 1 exit status
 
@@ -1106,8 +1106,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Test does not build: 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259292088912: cxxprogram test.cpp.1.o -> testprog}
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4457851c084bf0dc02a6f0079260d50c/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lQuantis', '-lpython27', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+	{task 140607319259792: cxxprogram test.cpp.1.o -> testprog}
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_1dc5dd25cb6115ee41431981c580eb46/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lpython27']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: The configuration failed
@@ -1125,12 +1125,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_20469b6f4dc57d237369ad64ddb8f3e8/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_809d4e15ede8d2f8d972ad07915dd655/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_20469b6f4dc57d237369ad64ddb8f3e8/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_20469b6f4dc57d237369ad64ddb8f3e8/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_809d4e15ede8d2f8d972ad07915dd655/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_809d4e15ede8d2f8d972ad07915dd655/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_20469b6f4dc57d237369ad64ddb8f3e8/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lQuantis', '-lpython27', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_809d4e15ede8d2f8d972ad07915dd655/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lpython27']
 err: /usr/bin/ld: cannot find -lpython27: No such file or directory
 collect2: error: ld returned 1 exit status
 
@@ -1141,8 +1141,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Test does not build: 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259291880848: cxxprogram test.cpp.1.o -> testprog}
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_20469b6f4dc57d237369ad64ddb8f3e8/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lQuantis', '-lpython27', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+	{task 140607319228048: cxxprogram test.cpp.1.o -> testprog}
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_809d4e15ede8d2f8d972ad07915dd655/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/python2.7/config-x86_64-linux-gnu', '-lpython27']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: The configuration failed
@@ -1160,12 +1160,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_8a5e6bbf3e698c685ae3a4f28b4d6fb6/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_4783b368e204e5435a837f10eaf0e43b/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8a5e6bbf3e698c685ae3a4f28b4d6fb6/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_8a5e6bbf3e698c685ae3a4f28b4d6fb6/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4783b368e204e5435a837f10eaf0e43b/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_4783b368e204e5435a837f10eaf0e43b/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8a5e6bbf3e698c685ae3a4f28b4d6fb6/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lQuantis', '-lpython27', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4783b368e204e5435a837f10eaf0e43b/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lpython27']
 err: /usr/bin/ld: cannot find -lpython27: No such file or directory
 collect2: error: ld returned 1 exit status
 
@@ -1176,8 +1176,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Test does not build: 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259291879504: cxxprogram test.cpp.1.o -> testprog}
-['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8a5e6bbf3e698c685ae3a4f28b4d6fb6/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lQuantis', '-lpython27', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+	{task 140607319308304: cxxprogram test.cpp.1.o -> testprog}
+['/usr/bin/g++', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4783b368e204e5435a837f10eaf0e43b/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/libs', '-lpython27']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: The configuration failed
@@ -1209,9 +1209,9 @@ int main(int argc, char **argv)
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_65024f26c6b2ac32b2168bf65bf74526/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_0b2004563d2a1aa88610cb9319ea5e69/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-fno-strict-aliasing', '-I/usr/include/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_65024f26c6b2ac32b2168bf65bf74526/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-fno-strict-aliasing', '-I/usr/include/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_0b2004563d2a1aa88610cb9319ea5e69/testbuild/test.cpp.1.o']
 err: ../test.cpp:2:10: fatal error: Python.h: No such file or directory
     2 | #include <Python.h>
       |          ^~~~~~~~~~
@@ -1224,8 +1224,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: Test does not build: 
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259291974736: cxx test.cpp -> test.cpp.1.o}
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-fno-strict-aliasing', '-I/usr/include/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_65024f26c6b2ac32b2168bf65bf74526/testbuild/test.cpp.1.o']
+	{task 140607319352400: cxx test.cpp -> test.cpp.1.o}
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-fno-strict-aliasing', '-I/usr/include/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/dist-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/dist-packages"', '-DNDEBUG', '-D_FORTIFY_SOURCE=2', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_0b2004563d2a1aa88610cb9319ea5e69/testbuild/test.cpp.1.o']
 
 Distutils not installed? Broken python installation? Get python-config now!
 from /home/ubuntu/Documents/qkdnetsim-dev/bindings/python: The configuration failed
@@ -1523,7 +1523,7 @@ not found
 ------------------------------------------------------
 Checking for program 'pkg-config'
 /usr/bin/pkg-config
-find program=['pkg-config'] paths=['/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin', '/snap/bin'] var='PKGCONFIG' -> ['/usr/bin/pkg-config']
+find program=['pkg-config'] paths=['/home/ubuntu/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli', '/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PKGCONFIG' -> ['/usr/bin/pkg-config']
 ------------------------------------------------------
 Checking for 'gtk+-3.0' >= 3.0
 ['/usr/bin/pkg-config', '--atleast-version=3.0', 'gtk+-3.0']
@@ -1550,9 +1550,9 @@ checking for uint128_t
         }
         
 <==
-[1/2] Compiling [32mbuild/.conf_check_49af7b2ffdc80a706f7648ac8ea8178e/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_77a19a218d65aaeb7020bea5724aa21d/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_49af7b2ffdc80a706f7648ac8ea8178e/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_77a19a218d65aaeb7020bea5724aa21d/testbuild/test.cpp.1.o']
 err: ../test.cpp: In function ‘int main(int, char**)’:
 ../test.cpp:6:14: error: ‘uint128_t’ was not declared in this scope; did you mean ‘uint8_t’?
     6 |         if ((uint128_t *) 0) return 0;
@@ -1577,8 +1577,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/src/core: Test does not build: Traceba
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259292088016: cxx test.cpp -> test.cpp.1.o}
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_49af7b2ffdc80a706f7648ac8ea8178e/testbuild/test.cpp.1.o']
+	{task 140607318937296: cxx test.cpp -> test.cpp.1.o}
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_77a19a218d65aaeb7020bea5724aa21d/testbuild/test.cpp.1.o']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/src/core: The configuration failed
@@ -1596,12 +1596,12 @@ checking for __uint128_t
         }
         
 <==
-[1/2] Compiling [32mbuild/.conf_check_b973035ad953dc4f266c22b5851a1ac1/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_c9585b50e633753104aeff6709a9888f/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_b973035ad953dc4f266c22b5851a1ac1/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_b973035ad953dc4f266c22b5851a1ac1/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_c9585b50e633753104aeff6709a9888f/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_c9585b50e633753104aeff6709a9888f/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_b973035ad953dc4f266c22b5851a1ac1/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_c9585b50e633753104aeff6709a9888f/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking high precision implementation
@@ -1617,12 +1617,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_4bc6354bd9643ec5f8d9e2b0790fc96d/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_e7299689d75337a2e2118fc02e6770da/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4bc6354bd9643ec5f8d9e2b0790fc96d/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_4bc6354bd9643ec5f8d9e2b0790fc96d/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_e7299689d75337a2e2118fc02e6770da/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_e7299689d75337a2e2118fc02e6770da/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4bc6354bd9643ec5f8d9e2b0790fc96d/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_e7299689d75337a2e2118fc02e6770da/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header inttypes.h
@@ -1635,12 +1635,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_2e627f887b238d22c5db674e972ec078/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_4603890af4ecb1110dbd7b698a75c432/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2e627f887b238d22c5db674e972ec078/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_2e627f887b238d22c5db674e972ec078/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4603890af4ecb1110dbd7b698a75c432/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_4603890af4ecb1110dbd7b698a75c432/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2e627f887b238d22c5db674e972ec078/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4603890af4ecb1110dbd7b698a75c432/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header sys/inttypes.h
@@ -1653,9 +1653,9 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_3117f47dc73a6b97ff1ca092c7e50e33/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_3f8210c59066faf0d8a26033a7e40c0b/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_3117f47dc73a6b97ff1ca092c7e50e33/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_3f8210c59066faf0d8a26033a7e40c0b/testbuild/test.cpp.1.o']
 err: ../test.cpp:1:10: fatal error: sys/inttypes.h: No such file or directory
     1 | #include <sys/inttypes.h>
       |          ^~~~~~~~~~~~~~~~
@@ -1668,8 +1668,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/src/core: Test does not build: Traceba
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259291665552: cxx test.cpp -> test.cpp.1.o}
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_3117f47dc73a6b97ff1ca092c7e50e33/testbuild/test.cpp.1.o']
+	{task 140607319028240: cxx test.cpp -> test.cpp.1.o}
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_3f8210c59066faf0d8a26033a7e40c0b/testbuild/test.cpp.1.o']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/src/core: The configuration failed
@@ -1684,12 +1684,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_beedcd3915dd4e1ca31689ea355cb66c/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_9e14b77ec4e90cce1dad89452fc01fa5/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_beedcd3915dd4e1ca31689ea355cb66c/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_beedcd3915dd4e1ca31689ea355cb66c/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_9e14b77ec4e90cce1dad89452fc01fa5/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_9e14b77ec4e90cce1dad89452fc01fa5/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_beedcd3915dd4e1ca31689ea355cb66c/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_9e14b77ec4e90cce1dad89452fc01fa5/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header sys/stat.h
@@ -1702,12 +1702,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_00040f4a442c3003cb4e800764a2bb44/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_dd25e0432de7161a4345c88b25198cfc/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_00040f4a442c3003cb4e800764a2bb44/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_00040f4a442c3003cb4e800764a2bb44/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_dd25e0432de7161a4345c88b25198cfc/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_dd25e0432de7161a4345c88b25198cfc/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_00040f4a442c3003cb4e800764a2bb44/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_dd25e0432de7161a4345c88b25198cfc/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header dirent.h
@@ -1720,12 +1720,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_1fc81f955790de7d7605fc60e3849c1b/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_09bf37a4149a118ee8bf80fda915050d/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_1fc81f955790de7d7605fc60e3849c1b/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_1fc81f955790de7d7605fc60e3849c1b/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_09bf37a4149a118ee8bf80fda915050d/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_09bf37a4149a118ee8bf80fda915050d/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_1fc81f955790de7d7605fc60e3849c1b/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_09bf37a4149a118ee8bf80fda915050d/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header stdlib.h
@@ -1738,12 +1738,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_7ff5e73ecbe84439dac3bfc1bc509457/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_52a92896c800b128de36aacaada77361/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_7ff5e73ecbe84439dac3bfc1bc509457/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_7ff5e73ecbe84439dac3bfc1bc509457/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_52a92896c800b128de36aacaada77361/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_52a92896c800b128de36aacaada77361/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_7ff5e73ecbe84439dac3bfc1bc509457/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_52a92896c800b128de36aacaada77361/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header signal.h
@@ -1756,12 +1756,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_2e0ff596eed40400eab000d00de917aa/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_20ffbbabbacfc754000a0501d851c5d1/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2e0ff596eed40400eab000d00de917aa/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_2e0ff596eed40400eab000d00de917aa/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_20ffbbabbacfc754000a0501d851c5d1/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_20ffbbabbacfc754000a0501d851c5d1/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2e0ff596eed40400eab000d00de917aa/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_20ffbbabbacfc754000a0501d851c5d1/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header pthread.h
@@ -1776,12 +1776,12 @@ int main ()
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_240ed3df66adfb59fadcaf135d842da0/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_8d6c3d2782e822aeec95c277dab62c46/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_240ed3df66adfb59fadcaf135d842da0/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_240ed3df66adfb59fadcaf135d842da0/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8d6c3d2782e822aeec95c277dab62c46/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_8d6c3d2782e822aeec95c277dab62c46/testbuild/testprog[0m
 
-['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_240ed3df66adfb59fadcaf135d842da0/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8d6c3d2782e822aeec95c277dab62c46/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header stdint.h
@@ -1794,12 +1794,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_4bc6354bd9643ec5f8d9e2b0790fc96d/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_e7299689d75337a2e2118fc02e6770da/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4bc6354bd9643ec5f8d9e2b0790fc96d/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_4bc6354bd9643ec5f8d9e2b0790fc96d/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_e7299689d75337a2e2118fc02e6770da/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_e7299689d75337a2e2118fc02e6770da/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4bc6354bd9643ec5f8d9e2b0790fc96d/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_e7299689d75337a2e2118fc02e6770da/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header inttypes.h
@@ -1812,12 +1812,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_2e627f887b238d22c5db674e972ec078/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_4603890af4ecb1110dbd7b698a75c432/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2e627f887b238d22c5db674e972ec078/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_2e627f887b238d22c5db674e972ec078/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4603890af4ecb1110dbd7b698a75c432/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_4603890af4ecb1110dbd7b698a75c432/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2e627f887b238d22c5db674e972ec078/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4603890af4ecb1110dbd7b698a75c432/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header sys/inttypes.h
@@ -1830,9 +1830,9 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_3117f47dc73a6b97ff1ca092c7e50e33/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_3f8210c59066faf0d8a26033a7e40c0b/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_3117f47dc73a6b97ff1ca092c7e50e33/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_3f8210c59066faf0d8a26033a7e40c0b/testbuild/test.cpp.1.o']
 err: ../test.cpp:1:10: fatal error: sys/inttypes.h: No such file or directory
     1 | #include <sys/inttypes.h>
       |          ^~~~~~~~~~~~~~~~
@@ -1845,8 +1845,8 @@ from /home/ubuntu/Documents/qkdnetsim-dev/src/core: Test does not build: Traceba
     raise Errors.BuildError(self.producer.error)
 BuildError: Build failed
  -> task in 'testprog' failed (exit status 1): 
-	{task 140259292061072: cxx test.cpp -> test.cpp.1.o}
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_3117f47dc73a6b97ff1ca092c7e50e33/testbuild/test.cpp.1.o']
+	{task 140607319055760: cxx test.cpp -> test.cpp.1.o}
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_3f8210c59066faf0d8a26033a7e40c0b/testbuild/test.cpp.1.o']
 
 not found
 from /home/ubuntu/Documents/qkdnetsim-dev/src/core: The configuration failed
@@ -1860,12 +1860,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_bc00b67bc75bfb81a4f8bb1925142f4f/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_8a8b5dbf7caecd0bd7175497bd0aba91/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_bc00b67bc75bfb81a4f8bb1925142f4f/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_bc00b67bc75bfb81a4f8bb1925142f4f/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8a8b5dbf7caecd0bd7175497bd0aba91/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_8a8b5dbf7caecd0bd7175497bd0aba91/testbuild/testprog[0m
 
-['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_bc00b67bc75bfb81a4f8bb1925142f4f/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lrt', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8a8b5dbf7caecd0bd7175497bd0aba91/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lrt']
 yes
 ------------------------------------------------------
 Checking for header sys/ioctl.h
@@ -1878,12 +1878,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_3d8771f245b32c9fc9657613ab59bbe4/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_5ecbfc63e29f7bb9b9304408a648c2a8/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_3d8771f245b32c9fc9657613ab59bbe4/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_3d8771f245b32c9fc9657613ab59bbe4/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5ecbfc63e29f7bb9b9304408a648c2a8/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_5ecbfc63e29f7bb9b9304408a648c2a8/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_3d8771f245b32c9fc9657613ab59bbe4/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5ecbfc63e29f7bb9b9304408a648c2a8/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header net/if.h
@@ -1896,12 +1896,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_8633a101cd8460ff5cdee43568c90852/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_0448d6520c400aa28bb4dbb7f56b5968/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8633a101cd8460ff5cdee43568c90852/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_8633a101cd8460ff5cdee43568c90852/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_0448d6520c400aa28bb4dbb7f56b5968/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_0448d6520c400aa28bb4dbb7f56b5968/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_8633a101cd8460ff5cdee43568c90852/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_0448d6520c400aa28bb4dbb7f56b5968/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header net/ethernet.h
@@ -1914,12 +1914,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_5f5e9e12482c79d6ae047178f7278515/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_c920aa8c1e53f683dd43c8ada28bd92c/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5f5e9e12482c79d6ae047178f7278515/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_5f5e9e12482c79d6ae047178f7278515/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_c920aa8c1e53f683dd43c8ada28bd92c/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_c920aa8c1e53f683dd43c8ada28bd92c/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5f5e9e12482c79d6ae047178f7278515/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_c920aa8c1e53f683dd43c8ada28bd92c/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header linux/if_tun.h
@@ -1932,12 +1932,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_5b70640192b3b8ee282b1d150d951649/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_2b11f347443ff31d630d64316f2695af/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5b70640192b3b8ee282b1d150d951649/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_5b70640192b3b8ee282b1d150d951649/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2b11f347443ff31d630d64316f2695af/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_2b11f347443ff31d630d64316f2695af/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5b70640192b3b8ee282b1d150d951649/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2b11f347443ff31d630d64316f2695af/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for header netpacket/packet.h
@@ -1950,12 +1950,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_9208a31e62463661b54a791920134e7a/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_23ba237d3ab1f3cf624f7d5af5dd8a67/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_9208a31e62463661b54a791920134e7a/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_9208a31e62463661b54a791920134e7a/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_23ba237d3ab1f3cf624f7d5af5dd8a67/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_23ba237d3ab1f3cf624f7d5af5dd8a67/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_9208a31e62463661b54a791920134e7a/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_23ba237d3ab1f3cf624f7d5af5dd8a67/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for NSC location
@@ -1977,21 +1977,21 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_5b70640192b3b8ee282b1d150d951649/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_2b11f347443ff31d630d64316f2695af/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5b70640192b3b8ee282b1d150d951649/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_5b70640192b3b8ee282b1d150d951649/testbuild/testprog[0m
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2b11f347443ff31d630d64316f2695af/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_2b11f347443ff31d630d64316f2695af/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_5b70640192b3b8ee282b1d150d951649/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lQuantis', '-lusb-1.0', '-L/lib64/', '-lQuantis']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_2b11f347443ff31d630d64316f2695af/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------
 Checking for program 'sudo'
 /usr/bin/sudo
-find program=['sudo'] paths=['/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin', '/snap/bin'] var='SUDO' -> ['/usr/bin/sudo']
+find program=['sudo'] paths=['/home/ubuntu/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli', '/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='SUDO' -> ['/usr/bin/sudo']
 ------------------------------------------------------
 Checking for program 'valgrind'
 /usr/bin/valgrind
-find program=['valgrind'] paths=['/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin', '/snap/bin'] var='VALGRIND' -> ['/usr/bin/valgrind']
+find program=['valgrind'] paths=['/home/ubuntu/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli', '/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='VALGRIND' -> ['/usr/bin/valgrind']
 ------------------------------------------------------
 Checking for 'gsl'
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'gsl']
@@ -2001,45 +2001,45 @@ yes
 ------------------------------------------------------
 python-config
 not found
-find program=['libgcrypt-config'] paths=['/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin', '/snap/bin'] var='LIBGCRYPT_CONFIG' -> None
+find program=['libgcrypt-config'] paths=['/home/ubuntu/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli', '/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='LIBGCRYPT_CONFIG' -> None
 from /home/ubuntu/Documents/qkdnetsim-dev: Could not find the program ['libgcrypt-config']
 -------------------------------------------------------
 Checking for compilation flag -fstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_4ecfdc48fe344d7927ceefb4015fdf6c/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_f09b1c2613881963693e23fd10fbe444/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4ecfdc48fe344d7927ceefb4015fdf6c/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_f09b1c2613881963693e23fd10fbe444/testbuild/test.cpp.1.o']
 ok
 -------------------------------------------------------
 Checking for compilation flag -fstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_a0d79f150ca6ac887d91c132469b4fea/test.c[0m
+[1/1] Compiling [32mbuild/.conf_check_ef68dedd817ac1aff742f5baac8624de/test.c[0m
 
-['/usr/bin/gcc', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.c', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_a0d79f150ca6ac887d91c132469b4fea/testbuild/test.c.1.o']
+['/usr/bin/gcc', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.c', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_ef68dedd817ac1aff742f5baac8624de/testbuild/test.c.1.o']
 ok
 -------------------------------------------------------
 Checking for compilation flag -Wstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_4ecfdc48fe344d7927ceefb4015fdf6c/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_f09b1c2613881963693e23fd10fbe444/test.cpp[0m
 
-['/usr/bin/g++', '-I/include/', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_4ecfdc48fe344d7927ceefb4015fdf6c/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-I/include/', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_f09b1c2613881963693e23fd10fbe444/testbuild/test.cpp.1.o']
 ok
 -------------------------------------------------------
 Checking for compilation flag -Wstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_a0d79f150ca6ac887d91c132469b4fea/test.c[0m
+[1/1] Compiling [32mbuild/.conf_check_ef68dedd817ac1aff742f5baac8624de/test.c[0m
 
-['/usr/bin/gcc', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.c', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_a0d79f150ca6ac887d91c132469b4fea/testbuild/test.c.1.o']
+['/usr/bin/gcc', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.c', '-c', '-o', '/home/ubuntu/Documents/qkdnetsim-dev/build/.conf_check_ef68dedd817ac1aff742f5baac8624de/testbuild/test.c.1.o']
 ok
 -------------------------------------------------------
 Checking for program 'doxygen'
 /usr/bin/doxygen
-find program=['doxygen'] paths=['/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin', '/snap/bin'] var='DOXYGEN' -> ['/usr/bin/doxygen']
+find program=['doxygen'] paths=['/home/ubuntu/.vscode-server/bin/f1b07bd25dfad64b0167beb15359ae573aecd2cc/bin/remote-cli', '/home/ubuntu/.cargo/bin', '/home/ubuntu/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='DOXYGEN' -> ['/usr/bin/doxygen']

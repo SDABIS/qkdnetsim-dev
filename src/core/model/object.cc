@@ -107,7 +107,7 @@ Object::Object ()
 Object::~Object () 
 {
   // remove this object from the aggregate list
-  NS_LOG_FUNCTION (this);
+  NS_LOG_FUNCTION (this << m_aggregates->n);
   uint32_t n = m_aggregates->n;
   for (uint32_t i = 0; i < n; i++)
     {

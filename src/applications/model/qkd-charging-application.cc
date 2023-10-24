@@ -235,10 +235,6 @@ QKDChargingApplication::GetTypeId (void)
                    UintegerValue (100), 
                    MakeUintegerAccessor (&QKDChargingApplication::packetSend),
                    MakeUintegerChecker<uint32_t> (1))
-    .AddAttribute ("m_activeQRNG", "Indica si se usa la generacion aleatoria con dispositivo cuantico",
-                   BooleanValue (false), 
-                   MakeBooleanAccessor (&QKDChargingApplication::m_activeQRNG),
-                   MakeBooleanChecker ())
 
    .AddTraceSource ("Tx", "A new packet is created and is sent",
                    MakeTraceSourceAccessor (&QKDChargingApplication::m_txTrace),
@@ -271,7 +267,7 @@ QKDChargingApplication::QKDChargingApplication ()
   m_packetNumber_temp7= 0; 
   m_packetNumber_temp8= 0;
   is_recharging = 0;
-  m_randomGenerator = QKDRandomGenerator(false);
+  m_randomGenerator = QKDRandomGenerator();
 }
 
 QKDChargingApplication::~QKDChargingApplication ()
@@ -487,10 +483,7 @@ void QKDChargingApplication::StartApplication (void) // Called at time specified
 {
   NS_LOG_FUNCTION (this);
 
-  m_random = CreateObject<UniformRandomVariable> ();
-  if(m_activeQRNG){
-    m_randomGenerator.ActivateQuantumDevice();
-  }
+  //m_random = CreateObject<UniformRandomVariable> ();
   //m_maxPackets = m_random->GetValue (m_maxPackets * 0.5, m_maxPackets * 1.5);
   
   //   SINK socket settings

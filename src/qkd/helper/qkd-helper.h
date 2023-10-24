@@ -237,13 +237,6 @@ public:
     */
     void SetRoutingHelper (const Ipv4RoutingHelper &routing);
 
-
-    /**
-    * Activa la generacion de material de clave con QRNG, 
-    * pero tiene que hacerse antes de instalar el QKDManager
-    */
-    void SetQRNG();
-
     void SetUseRealStorages(bool useRealStorages);
     void SetEncryptionEnabled(bool EncryptionEnabled);
 
@@ -304,7 +297,6 @@ private:
 
     ObjectFactory m_channelFactory;       //!< Channel Factory 
     ObjectFactory m_deviceFactory;        //!< Device Factory
-    bool    m_activeQRNG;     
     QKDRandomGenerator m_randomGenerator;            
 }; 
 } // namespace ns3

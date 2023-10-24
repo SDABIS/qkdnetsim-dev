@@ -59,8 +59,7 @@ QKDHelper::QKDHelper ()
     m_counter = 0;
     m_QCrypto = CreateObject<QKDCrypto> (); 
     m_supportQKDL4 = 1;
-    m_activeQRNG = false;
-    m_randomGenerator = QKDRandomGenerator(m_activeQRNG);
+    m_randomGenerator = QKDRandomGenerator();
 }  
 
 void 
@@ -68,13 +67,6 @@ QKDHelper::SetDeviceAttribute (std::string n1, const AttributeValue &v1)
 {
     m_deviceFactory.Set (n1, v1);
 }
-
-void QKDHelper::SetQRNG(){
-    m_activeQRNG = true;
-    m_randomGenerator.ActivateQuantumDevice();
-    m_randomGenerator.printCardsInfo();
-}
-
 
 void QKDHelper::SetUseRealStorages(bool useRealStorages){
     m_useRealStorages = useRealStorages;

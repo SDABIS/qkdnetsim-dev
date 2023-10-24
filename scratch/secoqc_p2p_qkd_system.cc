@@ -314,37 +314,37 @@ int main (int argc, char *argv[])
 
     /* QKD APPs for charing */
     //QKD LINK 0_1 
-    QKDAppChargingHelper qkdChargingApp_0_1("ns3::TcpSocketFactory", ifconf_0_1.GetAddress(0),  ifconf_0_1.GetAddress(1), 3072000, false); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_0_1("ns3::TcpSocketFactory", ifconf_0_1.GetAddress(0),  ifconf_0_1.GetAddress(1), 3072000); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_0_1 = qkdChargingApp_0_1.Install ( devices_0_1.Get(0), devices_0_1.Get(1) );
     qkdChrgApps_0_1.Start (Seconds (5.));
     qkdChrgApps_0_1.Stop (Seconds (500.)); 
      
     //QKD LINK 1_2
-    QKDAppChargingHelper qkdChargingApp_1_2("ns3::TcpSocketFactory", ifconf_1_2.GetAddress(0),  ifconf_1_2.GetAddress(1), 3072000, false); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_1_2("ns3::TcpSocketFactory", ifconf_1_2.GetAddress(0),  ifconf_1_2.GetAddress(1), 3072000); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_1_2 = qkdChargingApp_1_2.Install ( devices_1_2.Get(0), devices_1_2.Get(1) );
     qkdChrgApps_1_2.Start (Seconds (5.));
     qkdChrgApps_1_2.Stop (Seconds (500.)); 
    
     //QKD LINK 2_4
-    QKDAppChargingHelper qkdChargingApp_2_4("ns3::TcpSocketFactory", ifconf_2_4.GetAddress(0),  ifconf_2_4.GetAddress(1), 3072000, false); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_2_4("ns3::TcpSocketFactory", ifconf_2_4.GetAddress(0),  ifconf_2_4.GetAddress(1), 3072000); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_2_4 = qkdChargingApp_2_4.Install ( devices_2_4.Get(0), devices_2_4.Get(1) );
     qkdChrgApps_2_4.Start (Seconds (5.));
     qkdChrgApps_2_4.Stop (Seconds (500.)); 
 
     //QKD LINK 1_3 
-    QKDAppChargingHelper qkdChargingApp_1_3("ns3::TcpSocketFactory", ifconf_1_3.GetAddress(0),  ifconf_1_3.GetAddress(1), 3072000, false); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_1_3("ns3::TcpSocketFactory", ifconf_1_3.GetAddress(0),  ifconf_1_3.GetAddress(1), 3072000); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_1_3 = qkdChargingApp_1_3.Install ( devices_1_3.Get(0), devices_1_3.Get(1) );
     qkdChrgApps_1_3.Start (Seconds (5.));
     qkdChrgApps_1_3.Stop (Seconds (500.)); 
 
     //QKD LINK 3_4
-    QKDAppChargingHelper qkdChargingApp_3_4("ns3::TcpSocketFactory", ifconf_3_4.GetAddress(0),  ifconf_3_4.GetAddress(1), 3072000, false); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_3_4("ns3::TcpSocketFactory", ifconf_3_4.GetAddress(0),  ifconf_3_4.GetAddress(1), 3072000); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_3_4 = qkdChargingApp_3_4.Install ( devices_3_4.Get(0), devices_3_4.Get(1) );
     qkdChrgApps_3_4.Start (Seconds (5.));
     qkdChrgApps_3_4.Stop (Seconds (500.)); 
 
     //QKD LINK 4_5
-    QKDAppChargingHelper qkdChargingApp_4_5("ns3::TcpSocketFactory", ifconf_4_5.GetAddress(0),  ifconf_4_5.GetAddress(1), 3072000, false); //102400 * 30seconds
+    QKDAppChargingHelper qkdChargingApp_4_5("ns3::TcpSocketFactory", ifconf_4_5.GetAddress(0),  ifconf_4_5.GetAddress(1), 3072000); //102400 * 30seconds
     ApplicationContainer qkdChrgApps_4_5 = qkdChargingApp_4_5.Install ( devices_4_5.Get(0), devices_4_5.Get(1) );
     qkdChrgApps_4_5.Start (Seconds (5.));
     qkdChrgApps_4_5.Stop (Seconds (500.)); 

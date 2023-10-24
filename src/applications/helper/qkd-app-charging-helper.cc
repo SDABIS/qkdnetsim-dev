@@ -35,13 +35,13 @@ namespace ns3 {
 
 uint32_t QKDAppChargingHelper::appCounter = 0;
 
-QKDAppChargingHelper::QKDAppChargingHelper (std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate, bool enableQRNG)
+QKDAppChargingHelper::QKDAppChargingHelper (std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate)
 {
-    SetSettings(protocol, master, slave, keyRate, enableQRNG);
+    SetSettings(protocol, master, slave, keyRate);
 }
 
 void 
-QKDAppChargingHelper::SetSettings ( std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate, bool enableQRNG)
+QKDAppChargingHelper::SetSettings ( std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate)
 {
     uint16_t port;
 
@@ -147,7 +147,7 @@ QKDAppChargingHelper::SetSettings ( std::string protocol, Ipv4Address master, Ip
     m_factory_master_app.Set ("Local_Temp8", AddressValue (sinkAddress_temp8)); 
     m_factory_master_app.Set ("Remote_Temp8", AddressValue (slaveAppRemoteAddress_temp8));
 
-    m_factory_master_app.Set ("m_activeQRNG",BooleanValue (enableQRNG));
+    //m_factory_master_app.Set ("m_activeQRNG",BooleanValue (enableQRNG));
 
     /*************************
     //      SLAVE
@@ -191,7 +191,7 @@ QKDAppChargingHelper::SetSettings ( std::string protocol, Ipv4Address master, Ip
     m_factory_slave_app.Set ("Local_Temp8", AddressValue (sinkAddress_temp8)); 
     m_factory_slave_app.Set ("Remote_Temp8", AddressValue (masterAppRemoteAddress_temp8));
 
-    m_factory_slave_app.Set ("m_activeQRNG",BooleanValue (enableQRNG));
+    //m_factory_slave_app.Set ("m_activeQRNG",BooleanValue (enableQRNG));
 
     m_protocol = protocol;
 

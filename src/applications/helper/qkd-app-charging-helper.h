@@ -52,7 +52,7 @@ public:
    *        to.
    */
   //QKDAppChargingHelper (std::string protocol, Address address);
-  QKDAppChargingHelper (std::string protocol, Ipv4Address addressSrc, Ipv4Address addressDst, uint32_t keyRate, bool enableQRNG);
+  QKDAppChargingHelper (std::string protocol, Ipv4Address addressSrc, Ipv4Address addressDst, uint32_t keyRate);
 
   /**
    * Helper function used to set the underlying application attributes, 
@@ -72,7 +72,7 @@ public:
    * \returns Container of Ptr to the applications installed.
    */
   //ApplicationContainer Install (NodeContainer c) const;
-  void SetSettings ( std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate, bool enableQRNG);
+  void SetSettings ( std::string protocol, Ipv4Address master, Ipv4Address slave, uint32_t keyRate);
 
   /**
    * Install an ns3::QKDSendApplication on the node configured with all the

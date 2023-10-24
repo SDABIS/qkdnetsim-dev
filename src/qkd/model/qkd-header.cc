@@ -313,6 +313,8 @@ QKDHeader::Deserialize (Buffer::Iterator start)
     i.Read ((uint8_t*)tmpBuffer, len);
     m_authTag = tmpBuffer;
 
+    //if(m_encryped != 0) Print(std::cout);
+
     NS_LOG_DEBUG ("Deserialize m_length: " << (uint32_t) m_length 
                 << " m_messageId: " << (uint32_t) m_messageId
                 << " m_encryped: " << (uint32_t) m_encryped

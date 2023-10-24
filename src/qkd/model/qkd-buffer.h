@@ -29,6 +29,9 @@
 #include "ns3/trace-source-accessor.h"
 #include "ns3/event-id.h"
 #include "ns3/qkd-key.h"
+
+#include <crypto++/filters.h>
+#include <crypto++/hex.h>
 #include <vector>
 #include <map>
  

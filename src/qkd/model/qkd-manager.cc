@@ -349,6 +349,20 @@ QKDManager::VirtualSend (
     NS_LOG_FUNCTION ( this << "\t" << p->GetUid() << "\t" << p->GetSize() );
     NS_LOG_FUNCTION ( this << p );
 
+    QKDInternalTag tag;
+    if(p->PeekPacketTag(tag)) {
+        //p->RemovePacketTag(tag);
+    } else { 
+        NS_LOG_FUNCTION ( 
+            this << "No QKDInternalTag detected!" 
+            << "No encryption/authentication needed (no MarkEncryt or MarkAuthenticated called before)" 
+        );
+        tag.SetAuthenticateValue ( 0 ); 
+        tag.SetEncryptValue ( 0 );
+        tag.SetMaxDelayValue ( 10 );
+        p->AddPacketTag(tag); 
+    }
+
     // packetCopy is unencrypted packet that is used for sniffing in netDevices (to create .pcap records that are readble)
     Ptr<Packet> packetCopy = p->Copy ();
   
@@ -461,6 +475,11 @@ QKDManager::ForwardToSocket (
             }else{ 
 
                 i->second.IPNetDeviceSrc->SniffPacket(originalPacket);
+                QKDInternalTag tag;
+                packet->PeekPacketTag(tag);
+                if(tag.GetEncryptValue() > 0) {
+                    i->second.IPNetDeviceSrc->SniffPacket(packet); 
+                }
                 i->second.IPNetDeviceSrc->Send (
                     packet,
                     i->second.IPNetDeviceDst->GetAddress (),
@@ -895,7 +914,6 @@ QKDManager::ProcessOutgoingRequest (Ptr<NetDevice> dev, Ptr<Packet> p)
         tag.SetMaxDelayValue ( 10 );
         p->AddPacketTag(tag); 
     }
-    
     /*
     std::cout << "\n###################################################\n";
     p->Print(std::cout);

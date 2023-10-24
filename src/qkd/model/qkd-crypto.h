@@ -20,7 +20,7 @@
  
 #ifndef QKDCrypto_H
 #define QKDCrypto_H
-
+#define byte uint8_t
 #include <algorithm>
 #include <stdint.h>
 
@@ -193,7 +193,7 @@ public:
         Ptr<QKDBuffer>          QKDbuffer
     );
 
-    //TODO restaurar este cambio
+
     std::string OTP (const std::string& data, Ptr<QKDKey> key);
     std::string AESEncrypt (const std::string& data, Ptr<QKDKey> key);
     std::string AESDecrypt (const std::string& data, Ptr<QKDKey> key);

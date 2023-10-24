@@ -272,8 +272,8 @@ QKDBuffer::AddNewContent(const uint32_t& keySize)
 
     m_AverageKeyChargingTimePeriodTrace (m_AverageKeyChargingTimePeriod);
 
-    NS_LOG_DEBUG(this << " m_AverageKeyChargingTimePeriod: " << m_AverageKeyChargingTimePeriod );
-    NS_LOG_DEBUG(this << " m_chargingTimePeriods.size(): " << m_chargingTimePeriods.size() );
+    //NS_LOG_DEBUG(this << " m_AverageKeyChargingTimePeriod: " << m_AverageKeyChargingTimePeriod );
+    //NS_LOG_DEBUG(this << " m_chargingTimePeriods.size(): " << m_chargingTimePeriods.size() );
 
     /**
     * Second, add new value to vector of previous values
@@ -288,8 +288,8 @@ QKDBuffer::AddNewContent(const uint32_t& keySize)
     m_lastKeyChargingTimeDuration = tempPeriod;
     m_lastKeyChargingTimeStamp = currentTime;
 
-    NS_LOG_DEBUG (this << " m_lastKeyChargingTimeStamp: " << m_lastKeyChargingTimeStamp );
-    NS_LOG_DEBUG (this << " m_lastKeyChargingTimeDuration: " << m_lastKeyChargingTimeDuration );
+    //NS_LOG_DEBUG (this << " m_lastKeyChargingTimeStamp: " << m_lastKeyChargingTimeStamp );
+    //NS_LOG_DEBUG (this << " m_lastKeyChargingTimeDuration: " << m_lastKeyChargingTimeDuration );
     
     //////////////////////////////////////////////////////////////////////////////////
 
@@ -317,10 +317,10 @@ QKDBuffer::FetchMaxNumberOfRecordedKeyChargingTimePeriods(){
 Ptr<QKDKey>
 QKDBuffer::ProcessOutgoingRequest(const uint32_t& keySize)
 {    
-    NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
+    //NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
 
     if(m_Mcurrent - keySize <= m_Mmin){
-        NS_LOG_FUNCTION  (this << "no hay suficiente material para reservar"); 
+        NS_LOG_FUNCTION  (this << "not enough key material"); 
         return 0;
     }
 
@@ -355,7 +355,7 @@ QKDBuffer::ProcessOutgoingRequest(const uint32_t& keySize)
 Ptr<QKDKey>
 QKDBuffer::ProcessIncomingRequest(const uint32_t& akeyID, const uint32_t& akeySize)
 {
-    NS_LOG_FUNCTION  (this << akeyID ); 
+    //NS_LOG_FUNCTION  (this << akeyID ); 
 
     uint32_t keySize; 
     Ptr<QKDKey> key;
@@ -376,7 +376,7 @@ QKDBuffer::ProcessIncomingRequest(const uint32_t& akeyID, const uint32_t& akeySi
     }
     
 
-    NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
+    //NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
  
     
     m_McurrentChangeTrace(m_Mcurrent);
@@ -409,12 +409,19 @@ QKDBuffer::FetchKeyOfSize (const uint32_t& keySize)
 Ptr<QKDKey>
 QKDBuffer::FetchKeyByID (const uint32_t& keyID)
 {
-    NS_LOG_FUNCTION  (this << keyID); 
 
     std::map<uint32_t, Ptr<QKDKey> >::iterator a = m_keys.find (keyID);
     if (a != m_keys.end () && a->first == keyID)
     {
-       NS_LOG_FUNCTION (this << "KeyID is valid!" << keyID ); 
+       //NS_LOG_FUNCTION (this << "KeyID is valid!" << keyID ); 
+        std::string outputString;
+        CryptoPP::HexEncoder encoder;
+        encoder.Attach(new CryptoPP::StringSink(outputString));
+        encoder.Put(a->second->GetKey(), a->second->GetSize());
+        encoder.MessageEnd();
+
+        NS_LOG_FUNCTION  (this << "Fetching Key with ID: " << keyID << "\tValue: " << outputString); 
+
     }else{
       NS_LOG_FUNCTION (this << "KeyID is NOT valid!" << keyID ); 
       return 0;
@@ -578,7 +585,7 @@ QKDBuffer::GetMmin (void) const
 uint32_t
 QKDBuffer::AddKeyMaterial (std::vector<std::uint8_t> newMaterial)
 {
-    if(newMaterial.size() >= 600){//600 porque sino empezaria a ocupar mucho en el log
+    if(newMaterial.size() >= 600){
         std::vector<std::uint8_t>::const_iterator first = newMaterial.begin() ;
         std::vector<std::uint8_t>::const_iterator last = newMaterial.begin() + 30;
         std::vector<std::uint8_t> initVec(first, last);
@@ -618,33 +625,33 @@ QKDBuffer::AddKeyMaterial (std::vector<std::uint8_t> newMaterial)
     std::vector<std::uint8_t>::const_iterator last = key_material.end();
     std::vector<std::uint8_t> finalMaterial(first, last);
     NS_LOG_FUNCTION(this << "m_Mcurrent:" << m_Mcurrent << "buffer final material:" << finalMaterial);
-
+    NS_LOG_FUNCTION(this << " Adding new Key Material: " << key_material.size() << " bytes");
     return 0;
 }
 
 uint32_t
 QKDBuffer::ReserveKeyMaterial (const uint32_t& keySize)
 {
-    NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
+    //NS_LOG_FUNCTION  (this << keySize << m_Mcurrent); 
 
     /*if(m_Mcurrent <= keySize)
         return 0;*/
 
-
-    //usamos los primeros bytes del material de clave para hacer la nueva clave
+    // Create the key from the first bytes of the buffer
     std::vector<std::uint8_t>::const_iterator first = key_material.begin() + 0;
     std::vector<std::uint8_t>::const_iterator last = key_material.begin() + keySize;
     std::vector<std::uint8_t> key(first, last);
 
 
-    //eliminamos los bytes seleccionados para la nueva clave
+    // Remove the new reserved key from the buffer
     key_material.erase(key_material.begin(),key_material.begin() + keySize);
     
     m_nextKeyID++;
     Ptr<QKDKey> newKey = CreateObject<QKDKey> (m_nextKeyID, key);
 
-    NS_LOG_FUNCTION  (this << "Add keyID:" << m_nextKeyID);
+    //NS_LOG_FUNCTION  (this << "Add keyID:" << m_nextKeyID);
     //NS_LOG_DEBUG (this << " key: \t" << newKey->KeyToString());
+    NS_LOG_FUNCTION(this << " Reserved Key with ID " << m_nextKeyID << "of size" << keySize);
     m_keys.insert(std::pair<uint32_t,Ptr<QKDKey>>(m_nextKeyID,newKey));
 
 

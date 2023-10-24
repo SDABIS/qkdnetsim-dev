@@ -33,6 +33,7 @@
 #include "ns3/virtual-udp-socket-factory.h"
 #include "ns3/virtual-tcp-socket-factory.h"
 #include "qkd-send.h"
+#include <bits/stdc++.h>
 
 namespace ns3 {
 
@@ -158,8 +159,7 @@ QKDSend::SendPacket (void)
 {
     NS_LOG_FUNCTION (this);
 
-    std::string msg = "paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-";
-    //std::string msg = "paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend-paquete del QKDSend";
+    std::string msg(m_packetSize, 'A');
 
     Ptr<Packet> packet = Create<Packet> ((uint8_t*) msg.c_str(), msg.size()); 
     packet = m_socket->GetNode()->GetObject<QKDManager> ()->MarkEncrypt  (packet, QKDCRYPTO_OTP, QKDCRYPTO_AUTH_VMAC); 
@@ -170,7 +170,7 @@ QKDSend::SendPacket (void)
     std::string s = std::string((char*)buffer);
     delete[] buffer; 
 
-    NS_LOG_FUNCTION (this << "Paquete a mandar:" << s );
+    NS_LOG_FUNCTION (this << "Message to send:" << s );
 
     NS_ASSERT (packet != 0);
     NS_LOG_FUNCTION (this << packet->GetUid() << packet->GetSize() );
@@ -182,7 +182,7 @@ QKDSend::SendPacket (void)
 
     if ( m_nPacketSize == 0 ||  m_dataSent < m_nPacketSize )
       ScheduleTx ();
-    ScheduleTx ();
+    //ScheduleTx ();
 
     NS_LOG_FUNCTION(this << "m_nPacketSize:" << m_nPacketSize << "m_dataSent:" << m_dataSent << "m_nPacketSize:" << m_nPacketSize);
 }

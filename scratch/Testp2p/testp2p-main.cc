@@ -89,7 +89,7 @@ int main (int argc, char *argv[])
     Packet::EnablePrinting(); 
     PacketMetadata::Enable ();
 
-    bool useQuantisDevice = false;
+    bool useQuantisDevice = true;
 
     //
     // Explicitly create the nodes required by the topology (shown above).
@@ -126,6 +126,7 @@ int main (int argc, char *argv[])
     PointToPointHelper p2p;
     p2p.SetDeviceAttribute ("DataRate", StringValue ("5Mbps"));
     p2p.SetChannelAttribute ("Delay", StringValue ("2ms")); 
+    
 
     NetDeviceContainer d0d1 = p2p.Install (n0n1); 
     //NetDeviceContainer d1d2 = p2p.Install (n1n2);
@@ -147,7 +148,8 @@ int main (int argc, char *argv[])
     //
     //  install QKD Managers on the nodes 
     QKDHelper QHelper;  
-    //activar el dispositivo cuantico
+
+    //enable QRNG
     if(useQuantisDevice){
         QHelper.SetQRNG();
     }
@@ -203,7 +205,7 @@ int main (int argc, char *argv[])
 
     /* QKD APPs for charing  */
     QKDAppChargingHelper qkdChargingApp("ns3::TcpSocketFactory", i0i1.GetAddress(0),  i0i1.GetAddress(1), 3072000, useQuantisDevice);
-    //cambiar el tamaño del paquete y el delay de comprobacion del buffer
+    //change packet size and delay
     qkdChargingApp.SetPacketSize(500);
     qkdChargingApp.SetPacketSend(400);
     //qkdChargingApp.SetCheckDelay(6);
@@ -231,7 +233,7 @@ int main (int argc, char *argv[])
     Ptr<Socket> socket = Socket::CreateSocket (n.Get (0), UdpSocketFactory::GetTypeId ());
  
     Ptr<QKDSend> app = CreateObject<QKDSend> ();
-    app->Setup (socket, sourceAddress, sinkAddress, 640, 5, DataRate ("160kbps"));
+    app->Setup (socket, sourceAddress, sinkAddress, 640,  640 * 5, DataRate ("160kbps"));
     n.Get (0)->AddApplication (app);
     app->SetStartTime (Seconds (20.));
     app->SetStopTime (Seconds (300.));
@@ -253,5 +255,6 @@ int main (int argc, char *argv[])
  
     //Finally print the graphs
     QHelper.PrintGraphs();
+
     Simulator::Destroy ();
 }

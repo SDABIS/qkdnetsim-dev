@@ -413,8 +413,8 @@ QKDCrypto::ProcessOutgoingPacket (
     */
 
     //Convert whole packet to string, just do it!
+    
     plainText = PacketToString (p);
-
     // COMPRES PACKET
     if(m_compressionEnabled){
         plainText = StringCompressEncode (plainText); 
@@ -424,7 +424,7 @@ QKDCrypto::ProcessOutgoingPacket (
     //Now perform encryption of the packet
     if(shouldEncrypt > 0){
 
-        NS_LOG_FUNCTION ( "***** ENCRYPTION MODE *****" << shouldEncrypt );
+        NS_LOG_FUNCTION (this << "***** ENCRYPTION MODE *****" << shouldEncrypt );
 
         //////////////////////////////////////////////
         //          ENCRYPTION
@@ -435,14 +435,12 @@ QKDCrypto::ProcessOutgoingPacket (
         switch (shouldEncrypt)
         {
             case QKDCRYPTO_OTP:
-
                 if(SrcBuffer != 0 && DstBuffer != 0) 
                     //key = QKDbuffer->ProcessOutgoingRequest ( plainText.size() * 8 ); //In bits
-                    NS_LOG_FUNCTION ("Usando nueva generacion de claves");
-                    NS_LOG_FUNCTION ("SrcBuffer");
+                    NS_LOG_FUNCTION (this <<"SrcBuffer");
                     key = SrcBuffer->ProcessOutgoingRequest(plainText.size() /* * 8 */);
-                    //reservamos el material en el buffer del nodo al que lo vamos a mandar
-                    NS_LOG_FUNCTION ("DstBuffer");
+                    // Reserve key material in the destination buffer
+                    NS_LOG_FUNCTION (this <<"DstBuffer");
                     DstBuffer->ProcessOutgoingRequest(plainText.size() /* * 8 */);
 
 
@@ -462,7 +460,7 @@ QKDCrypto::ProcessOutgoingPacket (
             case QKDCRYPTO_AES: 
 
                 if(SrcBuffer != 0 && DstBuffer != 0) 
-                    NS_LOG_FUNCTION ("SrcBuffer");
+                    NS_LOG_FUNCTION (this <<"SrcBuffer");
                     key = SrcBuffer->ProcessOutgoingRequest( CryptoPP::AES::MAX_KEYLENGTH); //AES in bits
                     DstBuffer->ProcessOutgoingRequest(CryptoPP::AES::MAX_KEYLENGTH);
                     
@@ -497,7 +495,7 @@ QKDCrypto::ProcessOutgoingPacket (
     //Note: All encrypted packets MUST be authenticated as well!
     if (shouldEncrypt>0 || shouldAuthenticate>0){
         
-        NS_LOG_FUNCTION ( "***** AUTHENTICATION MODE *****" << shouldAuthenticate);
+        NS_LOG_FUNCTION (this << "***** AUTHENTICATION MODE *****" << shouldAuthenticate);
 
         //////////////////////////////////////////////
         //          AUTHENTICATION
@@ -510,11 +508,10 @@ QKDCrypto::ProcessOutgoingPacket (
 
             if(SrcBuffer != 0 && DstBuffer != 0) 
                 //key = SrcBuffer->ProcessOutgoingRequest ( m_authenticationTagLengthInBits ); //In bits
-                NS_LOG_FUNCTION ("Usando nueva generacion de claves");
-                NS_LOG_FUNCTION ("SrcBuffer");
+                NS_LOG_FUNCTION (this <<"SrcBuffer");
                 key = SrcBuffer->ProcessOutgoingRequest(m_authenticationTagLengthInBits);
-                //reservamos el material en el buffer del nodo al que lo vamos a mandar
-                NS_LOG_FUNCTION ("DstBuffer");
+                // Reserve key material in the destination buffer
+                NS_LOG_FUNCTION (this <<"DstBuffer");
                 DstBuffer->ProcessOutgoingRequest(m_authenticationTagLengthInBits);
 
             if(key == 0){
@@ -541,7 +538,7 @@ QKDCrypto::ProcessOutgoingPacket (
 
     }else{
         
-        NS_LOG_FUNCTION ( "***** PLAIN TEXT MODE *****" );
+        NS_LOG_FUNCTION (this << "***** PLAIN TEXT MODE *****" );
 
         //////////////////////////////////////////////
         //          PLAIN TEXT MODE
@@ -593,14 +590,18 @@ QKDCrypto::ProcessOutgoingPacket (
     //  FINALLY, PACKET IS READY
     /////////////////////////////////////////////
 
-    NS_LOG_FUNCTION(this 
+    if (shouldAuthenticate && shouldEncrypt) {
+            NS_LOG_FUNCTION(this 
         << "Final outgoing packet from QCrypto:" 
         << "PacketID:" << outputPacket->GetUid() 
         << "of size" << outputPacket->GetSize() 
         << "MessageID:" << qkdHeader.GetMessageId()
         << "QKDHeaderLength:" << qkdHeader.GetLength()
-        << "ChannelID:" << channelID
+        << "Encryption KeyID:" << qkdHeader.GetEncryptionKeyId()
+        << "Auth KeyID: " << qkdHeader.GetAuthenticationKeyId()
     );
+    }
+
 
     packetOutput.push_back(outputPacket);
     return packetOutput;    
@@ -1911,7 +1912,7 @@ QKDCrypto::CheckForFragmentation(Ptr<Packet> p, Ptr<QKDBuffer> QKDBuffer)
     Ptr<Packet> packetWithQKDHeader = Create<Packet> ((uint8_t*) cipherTextTotal.c_str(), cipherTextTotal.size());
     packetWithQKDHeader->AddHeader(qkdHeader);
 
-    NS_LOG_INFO (this << "packetWithQKDHeader: " << packetWithQKDHeader);
+    //NS_LOG_INFO (this << "packetWithQKDHeader: " << packetWithQKDHeader);
 
     ///////////////////////////////////
     // Check for fragmentation
@@ -2058,7 +2059,6 @@ QKDCrypto::ProcessIncomingPacket (
         << "ChannelID:"
         << channelID
     );
-
     std::vector<Ptr<Packet> > packetOutput = CheckForFragmentation(
         p, 
         QKDBuffer
@@ -2092,6 +2092,15 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
     if(!qkdHeader.IsValid () ){
         NS_LOG_FUNCTION(this << "UNKNOWN packet received!");
         return p;
+    }
+
+    if(qkdHeader.GetAuthenticated() >= 1 && qkdHeader.GetEncrypted() >= 1) {
+        NS_LOG_FUNCTION (this << "Received packet for decryption: "
+            << "PacketID:" 
+            << p->GetUid() 
+            << "PacketSize:" 
+            << p->GetSize()
+        );
     }
 
     NS_LOG_FUNCTION(this << qkdHeader);
@@ -3285,27 +3294,27 @@ QKDCrypto::Decrypt (Ptr<Packet> p, Ptr<QKDBuffer> QKDbuffer)
 std::string
 QKDCrypto::OTP (const std::string& data, Ptr<QKDKey> key)
 {
-    NS_LOG_DEBUG  (this << "m_encryptionEnabled" << (m_encryptionEnabled?"TRUE":"FALSE"));
+    //NS_LOG_DEBUG  (this << "m_encryptionEnabled" << (m_encryptionEnabled?"TRUE":"FALSE"));
     NS_LOG_FUNCTION  (this << data.size()); 
     if(!m_encryptionEnabled) return data;
 
     std::string encryptData = data; 
     uint8_t * keyString = key->GetKey();
 
-    NS_LOG_DEBUG  (this << "keyString" << keyString ); 
-    NS_LOG_DEBUG  (this << "keyString.size" << keyString << "encryptData.size()" << encryptData.size()); 
+    //NS_LOG_DEBUG  (this << "keyString" << keyString ); 
+    //NS_LOG_DEBUG  (this << "keyString.size" << keyString << "encryptData.size()" << encryptData.size()); 
     if(key->GetSize() != encryptData.size()){
         NS_LOG_FUNCTION(this << "KEY IS NOT GOOD FOR OTP!");
         return data;
     }
 
-    NS_LOG_DEBUG  (this << "Empieza encriptado");
-    NS_LOG_DEBUG  (this << "data: " << encryptData);
+    //NS_LOG_DEBUG  (this << "Begin Encrypt");
+    //NS_LOG_DEBUG  (this << "data: " << encryptData);
     for (uint32_t i = 0; i < encryptData.length(); i++) {
         encryptData[i] ^= keyString[i];
     } 
-    NS_LOG_DEBUG  (this << "Finaliza encriptado");
-    NS_LOG_DEBUG  (this << "encryptData: " << encryptData);
+    //NS_LOG_DEBUG  (this << "End Encrypt");
+    //NS_LOG_DEBUG  (this << "encryptData: " << encryptData);
 
     return encryptData;
 }
@@ -3329,7 +3338,7 @@ QKDCrypto::AESEncrypt (const std::string& data, Ptr<QKDKey> key)
     stf.MessageEnd(); 
     delete[] Kkey;
      
-    NS_LOG_DEBUG  (this << "encryptData.size" << encryptData.size() << "encryptData" << encryptData); 
+    //NS_LOG_DEBUG  (this << "encryptData.size" << encryptData.size() << "encryptData" << encryptData); 
     return encryptData;
 }
 
@@ -3352,7 +3361,7 @@ QKDCrypto::AESDecrypt (const std::string& data, Ptr<QKDKey> key)
     stf.MessageEnd();
     delete[] Kkey;
 
-    NS_LOG_DEBUG  (this << "decryptData.size" << decryptData.size() << "decryptData" << decryptData); 
+    //NS_LOG_DEBUG  (this << "decryptData.size" << decryptData.size() << "decryptData" << decryptData); 
     return decryptData;
 }
 
@@ -3469,7 +3478,7 @@ std::string
 QKDCrypto::VMAC (std::string& inputString, Ptr<QKDKey> key)
 { 
     NS_LOG_FUNCTION (this << inputString.length() << key->GetSize() << key->KeyToString() ); 
-    NS_LOG_DEBUG (this << "KeyID:" << key->GetKeyId()); 
+    //NS_LOG_DEBUG (this << "KeyID:" << key->GetKeyId()); 
     if(!m_encryptionEnabled) 
         return std::string( m_authenticationTagLengthInBits, '0'); 
 
@@ -3523,7 +3532,7 @@ QKDCrypto::SHA1(std::string& inputString)
     if(!m_encryptionEnabled) 
         return std::string( m_authenticationTagLengthInBits, '0'); 
   
-    byte digestBytes[CryptoPP::SHA::DIGESTSIZE];
+    byte digestBytes[CryptoPP::SHA1::DIGESTSIZE];
 
     CryptoPP::SHA1 sha1;
     sha1.CalculateDigest(digestBytes, (byte *) inputString.c_str(), inputString.length());

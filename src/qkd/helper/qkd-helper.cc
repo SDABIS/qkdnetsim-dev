@@ -72,9 +72,7 @@ QKDHelper::SetDeviceAttribute (std::string n1, const AttributeValue &v1)
 void QKDHelper::SetQRNG(){
     m_activeQRNG = true;
     m_randomGenerator.ActivateQuantumDevice();
-    std::cout << "Información de los dispositivos cuanticos:" << std::endl << std::endl; 
     m_randomGenerator.printCardsInfo();
-    std::cout << std::endl << std::endl; 
 }
 
 

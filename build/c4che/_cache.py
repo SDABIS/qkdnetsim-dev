@@ -2,23 +2,22 @@ APPNAME = 'ns'
 AR = ['/usr/bin/ar']
 ARFLAGS = ['rcs']
 BINDIR = '/usr/local/bin'
-BOOST_VERSION = '1_65_1'
+BOOST_VERSION = '1_74'
 BUILD_PROFILE = 'debug'
 BUILD_SUFFIX = '-debug'
 CC = ['/usr/bin/gcc']
 CCDEFINES = ['_DEBUG', 'ENABLE_CRYPTOPP']
 CCFLAGS = ['-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-I/include/', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing']
 CCFLAGS_PTHREAD = '-pthread'
-CCFLAGS_PYEXT = ['-fvisibility=hidden']
 CCLNK_SRC_F = []
 CCLNK_TGT_F = ['-o']
 CC_NAME = 'gcc'
 CC_SRC_F = []
 CC_TGT_F = ['-c', '-o']
-CC_VERSION = ('7', '5', '0')
+CC_VERSION = ('11', '4', '0')
 CFLAGS_MACBUNDLE = ['-fPIC']
-CFLAGS_PYEMBED = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv']
-CFLAGS_PYEXT = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv']
+CFLAGS_PYEMBED = ['-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-fno-strict-aliasing']
+CFLAGS_PYEXT = ['-flto=auto', '-ffat-lto-objects', '-flto=auto', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-fno-strict-aliasing']
 CFLAGS_cshlib = ['-fPIC']
 COMPILER_CC = 'gcc'
 COMPILER_CXX = 'g++'
@@ -28,8 +27,8 @@ CXXDEFINES = ['ENABLE_CRYPTOPP']
 CXXFLAGS = ['-I/include/', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing']
 CXXFLAGS_MACBUNDLE = ['-fPIC']
 CXXFLAGS_PTHREAD = '-pthread'
-CXXFLAGS_PYEMBED = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv']
-CXXFLAGS_PYEXT = ['-fno-strict-aliasing', '-fdebug-prefix-map=/build/python2.7-D7NSzq/python2.7-2.7.17=.', '-fstack-protector-strong', '-fwrapv', '-fvisibility=hidden', '-Wno-array-bounds']
+CXXFLAGS_PYEMBED = ['-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-fno-strict-aliasing']
+CXXFLAGS_PYEXT = ['-flto=auto', '-ffat-lto-objects', '-flto=auto', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-fno-strict-aliasing', '-fwrapv', '-ffile-prefix-map=/build/python2.7-W40Ff2/python2.7-2.7.18=.', '-flto=auto', '-ffat-lto-objects', '-flto=auto', '-ffat-lto-objects', '-fstack-protector-strong', '-fno-strict-aliasing']
 CXXFLAGS_cxxshlib = ['-fPIC']
 CXXLNK_SRC_F = []
 CXXLNK_TGT_F = ['-o']
@@ -39,12 +38,13 @@ CXX_TGT_F = ['-c', '-o']
 DATADIR = '/usr/local/share'
 DATAROOTDIR = '/usr/local/share'
 DEFINES = ['NS3_BUILD_PROFILE_DEBUG', 'NS3_ASSERT_ENABLE', 'NS3_LOG_ENABLE', 'HAVE_SYS_IOCTL_H=1', 'HAVE_IF_NETS_H=1', 'HAVE_NET_ETHERNET_H=1', 'HAVE_PACKET_H=1', 'HAVE_IF_TUN_H=1']
+DEFINES_GSL = ['HAVE_GSL=1']
 DEFINES_LIBXML2 = ['HAVE_LIBXML2=1']
-DEFINES_PYEMBED = ['HAVE_PYEMBED=1', '_FORTIFY_SOURCE=2', 'NDEBUG']
-DEFINES_PYEXT = ['HAVE_PYEXT=1', '_FORTIFY_SOURCE=2', 'NDEBUG']
+DEFINES_PYEMBED = ['NDEBUG', '_FORTIFY_SOURCE=2']
+DEFINES_PYEXT = ['NDEBUG', '_FORTIFY_SOURCE=2', 'NDEBUG', '_FORTIFY_SOURCE=2']
 DEFINES_SQLITE3 = ['HAVE_SQLITE3=1']
 DEFINES_ST = '-D%s'
-DEFINE_COMMENTS = {'HAVE_SYS_IOCTL_H': '', 'HAVE_IF_NETS_H': '', 'HAVE_SIGNAL_H': '', 'HAVE_SYS_TYPES_H': '', 'PYTHONDIR': '', 'INT64X64_USE_128': '', 'HAVE_DIRENT_H': '', 'HAVE_STDINT_H': '', 'HAVE_NET_ETHERNET_H': '', 'HAVE_PYEXT': '', 'HAVE_SYS_STAT_H': '', 'HAVE_PACKET_H': '', 'HAVE_INTTYPES_H': '', 'HAVE_STDLIB_H': '', 'HAVE_PTHREAD_H': '', 'HAVE_PYTHON_H': '', 'HAVE___UINT128_T': '', 'HAVE_PYEMBED': '', 'PYTHONARCHDIR': '', 'HAVE_GETENV': '', 'HAVE_RT': '', 'HAVE_IF_TUN_H': '', 'HAVE_SYS_INT_TYPES_H': '', 'HAVE_UINT128_T': ''}
+DEFINE_COMMENTS = {'HAVE_SYS_IOCTL_H': '', 'HAVE_IF_NETS_H': '', 'HAVE_SIGNAL_H': '', 'HAVE_SYS_TYPES_H': '', 'PYTHONDIR': '', 'INT64X64_USE_128': '', 'HAVE_PACKET_H': '', 'HAVE_STDINT_H': '', 'HAVE_NET_ETHERNET_H': '', 'HAVE_SYS_STAT_H': '', 'HAVE_DIRENT_H': '', 'HAVE_INTTYPES_H': '', 'HAVE_STDLIB_H': '', 'HAVE_PTHREAD_H': '', 'HAVE_PYTHON_H': '', 'HAVE___UINT128_T': '', 'PYTHONARCHDIR': '', 'HAVE_GETENV': '', 'HAVE_RT': '', 'HAVE_IF_TUN_H': '', 'HAVE_SYS_INT_TYPES_H': '', 'HAVE_UINT128_T': ''}
 DEST_BINFMT = 'elf'
 DEST_CPU = 'x86_64'
 DEST_OS = 'linux'
@@ -55,7 +55,7 @@ ENABLE_BRITE = False
 ENABLE_EMU = True
 ENABLE_EXAMPLES = False
 ENABLE_FDNETDEV = True
-ENABLE_GSL = None
+ENABLE_GSL = '-lgsl -lgslcblas -lm\n'
 ENABLE_GTK = None
 ENABLE_LIBXML2 = '-I/usr/include/libxml2 -lxml2\n'
 ENABLE_NSC = False
@@ -67,39 +67,37 @@ ENABLE_SUDO = False
 ENABLE_TAP = True
 ENABLE_TESTS = False
 ENABLE_THREADING = True
-EXAMPLE_DIRECTORIES = ['naming', 'udp-client-server', 'matrix-topology', 'socket', 'tcp', 'stats', 'ipv6', 'udp', 'error-model', 'wireless', 'routing', 'realtime', 'traffic-control', 'tutorial', 'energy']
+EXAMPLE_DIRECTORIES = ['tutorial', 'ipv6', 'naming', 'matrix-topology', 'wireless', 'socket', 'energy', 'error-model', 'udp', 'tcp', 'udp-client-server', 'stats', 'realtime', 'traffic-control', 'routing']
 EXEC_PREFIX = '/usr/local'
+HAVE_GSL = 1
 HAVE_LIBXML2 = 1
-HAVE_PYEMBED = 1
-HAVE_PYEXT = 1
 HAVE_SQLITE3 = 1
 HTMLDIR = '/usr/local/share/doc/ns'
 INCLUDEDIR = '/usr/local/include'
 INCLUDES_BOOST = '/usr/include'
 INCLUDES_LIBXML2 = ['/usr/include/libxml2']
-INCLUDES_PYEMBED = ['/usr/include/python2.7', '/usr/include/x86_64-linux-gnu/python2.7']
-INCLUDES_PYEXT = ['/usr/include/python2.7', '/usr/include/x86_64-linux-gnu/python2.7']
+INCLUDES_PYEMBED = ['/usr/include/python2.7']
+INCLUDES_PYEXT = ['/usr/include/python2.7']
 INFODIR = '/usr/local/share/info'
 INT64X64_USE_128 = 1
 LDFLAGS = ['-lusb-1.0', '-L/lib64/', '-lQuantis']
+LIB = ['Quantis']
 LIBDIR = '/usr/local/lib'
 LIBEXECDIR = '/usr/local/libexec'
-LIBPATH_BOOST = ['/usr/lib/x86_64-linux-gnu']
-LIBPATH_PYEMBED = ['/usr/lib/python2.7/config-x86_64-linux-gnu', '/usr/lib']
-LIBPATH_PYEXT = ['/usr/lib/python2.7/config-x86_64-linux-gnu', '/usr/lib']
+LIBPATH_PYEXT = []
 LIBPATH_ST = '-L%s'
-LIB_BOOST = ['boost_system', 'boost_signals', 'boost_filesystem']
+LIB_BOOST = []
+LIB_GSL = ['gsl', 'gslcblas', 'm']
 LIB_LIBXML2 = ['xml2']
-LIB_PYEMBED = ['python2.7', 'pthread', 'dl', 'util', 'm']
-LIB_PYEXT = ['python2.7', 'pthread', 'dl', 'util', 'm']
+LIB_PYEXT = []
 LIB_RT = ['rt']
 LIB_SQLITE3 = ['sqlite3']
 LIB_ST = '-l%s'
 LIB_cryptopp = ['cryptopp']
 LINKFLAGS_MACBUNDLE = ['-bundle', '-undefined', 'dynamic_lookup']
 LINKFLAGS_PTHREAD = '-pthread'
-LINKFLAGS_PYEMBED = ['-Xlinker', '-export-dynamic', '-Wl,-O1', '-Wl,-Bsymbolic-functions']
-LINKFLAGS_PYEXT = ['-Xlinker', '-export-dynamic', '-Wl,-O1', '-Wl,-Bsymbolic-functions']
+LINKFLAGS_PYEMBED = ['-Wl,-Bsymbolic-functions', '-Wl,-z,relro']
+LINKFLAGS_PYEXT = ['-Wl,-Bsymbolic-functions', '-Wl,-z,relro', '-Wl,-O1', '-Wl,-Bsymbolic-functions', '-Wl,-Bsymbolic-functions', '-Wl,-z,relro']
 LINKFLAGS_cshlib = ['-shared']
 LINKFLAGS_cstlib = ['-Wl,-Bstatic']
 LINKFLAGS_cxxshlib = ['-shared']
@@ -113,10 +111,10 @@ MODULES_NOT_BUILT = ['brite', 'click', 'openflow', 'visualizer']
 NS3_CONTRIBUTED_MODULES = []
 NS3_ENABLED_CONTRIBUTED_MODULES = []
 NS3_ENABLED_MODULES = ['ns3-antenna', 'ns3-aodv', 'ns3-aodvq', 'ns3-applications', 'ns3-bridge', 'ns3-buildings', 'ns3-config-store', 'ns3-core', 'ns3-csma', 'ns3-csma-layout', 'ns3-dsdv', 'ns3-dsdvq', 'ns3-dsr', 'ns3-energy', 'ns3-fd-net-device', 'ns3-flow-monitor', 'ns3-internet', 'ns3-internet-apps', 'ns3-lr-wpan', 'ns3-lte', 'ns3-mesh', 'ns3-mobility', 'ns3-mpi', 'ns3-netanim', 'ns3-network', 'ns3-nix-vector-routing', 'ns3-olsr', 'ns3-point-to-point', 'ns3-point-to-point-layout', 'ns3-propagation', 'ns3-qkd', 'ns3-sixlowpan', 'ns3-spectrum', 'ns3-stats', 'ns3-tap-bridge', 'ns3-test', 'ns3-topology-read', 'ns3-traffic-control', 'ns3-uan', 'ns3-virtual-net-device', 'ns3-wave', 'ns3-wifi', 'ns3-wimax']
-NS3_EXECUTABLE_PATH = ['/home/qbit/miCodigo/qkdnetsim-dev/build/src/fd-net-device', '/home/qbit/miCodigo/qkdnetsim-dev/build/src/tap-bridge']
+NS3_EXECUTABLE_PATH = ['/home/ubuntu/Documents/qkdnetsim-dev/build/src/fd-net-device', '/home/ubuntu/Documents/qkdnetsim-dev/build/src/tap-bridge']
 NS3_MODULES = ['ns3-antenna', 'ns3-aodv', 'ns3-aodvq', 'ns3-applications', 'ns3-bridge', 'ns3-buildings', 'ns3-config-store', 'ns3-core', 'ns3-csma', 'ns3-csma-layout', 'ns3-dsdv', 'ns3-dsdvq', 'ns3-dsr', 'ns3-energy', 'ns3-fd-net-device', 'ns3-flow-monitor', 'ns3-internet', 'ns3-internet-apps', 'ns3-lr-wpan', 'ns3-lte', 'ns3-mesh', 'ns3-mobility', 'ns3-mpi', 'ns3-netanim', 'ns3-network', 'ns3-nix-vector-routing', 'ns3-olsr', 'ns3-point-to-point', 'ns3-point-to-point-layout', 'ns3-propagation', 'ns3-qkd', 'ns3-sixlowpan', 'ns3-spectrum', 'ns3-stats', 'ns3-tap-bridge', 'ns3-test', 'ns3-topology-read', 'ns3-traffic-control', 'ns3-uan', 'ns3-virtual-net-device', 'ns3-wave', 'ns3-wifi', 'ns3-wimax']
-NS3_MODULE_PATH = ['/usr/lib/gcc/x86_64-linux-gnu/7', '/home/qbit/miCodigo/qkdnetsim-dev/build/lib']
-NS3_OPTIONAL_FEATURES = [('python', 'Python Bindings', False, 'PyBindGen missing'), ('brite', 'BRITE Integration', False, 'BRITE not enabled (see option --with-brite)'), ('nsclick', 'NS-3 Click Integration', False, 'nsclick not enabled (see option --with-nsclick)'), ('GtkConfigStore', 'GtkConfigStore', [], "library 'gtk+-3.0 >= 3.0' not found"), ('XmlIo', 'XmlIo', '-I/usr/include/libxml2 -lxml2\n', "library 'libxml-2.0 >= 2.7' not found"), ('Threading', 'Threading Primitives', True, '<pthread.h> include not detected'), ('RealTime', 'Real Time Simulator', True, 'threading not enabled'), ('FdNetDevice', 'File descriptor NetDevice', True, 'FdNetDevice module enabled'), ('TapFdNetDevice', 'Tap FdNetDevice', True, 'Tap support enabled'), ('EmuFdNetDevice', 'Emulation FdNetDevice', True, 'Emulation support enabled'), ('PlanetLabFdNetDevice', 'PlanetLab FdNetDevice', False, 'PlanetLab operating system not detected (see option --force-planetlab)'), ('nsc', 'Network Simulation Cradle', False, 'NSC not found (see option --with-nsc)'), ('mpi', 'MPI Support', False, 'option --enable-mpi not selected'), ('openflow', 'NS-3 OpenFlow Integration', False, 'OpenFlow not enabled (see option --with-openflow)'), ('SqliteDataOutput', 'SQlite stats data output', '-lsqlite3\n', "library 'sqlite3' not found"), ('TapBridge', 'Tap Bridge', True, '<linux/if_tun.h> include not detected'), ('PyViz', 'PyViz visualizer', False, 'Python Bindings are needed but not enabled'), ('ENABLE_SUDO', 'Use sudo to set suid bit', False, 'option --enable-sudo not selected'), ('ENABLE_TESTS', 'Tests', False, 'defaults to disabled'), ('ENABLE_EXAMPLES', 'Examples', False, 'defaults to disabled'), ('GSL', 'GNU Scientific Library (GSL)', [], 'GSL not found'), ('libgcrypt', 'Gcrypt library', [], 'libgcrypt not found: you can use libgcrypt-config to find its location.'), ('DES Metrics', 'DES Metrics event collection', [], 'defaults to disabled')]
+NS3_MODULE_PATH = ['/usr/lib/gcc/x86_64-linux-gnu/11', '/home/ubuntu/Documents/qkdnetsim-dev/build/lib']
+NS3_OPTIONAL_FEATURES = [('python', 'Python Bindings', False, 'Python library or headers missing'), ('brite', 'BRITE Integration', False, 'BRITE not enabled (see option --with-brite)'), ('nsclick', 'NS-3 Click Integration', False, 'nsclick not enabled (see option --with-nsclick)'), ('GtkConfigStore', 'GtkConfigStore', [], "library 'gtk+-3.0 >= 3.0' not found"), ('XmlIo', 'XmlIo', '-I/usr/include/libxml2 -lxml2\n', "library 'libxml-2.0 >= 2.7' not found"), ('Threading', 'Threading Primitives', True, '<pthread.h> include not detected'), ('RealTime', 'Real Time Simulator', True, 'threading not enabled'), ('FdNetDevice', 'File descriptor NetDevice', True, 'FdNetDevice module enabled'), ('TapFdNetDevice', 'Tap FdNetDevice', True, 'Tap support enabled'), ('EmuFdNetDevice', 'Emulation FdNetDevice', True, 'Emulation support enabled'), ('PlanetLabFdNetDevice', 'PlanetLab FdNetDevice', False, 'PlanetLab operating system not detected (see option --force-planetlab)'), ('nsc', 'Network Simulation Cradle', False, 'NSC not found (see option --with-nsc)'), ('mpi', 'MPI Support', False, 'option --enable-mpi not selected'), ('openflow', 'NS-3 OpenFlow Integration', False, 'Required boost libraries not found'), ('SqliteDataOutput', 'SQlite stats data output', '-lsqlite3\n', "library 'sqlite3' not found"), ('TapBridge', 'Tap Bridge', True, '<linux/if_tun.h> include not detected'), ('PyViz', 'PyViz visualizer', False, 'Python Bindings are needed but not enabled'), ('ENABLE_SUDO', 'Use sudo to set suid bit', False, 'option --enable-sudo not selected'), ('ENABLE_TESTS', 'Tests', False, 'defaults to disabled'), ('ENABLE_EXAMPLES', 'Examples', False, 'defaults to disabled'), ('GSL', 'GNU Scientific Library (GSL)', '-lgsl -lgslcblas -lm\n', 'GSL not found'), ('libgcrypt', 'Gcrypt library', [], 'libgcrypt not found: you can use libgcrypt-config to find its location.'), ('DES Metrics', 'DES Metrics event collection', [], 'defaults to disabled')]
 OLDINCLUDEDIR = '/usr/include'
 PACKAGE = 'ns'
 PDFDIR = '/usr/local/share/doc/ns'
@@ -129,10 +127,9 @@ PYC = 1
 PYFLAGS = ''
 PYFLAGS_OPT = '-O'
 PYO = 1
-PYTHON = ['/usr/bin/python']
+PYTHON = ['/usr/bin/python2.7']
 PYTHONARCHDIR = '/usr/local/lib/python2.7/dist-packages'
 PYTHONDIR = '/usr/local/lib/python2.7/dist-packages'
-PYTHON_CONFIG = ['/usr/bin/python-config']
 PYTHON_VERSION = '2.7'
 REQUIRED_BOOST_LIBS = ['system', 'signals', 'filesystem']
 RPATH_ST = '-Wl,-rpath,%s'
@@ -141,9 +138,7 @@ SHAREDSTATEDIR = '/usr/local/com'
 SHLIB_MARKER = '-Wl,-Bdynamic'
 SONAME_ST = '-Wl,-h,%s'
 SQLITE_STATS = '-lsqlite3\n'
-STLIBPATH_BOOST = ['/usr/lib/x86_64-linux-gnu']
 STLIBPATH_ST = '-L%s'
-STLIB_BOOST = []
 STLIB_MARKER = '-Wl,-Bstatic'
 STLIB_ST = '-l%s'
 SUDO = ['/usr/bin/sudo']
@@ -152,7 +147,7 @@ VALGRIND = ['/usr/bin/valgrind']
 VALGRIND_FOUND = True
 VERSION = '3-dev'
 WL_SONAME_SUPPORTED = True
-cfg_files = ['/home/qbit/miCodigo/qkdnetsim-dev/build/ns3/config-store-config.h', '/home/qbit/miCodigo/qkdnetsim-dev/build/ns3/core-config.h']
+cfg_files = ['/home/ubuntu/Documents/qkdnetsim-dev/build/ns3/config-store-config.h', '/home/ubuntu/Documents/qkdnetsim-dev/build/ns3/core-config.h']
 cprogram_PATTERN = '%s'
 cshlib_PATTERN = 'lib%s.so'
 cstlib_PATTERN = 'lib%s.a'

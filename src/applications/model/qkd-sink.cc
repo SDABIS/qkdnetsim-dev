@@ -174,7 +174,6 @@ void QKDSink::HandleRead (Ptr<Socket> socket)
       p->CopyData(buffer, p->GetSize ());
       std::string s = std::string((char*)buffer);
       delete[] buffer; 
-
       NS_LOG_FUNCTION (this << "Paquete recibido:" << s );
 
       NS_LOG_FUNCTION(this << p->GetUid() << p->GetSize() );

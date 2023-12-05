@@ -239,8 +239,8 @@ public:
 
 
     /**
-    * Activa la generacion de material de clave con QRNG, 
-    * pero tiene que hacerse antes de instalar el QKDManager
+    * Activates key material generation with QRNG
+    * needs to be called before installing the QKDManager
     */
     void SetQRNG();
 
@@ -305,7 +305,7 @@ private:
     ObjectFactory m_channelFactory;       //!< Channel Factory 
     ObjectFactory m_deviceFactory;        //!< Device Factory
     bool    m_activeQRNG;     
-    QKDRandomGenerator m_randomGenerator;            
+    Ptr<QKDRandomGenerator> m_randomGenerator;            
 }; 
 } // namespace ns3
 

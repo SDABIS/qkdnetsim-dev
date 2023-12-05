@@ -271,7 +271,7 @@ QKDChargingApplication::QKDChargingApplication ()
   m_packetNumber_temp7= 0; 
   m_packetNumber_temp8= 0;
   is_recharging = 0;
-  m_randomGenerator = QKDRandomGenerator(false);
+  m_randomGenerator = CreateObject<QKDRandomGenerator>(false);
 }
 
 QKDChargingApplication::~QKDChargingApplication ()
@@ -489,7 +489,7 @@ void QKDChargingApplication::StartApplication (void) // Called at time specified
 
   m_random = CreateObject<UniformRandomVariable> ();
   if(m_activeQRNG){
-    m_randomGenerator.ActivateQuantumDevice();
+    m_randomGenerator->ActivateQuantumDevice();
   }
   //m_maxPackets = m_random->GetValue (m_maxPackets * 0.5, m_maxPackets * 1.5);
   
@@ -1158,7 +1158,7 @@ void QKDChargingApplication::PrepareOutput (std::string key, uint32_t value,cons
     //msg << key << ":";
     if(key== "ADDKEY"){
 
-      newKeyMaterial = m_randomGenerator.generateStream(m_pktSize);
+      newKeyMaterial = m_randomGenerator->generateStream(m_pktSize);
 
       isKeyAdded = GetNode ()->GetObject<QKDManager> ()->AddNewKeyMaterial(src, newKeyMaterial);
       if(isKeyAdded == 0){

@@ -513,7 +513,7 @@ private:
   void RegisterAckTime (Time oldRtt, Time newRtt);
   
   Ptr<UniformRandomVariable> m_random;
-  QKDRandomGenerator m_randomGenerator;
+  Ptr<QKDRandomGenerator> m_randomGenerator;
   bool m_activeQRNG;
 };
 

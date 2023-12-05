@@ -60,7 +60,9 @@ QKDHelper::QKDHelper ()
     m_QCrypto = CreateObject<QKDCrypto> (); 
     m_supportQKDL4 = 1;
     m_activeQRNG = false;
-    m_randomGenerator = QKDRandomGenerator(m_activeQRNG);
+    m_randomGenerator = CreateObject<QKDRandomGenerator> (m_activeQRNG);
+
+    //m_randomGenerator = QKDRandomGenerator(m_activeQRNG);
 }  
 
 void 
@@ -71,8 +73,8 @@ QKDHelper::SetDeviceAttribute (std::string n1, const AttributeValue &v1)
 
 void QKDHelper::SetQRNG(){
     m_activeQRNG = true;
-    m_randomGenerator.ActivateQuantumDevice();
-    m_randomGenerator.printCardsInfo();
+    m_randomGenerator->ActivateQuantumDevice();
+    m_randomGenerator->printCardsInfo();
 }
 
 
@@ -808,7 +810,7 @@ QKDHelper::InstallOverlayQKD(
 
         //std::stringstream aux;
         std::vector<std::uint8_t> newKeyMaterial;
-        newKeyMaterial = m_randomGenerator.generateStream(limite);
+        newKeyMaterial = m_randomGenerator->generateStream(limite);
 
 
         NS_LOG_FUNCTION(this << newKeyMaterial.size());
@@ -1151,7 +1153,7 @@ QKDHelper::InstallQKD(
             }
             randomgenerator->Dispose();
         }*/
-        newKeyMaterial = m_randomGenerator.generateStream(limite);
+        newKeyMaterial = m_randomGenerator->generateStream(limite);
 
         NS_LOG_FUNCTION(this << newKeyMaterial);
 
